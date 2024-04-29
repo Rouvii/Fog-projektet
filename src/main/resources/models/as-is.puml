@@ -1,0 +1,76 @@
+@startuml
+!pragma visma layout smetana
+title As-is Diagram
+|#3498DB|Kunde|
+|#FADBD8|Sælger|
+|#AEB6BF|lager|
+|#EDBB99|Beregningssystem|
+|#D0ECE7|database|
+
+
+
+|Kunde|
+start
+|Kunde|
+:Bestil carport;
+:Valg af model;
+split
+:Materiale valg;
+split again
+:Længde valgt;
+
+split again
+:Type af materiale;
+split end
+:Carport design færdigt;
+|Sælger|
+:Sælger modtager tilbud;
+
+|database|
+:Databse tjekker om materialer er på lager;
+if (Er alle materialer på lager) then (yes)
+
+|Beregningssystem|
+:Sælger Opretter dimensioner;
+:Sælger Opretter beklædning og gulv;
+:Opretter stykliste;
+
+:Beregner pris;
+
+:Sælger ændrer eller bevarer pris;
+
+:Opretter beskrivelse;
+:Tilbud sendes til sælger;
+|Sælger|
+:Sælger modtager tilbud;
+:Sælger sender tilbud til kunde;
+
+|Kunde|
+:Kunde modtager tilbud fra sælger;
+:Kunde accepterer tilbud;
+:Kunde sender betaling;
+|Sælger|
+:Modtager betaling;
+|lager|
+:Pak ordrer;
+|Sælger|
+:Send til kunde inklusiv stykliste;
+|Kunde|
+:Modtager carport;
+
+detach
+else (no)
+|Sælger|
+
+
+
+:Giv kunde besked om afslag af ordrer;
+|Kunde|
+:Kunde får besked om afslag fra sælger;
+
+
+detach
+|Kunde|
+
+
+@enduml
