@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Title Domænemodel
+hide circle
+hide methods
+
+
+class Kunde{
+navn
+adresse
+email
+telefon nummer
+
+}
+
+class Carport{
+id
+længde
+bredde
+højde
+}
+
+class Stykliste{
+id
+carport_id
+}
+
+class Materialer{
+stolper
+rem
+spær
+skruer
+materiale type
+}
+
+
+class Order{
+id
+dato
+status
+}
+
+Kunde "1"--"*" Order:afgiver >
+Order "1"--"*" Carport: >
+Carport "1"--"1"Stykliste : >
+Stykliste "1"-right-"1"Kunde:sendes først efter betaling >
+Stykliste "1"--"*"Materialer:<
+
+@enduml
