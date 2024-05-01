@@ -1,0 +1,118 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Main
+
+
+
+
+package Controllers{
+class OrdreController{
++ static void addRoutes()
+
+}
+class KundeController{
++ static void addRoutes()
+- static void createKunde()
+- static void logout()
++ static void login()
+}
+class AdminController{
++ static void addRoutes()
+- static void deleteOrder()
+}
+
+}
+
+package Mappers{
+class OrdreMapper{
++ static List<Order> getAllOrder
++ static void deleteOrder
+}
+class KundeMapper{
++ static Kunde login()
++ static void createKunde()
++ static List<Kunde> getAllKunder()
+
+}
+class CarportMapper{
++ static getAllCarporte
+}
+class MaterialerMapper{
++ static getAllMaterialer
++ static getMaterialerByType
+}
+
+
+}
+
+package entities{
+class Materialer{
+- int materialeId
++ Getters()
++ Setters()
+}
+class Admin{
+- int adminId
+- boolean admin
++ Getters()
++ Setters()
+}
+class Stykliste{
+- int stykListeId
++ Getters()
++ Setters()
+}
+class Kunde{
+- int kundeId
+- String fornavn
+- String efternavn
+- String email
+- String password
+- int telefonNr
+- String adresse
+- int postNummer
++ Getters()
++ Setters()
+
+}
+class Ordre{
+- int ordreId
+- boolean status
+- Date dato
++ Getters()
++ Setters()
+}
+class Carport{
+- int carportId
+- double højde
+- double bredde
+- double længde
+- double pris
++ Getters()
++ Setters()
+}
+
+Materialer -- Stykliste
+Stykliste -- Kunde
+Ordre -- Kunde
+Carport -- Kunde
+Kunde -- Admin
+
+Carport -- CarportMapper
+Ordre -- OrdreMapper
+Kunde -- KundeMapper
+Materialer -- MaterialerMapper
+Admin -- AdminController
+Kunde -- KundeController
+Ordre -- OrdreController
+
+
+}
+
+Main -- OrdreController
+Main -- KundeController
+Main -- AdminController
+
+
+@enduml
