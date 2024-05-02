@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>opret bruger</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../public/css/adminpage.css" th:href="@{/css/adminpage.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page">
+
+  <a href="index.html" class="banner" th:href="@{/}"><h2>FOG</h2></a>
+</div>
+
+
+<div class="login-container">
+  <div class="create">
+
+    <h1>Opret bruger</h1>
+    <form class="create-form" method="post">
+      <input type="text" name="username" placeholder="Email"/>
+      <input type="password" name="password1" placeholder="Password"/>
+      <input type="password" name="password2" placeholder="Gentag password"/>
+
+      <button class="btn-ok" type="submit" formaction="/createuser">Opret bruger</button>
+      <div><p th:text="${message}"></p></div>
+    </form>
+  </div>
+
+  <div>
+    <a class="login-link" href="Login.html" th:href="@{/login}">Login</a>
+  </div>
+
+</div>
+</body>
+</html>
