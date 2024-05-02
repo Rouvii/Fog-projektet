@@ -5,9 +5,9 @@ package app.entities;
  *
  * @author: Kevin Løvstad Schou
  */
-public class Kunde {
+public class User {
 
-    private int kundeId;
+    private int userId;
     private String fornavn;
 
     private String efternavn;
@@ -22,8 +22,8 @@ public class Kunde {
 
     private int postNummer;
 
-    public Kunde(int kundeId, String fornavn, String efternavn, String email, String password, int telefonNr, String adresse, int postNummer) {
-        this.kundeId = kundeId;
+    public User(int userId, String fornavn, String efternavn, String email, String password, int telefonNr, String adresse, int postNummer) {
+        this.userId = userId;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.email = email;
@@ -34,12 +34,12 @@ public class Kunde {
     }
 
 
-    public int getKundeId() {
-        return kundeId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setKundeId(int kundeId) {
-        this.kundeId = kundeId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFornavn() {
