@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+
+
+
+<div class="design-dropdown">
+<form class="design-dropdown-content" method="post">
+    Længde: <select name="subject" id="subject">
+    <option value="" selected="selected">Select subject</option>
+</select>
+    <br><br>
+    Bredde: <select name="topic" id="topic">
+    <option value="" selected="selected">Please select subject first</option>
+</select>
+    <br><br>
+    <input type="submit" value="Videre til valg af materialer" href="finalDesign.html" th:href="@{/finalDesign}">
+    <input type="submit" value="Plantegning" href="plantegning.html" th:href="@{/plantegning}">
+</form>
+
+</div>
+
+
+
+
+</body>
+</html>

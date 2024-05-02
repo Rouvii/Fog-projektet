@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>finalDesign</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<h1>Final design</h1>
+
+<h2>MATERIALER</h2>
+
+<form class="materialer" method="post">
+  <label for="materiale">Vælg materiale</label><br>
+  <select name="materiale" id="materiale">
+      <option value="træ">Træ</option>
+      <option value="metal">Metal</option>
+  </select>
+  <br>
+</form>
+
+    <label for="tag">vælg tag</label><br>
+    <select name="tag" id="tag">
+      <option value="sten">Sten</option>
+      <option value="KÆMPE STEN">KÆMPE STEN</option>
+    </select>
+    <br>
+
+  <label for="redskabsrum">vælg redskabsrum</label><br>
+  <select name="redskabsrum" id="redskabsrum">
+    <option value="xD">xD</option>
+  </select>
+  <br>
+
+  <h2>KONTAKTOPLYSNINGER</h2>
+  
+<form class="kontakt-oplysninger" method="post">
+
+  <input type="text" name="navn" placeholder="Navn og efternavn"/><br>
+  <input type="text" name="adresse" placeholder="Adresse (vej+nummer)"/><br>
+  <input type="number" name="postnummer" placeholder="Postnummer"/><br>
+  <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
+  <button class="btn-ok" type="submit" formaction="/checkout">Videre til checkout</button>
+</form>
+
+</body>
+</html>
