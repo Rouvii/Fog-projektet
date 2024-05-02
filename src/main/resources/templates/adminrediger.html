@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>FOG Carports</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;">
+    <h1>FOG Carports</h1>
+</header>
+
+<div class="main-content">
+    <form method="post">
+        <table class="materiale-table">
+
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>pris</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="materiale: ${materialeList}">
+                <td th:text="${materiale.materialeId}">id</td>
+                <td th:text="${materiale.materialeId}">type</td>
+                <td th:text="${materiale.materialeId}">pris</td>
+                <td>
+                    <div class="button">
+                        <button type="submit" name="materialeId" th:value="${materiale.materialeId}"
+                                formaction="/rediger">
+                            Rediger
+                        </button>
+
+
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </form>
+    </div>
+</div>
+
+</body>
+</html>
