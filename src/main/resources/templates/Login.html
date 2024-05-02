@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/login.css" th:href="@{/css/login.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="page">
+    <a href="index.html" class="banner" th:href="@{/}"><h2>FOG</h2></a>
+
+    <div class="login-header">
+        <header>
+            <h1>Login</h1>
+        </header>
+    </div>
+
+
+    <form class="generic-form" method="post">
+        <input type="text" name="email" placeholder="Email"/>
+        <input type="password" name="password" placeholder="Password"/>
+        <button class="btn-ok" type="submit" formaction="/login">Login</button>
+        <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+    </form>
+    <div>
+        <a class="create-link" href="createUser.html" th:href="@{/createuser}">Opret bruger</a>
+    </div>
+</div>
+</body>
+</html>
