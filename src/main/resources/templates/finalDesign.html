@@ -43,8 +43,11 @@
   <input type="text" name="adresse" placeholder="Adresse (vej+nummer)"/><br>
   <input type="number" name="postnummer" placeholder="Postnummer"/><br>
   <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
-  <button class="btn-ok" type="submit" formaction="/checkout">Videre til checkout</button>
 </form>
+
+<div>
+    <a class="checkout-link" href="checkout.html" th:href="@{/videre}">Videre</a>
+</div>
 
 </body>
 </html>
