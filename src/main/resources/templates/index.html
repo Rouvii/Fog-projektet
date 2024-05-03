@@ -2,32 +2,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>FOG Carports</title>
+    <title>FOG Forside</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 
+
 <body>
 
-<header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;">
-    <h1>FOG Carports</h1>
-</header>
+<div class="header">
+    <header>
 
-<div class="main-content">
-    <div class="option-container">
-        <div class="option-outline">
-            <button class="option-button">See All Carports</button>
+        <a href="index.html">
+            <img class="fog-logo" src="../public/images/Fog_Logo.jpeg" alt="Fog Logo">
+        </a>
+        <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
+    </header>
+</div>
+
+<div class="content">
+    <div class="box box-left">
+        <img class="car-left-img" src="../public/images/car1.jpg" alt="Car Image">
+        <div class="blue-half">
+            <div class="box-left-text">SE ALLE VORES CARPORTE</div>
+            <div class="button-left">
+                <a href="https://www.johannesfog.dk/have-fritid/carporte">
+                    <button type="submit" class="button-left">SE VORES UDVALG</button>
+                </a>
+            </div>
         </div>
     </div>
-
-
-    <div class="option-container">
-        <div class="option-outline">
-            <button class="option-button">Design Your Own</button>
+    <div class="gap"></div>
+    <div class="box box-right">
+        <img class="car-right-img" src="../public/images/car2.jpg" alt="Car Image">
+        <div class="blue-half">
+            <div class="box-right-text">DESIGN DIN EGEN CARPORT</div>
+            <div class="button-right">
+                <a href="design.html">
+                    <button type="submit">FÅ ET TILBUD</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
 </body>
+
 </html>
