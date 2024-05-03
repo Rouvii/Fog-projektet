@@ -23,22 +23,19 @@
                 <th>Id</th>
                 <th>Type</th>
                 <th>pris</th>
-
             </tr>
             </thead>
             <tbody>
             <tr th:each="materiale: ${materialeList}">
                 <td th:text="${materiale.materialeId}">id</td>
-                <td th:text="${materiale.materialeId}">type</td>
-                <td th:text="${materiale.materialeId}">pris</td>
+                <td th:text="${materiale.type}">type</td>
+                <td th:text="${materiale.pris}">pris</td>
                 <td>
                     <div class="button">
                         <button type="submit" name="materialeId" th:value="${materiale.materialeId}"
                                 formaction="/rediger">
                             Rediger
                         </button>
-
-
                     </div>
                 </td>
             </tr>
@@ -47,7 +44,6 @@
 
         </table>
     </form>
-    </div>
 </div>
 
 </body>
