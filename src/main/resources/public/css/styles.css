@@ -1,5 +1,5 @@
 
-body {
+.admin-body {
     background-color: #C9C9C9;
     margin: 0px;
 }
@@ -114,6 +114,80 @@ body {
 
 .design-dropdown {
   display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+
+/****************************** ADMIN *****************************************/
+
+.admin-body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.admin-text{
+    display: flex;
+    justify-content: center;
+    color: #0077C0;;
+
+}
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.option-container {
+
+    padding: 10px;
+}
+
+.option-outline {
+    width: 250px;
+    height: 375px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #0077C0;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option-button:hover {
+    background-color: #005999;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 15px;
+    }
+
+    .option-container {
+        margin-bottom: 20px;
+    }
+}
+
+
+.design-dropdown {
+    display: flex;
     justify-content: center;
     margin-top: 20%;
 }
