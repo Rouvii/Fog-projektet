@@ -14,20 +14,21 @@
     <h1>FOG Carports</h1>
 </header>
 
+
 <div class="main-content">
-    <div class="option-container">
-        <div class="option-outline">
-            <button class="option-button">See All Carports</button>
-        </div>
-    </div>
 
+        <form class="login-form" method="post">
 
-    <div class="option-container">
-        <div class="option-outline">
-            <button class="option-button">Design Your Own</button>
-        </div>
-    </div>
+            <input type="text" name="materialepris" th:value="${materiale.pris}"/>
+
+            <button type="submit" name="materialeId" th:value="${materiale.materialeId}" formaction="/updatemateriale">Update</button>
+
+        </form>
 </div>
+
+
+
+
 
 </body>
 </html>
