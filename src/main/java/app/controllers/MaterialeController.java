@@ -15,25 +15,26 @@ import java.util.List;
  */
 
 public class MaterialeController {
-/*
+
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
 
-        app.post("updatetask", ctx -> updatetask(ctx, connectionPool));
+        app.post("updatename", ctx -> updateMaterialeName(ctx, connectionPool));
     }
 
 
 
 
-    private static void updatetask(Context ctx, ConnectionPool connectionPool) {
+
+    private static void updateMaterialeName(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
 
         try {
             int materialeId = Integer.parseInt(ctx.formParam("materialeId"));
-            double price = Double.parseDouble(ctx.formParam("materialepris"));
+            String type = ctx.formParam("materialepris");
 
-           // MaterialeMapper.update(materialeId, pris, connectionPool);
+           MaterialeMapper.updateName(materialeId,type , connectionPool);
 
-           // List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
+           List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
 
             ctx.attribute("materialeList", materialerList);
             ctx.render("adminrediger.html");
@@ -43,6 +44,6 @@ public class MaterialeController {
             ctx.render("index.html");
         }
     }
-    */
+
 
 }
