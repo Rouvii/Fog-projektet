@@ -1,0 +1,221 @@
+
+.admin-body {
+    background-color: #C9C9C9;
+    margin: 0px;
+}
+
+.header {
+    background-color: #D9D9D9;
+    height: 88px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.fog-logo {
+    width: 75px;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 7px;
+    margin-left: 0px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.box {
+    width: calc(50% - 10px); /* Two boxes with a gap in between */
+    height: 600px; /* Set box height */
+    background-color: #000000; /* Set box background color */
+    position: relative;
+}
+
+.car-left-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.car-right-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gap {
+    width: 50px; /* Set gap width */
+}
+
+.carporte-link {
+    position: absolute;
+    left: 17%; /* Position it in the center */
+    transform: translateX(-50%); /* Center it relative to its own width */
+    color: #154985; /* Set link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Set font size */
+    font-weight: bold;
+}
+
+
+.blue-half {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #314F9D;
+
+
+}
+
+.box-left-text {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 30px;
+
+
+}
+
+
+
+.button {
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 15px;
+    color: #314F9D;
+    margin-top: 330px;
+    margin-left: 20px;
+
+}
+
+
+
+.design-dropdown {
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+
+
+
+.design-dropdown {
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+
+/****************************** ADMIN *****************************************/
+
+.admin-body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.admin-text{
+    display: flex;
+    justify-content: center;
+    color: #0077C0;;
+
+}
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.option-container {
+
+    padding: 10px;
+}
+
+.option-outline {
+    width: 250px;
+    height: 375px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #0077C0;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option-button:hover {
+    background-color: #005999;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 15px;
+    }
+
+    .option-container {
+        margin-bottom: 20px;
+    }
+}
+
+
+.design-dropdown {
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+.box1 {
+    width: 80%; /* Adjust width as needed */
+    margin: 20px auto; /* Center the box horizontally */
+    padding: 20px; /* Add padding for spacing */
+    background-color: #ffffff; /* Set background color */
+    border: 1px solid #dddddd; /* Add a border */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow for depth */
+}
+
+/* Style the table inside the box */
+.materiale-table {
+    width: 100%; /* Make table fill the box */
+    border-collapse: collapse; /* Collapse table borders */
+}
+
+.materiale-table th, .materiale-table td {
+    padding: 10px; /* Add padding to table cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #dddddd; /* Add bottom border to table rows */
+}
+
+.materiale-table th {
+    background-color: #f2f2f2; /* Set background color for table header */
+    font-weight: bold; /* Make header text bold */
+}
+

@@ -40,4 +40,14 @@ public class Materialer {
     public double getPrice() {
         return price;
     }
+
+
+    @Override
+    public String toString() {
+        return "Materialer{" +
+                "materialeId=" + materialeId +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
