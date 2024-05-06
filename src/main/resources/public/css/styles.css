@@ -89,6 +89,28 @@ body {
 
 }
 
+.box-right-text {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.button-right {
+    margin-top: 300px;
+    margin-left: 30px;
+    width: 358px;
+}
+
+.button-left {
+    margin-top: 150px;
+    margin-left: 16px;
+    width: 258px;
+}
+
 
 
 .button {
@@ -118,4 +140,47 @@ body {
     margin-top: 20%;
 }
 
+.orders-img {
+    width: 50px;
+}
 
+.header-login-image {
+    width: 50px;
+}
+
+.header-login-button {
+    margin-left: 1200px;
+}
+
+.orders-button {
+    margin-right: 20px;
+}
+
+.header-bottom-orders-text {
+    width: 100px;
+    font-size: 12px;
+    position: absolute;
+    text-decoration: none;
+    color: #154985;
+    font-weight: bold;
+
+}
+
+.header-login-button-text {
+    font-size: 12px;
+    text-decoration: none;
+    color: #154985;
+    position: absolute;
+    font-weight: bold;
+}
+
+.header-design-carport-link {
+    margin-left: 380px;
+    width: 200px;
+    position: absolute;
+    color: #154985;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    left: 6%;
+}
