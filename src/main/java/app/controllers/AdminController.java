@@ -19,8 +19,8 @@ public class AdminController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool){
         app.get("admin", ctx -> adminpage(ctx, connectionPool));
-       // app.get("adminrediger",ctx -> ctx.render("adminrediger.html"));
-      //  app.post("adminrediger",ctx -> adminpagerediger(ctx,connectionPool));
+       app.get("adminrediger",ctx -> ctx.render("adminrediger.html"));
+      app.post("adminrediger",ctx -> adminpagerediger(ctx,connectionPool));
     }
 
 
@@ -44,7 +44,7 @@ public class AdminController {
 
     }
 
-    /*
+
     private static void adminpagerediger(Context ctx, ConnectionPool connectionPool)
     {
         User user = ctx.sessionAttribute("currentUser");
@@ -63,6 +63,6 @@ public class AdminController {
 
 
     }
-    */
+
 
 }
