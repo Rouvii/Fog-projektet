@@ -89,6 +89,28 @@
 
 }
 
+.box-right-text {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.button-right {
+    margin-top: 300px;
+    margin-left: 30px;
+    width: 358px;
+}
+
+.button-left {
+    margin-top: 150px;
+    margin-left: 16px;
+    width: 258px;
+}
+
 
 
 .button {
@@ -118,78 +140,10 @@
     margin-top: 20%;
 }
 
-
-/****************************** ADMIN *****************************************/
-
-.admin-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+.orders-img {
+    width: 50px;
 }
 
-h1 {
-    margin: 0;
-    font-size: 2rem;
+.header-login-image {
+    width: 50px;
 }
-
-.admin-text{
-    display: flex;
-    justify-content: center;
-    color: #0077C0;;
-
-}
-.main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-}
-
-.option-container {
-
-    padding: 10px;
-}
-
-.option-outline {
-    width: 250px;
-    height: 375px;
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.option-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #0077C0;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.option-button:hover {
-    background-color: #005999;
-}
-
-@media (max-width: 768px) {
-    .main-content {
-        margin-top: 15px;
-    }
-
-    .option-container {
-        margin-bottom: 20px;
-    }
-}
-
-
-.design-dropdown {
-    display: flex;
-    justify-content: center;
-    margin-top: 20%;
-}
-
-
