@@ -20,9 +20,10 @@ public class User {
 
     private String adresse;
 
-    private int postNummer;
 
-    public User(int userId, String fornavn, String efternavn, String email, String password, int telefonNr, String adresse, int postNummer) {
+    private boolean isAdmin;
+
+    public User(int userId, String fornavn, String efternavn, String email, String password, int telefonNr, String adresse, boolean isAdmin) {
         this.userId = userId;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
@@ -30,9 +31,16 @@ public class User {
         this.password = password;
         this.telefonNr = telefonNr;
         this.adresse = adresse;
-        this.postNummer = postNummer;
+        this.isAdmin = isAdmin;
     }
 
+
+    public User(int userId, String email, String password, boolean isAdmin) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
 
     public int getUserId() {
         return userId;
@@ -90,11 +98,12 @@ public class User {
         this.adresse = adresse;
     }
 
-    public int getPostNummer() {
-        return postNummer;
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setPostNummer(int postNummer) {
-        this.postNummer = postNummer;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
