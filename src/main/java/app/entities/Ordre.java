@@ -21,6 +21,7 @@ public class Ordre {
     private double slutPris;
     private Date dato;
 
+    private int statusId;
 
 
     public Ordre(int ordreId, Date dato) {
@@ -106,5 +107,9 @@ public class Ordre {
                 ", slutPris=" + slutPris +
                 ", dato=" + dato +
                 '}';
+    }
+
+    public int getStatusId() {
+        return statusId;
     }
 }

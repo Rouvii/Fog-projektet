@@ -1,23 +1,40 @@
 package app.controllers;
 
 import app.entities.ConnectionPool;
-import app.entities.Ordre;
 import app.entities.User;
-import app.mappers.OrdreMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-import java.util.List;
+import java.sql.Date;
 
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou, Daniel Rouvillain
+ * @author: Kevin Løvstad Schou
  */
 public class OrdreController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool){
         app.get("design", ctx -> designPage(ctx, connectionPool));
-        app.get("orders",ctx -> myorders(ctx,connectionPool));
+        app.get("/finalDesign", ctx -> finalDesignPage(ctx,connectionPool));
+        app.post("/createOrder", ctx -> placeOrdre(ctx,connectionPool));
+
+    }
+
+    private static void finalDesignPage(Context ctx, ConnectionPool connectionPool) {
+
+
+        try{
+
+
+            ctx.render("/finalDesign.html");
+
+
+        }catch (Exception e){
+
+        }
+
+
+
 
     }
 
@@ -39,21 +56,15 @@ public class OrdreController {
 
 
 
+    public static void placeOrdre (Context ctx, ConnectionPool connectionPool){
 
-public static void myorders(Context ctx, ConnectionPool connectionPool){
+        double længde = ctx.formParam("length", Double.class).value();
+        double bredde = ctx.formParam("width", Double.class).value();
 
-    User user = ctx.sessionAttribute("currentUser");
 
-    try {
-        List<Ordre> ordreList = OrdreMapper.getAllOrdersPerUser(user.getUserId(),connectionPool);
-        ctx.attribute("ordreList",ordreList);
-        ctx.render("orders.html");
-    } catch (Exception e) {
-        ctx.attribute("message",e.getMessage());
-        ctx.render("index.html");
+
+
     }
-
-}
 
 
 }

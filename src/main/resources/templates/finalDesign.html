@@ -46,10 +46,13 @@
     <input type="hidden" name="length" th:value="${param.length}" />
     <input type="hidden" name="width" th:value="${param.width}" />
 </form>
-
+<form class="videre-knap" method="post" action="/createOrder">
 <div>
+    <!--
     <a class="checkout-link" href="checkout.html" th:href="@{/videre}">Videre</a>
+    -->
+    <button type="submit">Videre</button>
 </div>
-
+</form>
 </body>
 </html>
