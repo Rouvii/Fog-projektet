@@ -1,5 +1,5 @@
 
-.admin-body {
+body {
     background-color: #C9C9C9;
     margin: 0px;
 }
@@ -146,4 +146,41 @@
 
 .header-login-image {
     width: 50px;
+}
+
+.header-login-button {
+    margin-left: 1200px;
+}
+
+.orders-button {
+    margin-right: 20px;
+}
+
+.header-bottom-orders-text {
+    width: 100px;
+    font-size: 12px;
+    position: absolute;
+    text-decoration: none;
+    color: #154985;
+    font-weight: bold;
+
+}
+
+.header-login-button-text {
+    font-size: 12px;
+    text-decoration: none;
+    color: #154985;
+    position: absolute;
+    font-weight: bold;
+}
+
+.header-design-carport-link {
+    margin-left: 380px;
+    width: 200px;
+    position: absolute;
+    color: #154985;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    left: 6%;
 }
