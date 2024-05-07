@@ -18,8 +18,8 @@
     </div>
 
 
-    <form class="generic-form" method="post">
-        <input type="text" name="email" placeholder="Email"/>
+    <form class="login information" method="post">
+        <input type="email" name="email" placeholder="Email"/>
         <input type="password" name="password" placeholder="Password"/>
         <button class="btn-ok" type="submit" formaction="/login">Login</button>
         <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>

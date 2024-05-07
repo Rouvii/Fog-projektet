@@ -15,34 +15,15 @@ import java.util.List;
  */
 
 public class MaterialeController {
-/*
+
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
 
-        app.post("updatetask", ctx -> updatetask(ctx, connectionPool));
+
     }
 
 
 
 
-    private static void updatetask(Context ctx, ConnectionPool connectionPool) {
-        User user = ctx.sessionAttribute("currentUser");
 
-        try {
-            int materialeId = Integer.parseInt(ctx.formParam("materialeId"));
-            double price = Double.parseDouble(ctx.formParam("materialepris"));
-
-           // MaterialeMapper.update(materialeId, pris, connectionPool);
-
-           // List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
-
-            ctx.attribute("materialeList", materialerList);
-            ctx.render("adminrediger.html");
-
-        } catch (DatabaseException | NumberFormatException e) {
-            ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
-        }
-    }
-    */
 
 }

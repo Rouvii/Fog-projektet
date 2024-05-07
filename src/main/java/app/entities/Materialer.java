@@ -9,11 +9,19 @@ public class Materialer {
 
     private int materialeId;
 
-    private int skruer;
+    private String type;
 
-    public Materialer(int materialeId,int skruer) {
+    private double price;
+
+    public Materialer(int materialeId) {
         this.materialeId = materialeId;
-        this.skruer=skruer;
+
+    }
+
+    public Materialer(int materialeId, String type, double price) {
+        this.materialeId = materialeId;
+        this.type = type;
+        this.price = price;
     }
 
 
@@ -25,11 +33,21 @@ public class Materialer {
         this.materialeId = materialeId;
     }
 
-    public int getSkruer() {
-        return skruer;
+    public String getType() {
+        return type;
     }
 
-    public void setSkruer(int skruer) {
-        this.skruer = skruer;
+    public double getPrice() {
+        return price;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Materialer{" +
+                "materialeId=" + materialeId +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

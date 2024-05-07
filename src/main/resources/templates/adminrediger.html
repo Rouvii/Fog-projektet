@@ -8,14 +8,16 @@
     <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body CLASS="admin-body">
 
-<header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;">
+<header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;" class="admin-header">
     <h1>FOG Carports</h1>
 </header>
 
 <div class="main-content">
+
     <form method="post">
+        <div class="box1">
         <table class="materiale-table">
 
             <thead>
@@ -23,22 +25,17 @@
                 <th>Id</th>
                 <th>Type</th>
                 <th>pris</th>
-
             </tr>
+
             </thead>
             <tbody>
-            <tr th:each="materiale: ${materialeList}">
-                <td th:text="${materiale.materialeId}">id</td>
-                <td th:text="${materiale.materialeId}">type</td>
-                <td th:text="${materiale.materialeId}">pris</td>
+            <tr th:each="materialer: ${materialeList}">
+                <td th:text="${materialer.materialeId}">id</td>
+                <td th:text="${materialer.type}">type</td>
+                <td th:text="${materialer.price}">pris</td>
                 <td>
                     <div class="button">
-                        <button type="submit" name="materialeId" th:value="${materiale.materialeId}"
-                                formaction="/rediger">
-                            Rediger
-                        </button>
-
-
+                        <button type="submit" name="materialeId" th:value="${materialer.materialeId}" formaction="/redigermateriale">Rediger</button>
                     </div>
                 </td>
             </tr>
@@ -46,8 +43,9 @@
             </tbody>
 
         </table>
+        </div>
     </form>
-    </div>
+
 </div>
 
 </body>
