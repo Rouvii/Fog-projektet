@@ -89,4 +89,21 @@ public class Ordre {
     public double getSlutPris() {
         return slutPris;
     }
+
+
+    @Override
+    public String toString() {
+        return "Ordre{" +
+                "ordreId=" + ordreId +
+                ", betalt=" + betalt +
+                ", afsendt=" + afsendt +
+                ", afvist=" + afvist +
+                ", modtaget=" + modtaget +
+                ", længde=" + længde +
+                ", bredde=" + bredde +
+                ", userId=" + userId +
+                ", slutPris=" + slutPris +
+                ", dato=" + dato +
+                '}';
+    }
 }

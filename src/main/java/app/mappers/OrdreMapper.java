@@ -42,8 +42,8 @@ public class OrdreMapper {
                 boolean afsendt = rs.getBoolean("afsendt");
                 boolean afvist = rs.getBoolean("afvist");
                 boolean modtaget = rs.getBoolean("modtaget");
-                double slutPris = rs.getDouble("final_price");
-                //System.out.println("Retrieved name: " + orderId + "userId "+ userId + ", price: " + price); // Add this line for debugging
+                double slutPris = rs.getDouble("slut_pris");
+
                 orderList.add(new Ordre(orderId,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
             }
 
