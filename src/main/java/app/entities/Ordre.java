@@ -22,6 +22,7 @@ public class Ordre {
     private Date dato;
 
 
+
     public Ordre(int ordreId, Date dato) {
         this.ordreId = ordreId;
         this.dato = dato;
