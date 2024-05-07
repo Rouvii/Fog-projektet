@@ -2,6 +2,7 @@ package app.mappers;
 
 import app.entities.ConnectionPool;
 import app.entities.Ordre;
+import app.exceptions.DatabaseException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -56,5 +57,39 @@ public class OrdreMapper {
         return orderList;
 
 
+    }
+
+    public static List<Ordre> getAllOrdersPerUser(int userId, ConnectionPool connectionPool) throws DatabaseException
+    {
+
+        List<Ordre> ordreList = new ArrayList<>();
+        String sql = "select * from ordre where user_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                int id = rs.getInt("order_id");
+                Date dato = rs.getDate("dato");
+                double længde = rs.getDouble("længde");
+                double bredde = rs.getDouble("bredde");
+                boolean betalt = rs.getBoolean("betalt");
+                boolean afsendt = rs.getBoolean("afsendt");
+                boolean afvist = rs.getBoolean("afvist");
+                boolean modtaget = rs.getBoolean("modtaget");
+                double slutPris = rs.getDouble("slut_pris");
+                ordreList.add(new Ordre (id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("Fejl " +  e.getMessage());
+        }
+        return ordreList;
     }
 }
