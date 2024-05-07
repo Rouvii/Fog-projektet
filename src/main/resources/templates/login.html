@@ -19,8 +19,8 @@
 
 
     <form class="login information" method="post">
-        <input type="email" name="email" placeholder="Email"/>
-        <input type="password" name="password" placeholder="Password"/>
+        <input type="email" id="email" name="email" placeholder="Email"/>
+        <input type="password" id="password" name="password" placeholder="Password"/>
         <button class="btn-ok" type="submit" formaction="/login">Login</button>
         <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
     </form>

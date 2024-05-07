@@ -39,7 +39,7 @@ public class AdminController {
 
             ctx.attribute("materialerList", materialerList);
 
-            ctx.render("/admin.html");
+            ctx.render("admin.html");
 
         } catch (Exception e) {
 
