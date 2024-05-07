@@ -42,6 +42,11 @@ public class Ordre {
         this.slutPris = slutPris;
     }
 
+    public Ordre(double længde,double bredde){
+        this.længde=længde;
+        this.bredde=bredde;
+    }
+
 
     public int getOrdreId() {
         return ordreId;
@@ -92,6 +97,41 @@ public class Ordre {
         return slutPris;
     }
 
+    public void setBetalt(boolean betalt) {
+        this.betalt = betalt;
+    }
+
+    public void setAfsendt(boolean afsendt) {
+        this.afsendt = afsendt;
+    }
+
+    public void setAfvist(boolean afvist) {
+        this.afvist = afvist;
+    }
+
+    public void setModtaget(boolean modtaget) {
+        this.modtaget = modtaget;
+    }
+
+    public void setLængde(double længde) {
+        this.længde = længde;
+    }
+
+    public void setBredde(double bredde) {
+        this.bredde = bredde;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setSlutPris(double slutPris) {
+        this.slutPris = slutPris;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
 
     @Override
     public String toString() {

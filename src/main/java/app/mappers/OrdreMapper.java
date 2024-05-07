@@ -3,7 +3,10 @@ package app.mappers;
 import app.entities.ConnectionPool;
 import app.entities.Ordre;
 import app.exceptions.DatabaseException;
+import net.bytebuddy.asm.Advice;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,11 +68,11 @@ public class OrdreMapper {
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setDate(1, order.getDato());
+            ps.setDate(1, Date.valueOf(LocalDate.now()));
             ps.setInt(2, order.getUserId());
             ps.setDouble(3, order.getLængde());
             ps.setDouble(4, order.getBredde());
-            ps.setInt(5, order.getStatusId());
+            ps.setInt(5, 5);
 
             ps.executeUpdate();
         } catch (SQLException e) {

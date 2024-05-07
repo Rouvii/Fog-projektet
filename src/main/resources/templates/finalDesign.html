@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
 <h1>Final design</h1>
 
 <h2>MATERIALER</h2>
@@ -43,8 +42,8 @@
   <input type="text" name="adresse" placeholder="Adresse (vej+nummer)"/><br>
   <input type="number" name="postnummer" placeholder="Postnummer"/><br>
   <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
-    <input type="hidden" name="length" th:value="${param.length}" />
-    <input type="hidden" name="width" th:value="${param.width}" />
+    <input type="hidden" name="length" th:value="${length}" />
+    <input type="hidden" name="width" th:value="${width}" />
 </form>
 <form class="videre-knap" method="post" action="/createOrder">
 <div>
