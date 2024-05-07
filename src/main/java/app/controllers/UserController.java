@@ -13,6 +13,7 @@ public class UserController
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)
     {
         app.post("login", ctx -> login(ctx, connectionPool));
+        app.get("index", ctx -> ctx.render("index.html"));
         app.get("login", ctx -> loginpage(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
@@ -86,7 +87,7 @@ public class UserController
             if ("admin".equals(user.getrole())){
                 ctx.redirect("/admin");
             }else {
-                ctx.redirect("index.html");
+                ctx.redirect("/index");
             }
         }
         catch (DatabaseException e)
