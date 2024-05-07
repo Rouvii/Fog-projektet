@@ -24,11 +24,12 @@
                 <tr>
                     <th>User</th>
                     <th>Order id</th>
-                    <th>Price</th>
+                    <th>Dato</th>
                     <th>Betalt</th>
                     <th>Afsendt</th>
                     <th>Afvist</th>
                     <th>Modtaget</th>
+                    <th>Pris</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,10 +37,11 @@
                     <td th:text="${order.userId}">User</td>
                     <td th:text="${order.orderId}">Order id</td>
                     <td th:text="${order.price}">Price</td>
-                    <td th:text="${order.status}">Betalt</td>
-                    <td th:text="${order.status}">Afsendt</td>
-                    <td th:text="${order.status}">Afvist</td>
-                    <td th:text="${order.status}">Modtaget</td>
+                    <td th:text="${order.betalt}">Betalt</td>
+                    <td th:text="${order.afsendt}">Afsendt</td>
+                    <td th:text="${order.afvist}">Afvist</td>
+                    <td th:text="${order.modtaget}">Modtaget</td>
+                    <td th:text="${order.slutpris}">Pris</td>
                     <td>
                         <div class="button">
                             <button type="submit" name="delete-order" th:value="${order.orderId}"> Delete
