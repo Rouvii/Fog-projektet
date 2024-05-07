@@ -110,5 +110,4 @@ public class User {
     public String getrole() {
         return isAdmin ? "admin" : "user";
     }
-
 }

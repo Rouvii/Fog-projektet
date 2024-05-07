@@ -84,12 +84,10 @@ public class UserController
             ctx.attribute("message", "Du er nu logget ind");
 
             if ("admin".equals(user.getrole())){
-                ctx.render("admin.html");
+                ctx.redirect("/admin");
             }else {
-                ctx.redirect("/index.html");
+                ctx.redirect("index.html");
             }
-
-
         }
         catch (DatabaseException e)
         {
@@ -97,6 +95,5 @@ public class UserController
             ctx.attribute("message", e.getMessage() );
             ctx.render("index.html");
         }
-
     }
 }
