@@ -5,7 +5,7 @@
   <title>Admin panel</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+  <link href="../public/css/admin.css" th:href="@{/css/admin.css}" rel="stylesheet"/>
 </head>
 
 <body CLASS="admin-body">
@@ -27,7 +27,7 @@
 
   <div class="option-container">
     <div class="option-outline">
-      <a href="adminordre.html" class="option-link">
+      <a href="adminordre.html" th:href="@{adminordre}" class="option-link">
         <button class="option-button">Ordre</button>
       </a>
     </div>

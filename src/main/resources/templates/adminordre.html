@@ -5,7 +5,7 @@
     <title>FOG Carports</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/admin.css" th:href="@{/css/admin.css}" rel="stylesheet"/>
 </head>
 
 <body CLASS="admin-body">
@@ -15,10 +15,10 @@
 </header>
 
 <div class="main-content">
+    <form method="post" class="admin-orders" action="/deleteorder">
     <div class="tables">
         <h1>Active Orders</h1>
-        <form method="post">
-            <table class="order-table">
+        <table class="order-table">
 
                 <thead>
                 <tr>
@@ -42,9 +42,7 @@
                     <td th:text="${order.status}">Modtaget</td>
                     <td>
                         <div class="button">
-                            <button type="submit" name="orderId" th:value="${order.orderId}"
-                                    formaction="/deleteorder">
-                                Delete
+                            <button type="submit" name="delete-order" th:value="${order.orderId}"> Delete
                             </button>
 
 
@@ -54,9 +52,10 @@
 
                 </tbody>
 
-            </table>
-        </form>
+        </table>
+
     </div>
+    </form>
 </div>
 
 </body>
