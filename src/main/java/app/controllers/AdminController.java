@@ -206,4 +206,6 @@ public class AdminController {
 
     }
 
+    //TODO: tilføj update status med update status id til et af de status ideer
+
 }
