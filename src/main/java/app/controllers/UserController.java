@@ -18,6 +18,7 @@ public class UserController
         app.get("logout", ctx -> logout(ctx));
         app.get("createUser", ctx -> ctx.render("createUser.html"));
         app.post("createUser", ctx -> createUser(ctx, connectionPool));
+        app.post("insertUserDetails", ctx -> insertUserDetails(ctx, connectionPool));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool)
@@ -80,22 +81,32 @@ public class UserController
         // Hent form parametre
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
-        int length = Integer.valueOf(ctx.formParam("length"));
-        int width = Integer.valueOf(ctx.formParam("width"));
+        String lengthStr = ctx.formParam("length");
+        String widthStr = ctx.formParam("width");
+
+        int length = 0;
+        int width = 0;
+
+        if (lengthStr != null && !lengthStr.isEmpty()) {
+            length = Integer.valueOf(lengthStr);
+        }
+
+        if (widthStr != null && !widthStr.isEmpty()) {
+            width = Integer.valueOf(widthStr);
+        }
 
         // Check om bruger findes i DB med de angivne username + password
         try
         {
             User user = UserMapper.login(email, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
-            // Hvis ja, send videre til forsiden med login besked
             ctx.attribute("message", "Du er nu logget ind");
 
             if ("admin".equals(user.getrole())){
                 ctx.redirect("/admin");
-            }else if (length == 0 && width == 0){
+            } else if (length == 0 && width == 0){
                 ctx.redirect("/index");
-            } else if (length != 0 && width != 0){
+            } else {
                 ctx.redirect("/finalDesign");
             }
         }
@@ -104,6 +115,26 @@ public class UserController
             // Hvis nej, send tilbage til login side med fejl besked
             ctx.attribute("message", e.getMessage() );
             ctx.render("login.html");
+        }
+    }
+
+
+
+    public static void insertUserDetails(Context ctx, ConnectionPool connectionPool)
+    {
+     String fornavn = ctx.formParam("fornavn");
+        String efternavn = ctx.formParam("efternavn");
+        String adresse = ctx.formParam("adresse");
+        String telefon = ctx.formParam("telefon");
+
+
+        try {
+            UserMapper.insertUserDetails(fornavn, efternavn, adresse, telefon, connectionPool);
+
+          //  ctx.render("index.html");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", e.getMessage());
+
         }
     }
 }

@@ -28,29 +28,26 @@ public class OrdreController {
 
     private static void finalDesignPage(Context ctx, ConnectionPool connectionPool) {
 
-        User user = ctx.sessionAttribute("currentUser");
-
         try{
-
-            int length = Integer.valueOf(ctx.formParam("length"));
-            int width = Integer.valueOf(ctx.formParam("width"));
-
-            ctx.sessionAttribute("length", length);
-            ctx.sessionAttribute("width", width);
-
-
+            User user = ctx.sessionAttribute("currentUser");
+            String lengthStr = ctx.formParam("length");
+            String widthStr = ctx.formParam("width");
+            if (lengthStr != null && widthStr != null) {
+                int length = Integer.valueOf(lengthStr);
+                int width = Integer.valueOf(widthStr);
+                ctx.sessionAttribute("length", length);
+                ctx.sessionAttribute("width", width);
+            }
             ctx.render("finalDesign.html");
-
-
-
-        }catch (NumberFormatException e){
-            e.getMessage();
+        } catch (Exception e) {
+            System.out.println("Error rendering finalDesign.html: " + e.getMessage());
+            e.printStackTrace();
         }
-
-
-
-
     }
+
+
+
+
 
     public static void designPage(Context ctx,ConnectionPool connectionPool){
 
@@ -58,10 +55,7 @@ public class OrdreController {
 
 
 
-
         try{
-
-
 
             ctx.render("design.html");
 
