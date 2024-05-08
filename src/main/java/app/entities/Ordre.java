@@ -15,12 +15,13 @@ public class Ordre {
     private boolean afsendt;
     private boolean afvist;
     private boolean modtaget;
-    private double længde;
-    private double bredde;
+    private int længde;
+    private int bredde;
     private int userId;
     private double slutPris;
     private Date dato;
 
+    private int statusId;
 
 
     public Ordre(int ordreId, Date dato) {
@@ -28,7 +29,7 @@ public class Ordre {
         this.dato = dato;
     }
 
-    public Ordre(int orderId, int userId, java.sql.Date dato, double længde, double bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+    public Ordre(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
         this.ordreId = orderId;
         this.userId = userId;
         this.dato = dato;
@@ -39,6 +40,11 @@ public class Ordre {
         this.afvist = afvist;
         this.modtaget = modtaget;
         this.slutPris = slutPris;
+    }
+
+    public Ordre(int længde,int bredde){
+        this.længde=længde;
+        this.bredde=bredde;
     }
 
 
@@ -75,11 +81,11 @@ public class Ordre {
         return modtaget;
     }
 
-    public double getLængde() {
+    public int getLængde() {
         return længde;
     }
 
-    public double getBredde() {
+    public int getBredde() {
         return bredde;
     }
 
@@ -91,6 +97,45 @@ public class Ordre {
         return slutPris;
     }
 
+    public void setBetalt(boolean betalt) {
+        this.betalt = betalt;
+    }
+
+    public void setAfsendt(boolean afsendt) {
+        this.afsendt = afsendt;
+    }
+
+    public void setAfvist(boolean afvist) {
+        this.afvist = afvist;
+    }
+
+    public void setModtaget(boolean modtaget) {
+        this.modtaget = modtaget;
+    }
+
+    public void setLængde(int længde) {
+        this.længde = længde;
+    }
+
+    public void setBredde(int bredde) {
+        this.bredde = bredde;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setSlutPris(double slutPris) {
+        this.slutPris = slutPris;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
 
     @Override
     public String toString() {
@@ -107,4 +152,6 @@ public class Ordre {
                 ", dato=" + dato +
                 '}';
     }
+
+
 }
