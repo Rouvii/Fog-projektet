@@ -39,18 +39,21 @@
 
   <h2>KONTAKTOPLYSNINGER</h2>
   
-<form class="kontakt-oplysninger" method="post" action="/insertUserDetails">
+<form class="kontakt-oplysninger" method="post" action="/createOrderAndInsertUserDetails" th:if="${session.currentUser !=null}">
 
   <input type="text" name="fornavn" placeholder="Fornavn"/><br>
     <input type="text" name="efternavn" placeholder="Efternavn"/><br>
   <input type="text" name="adresse" placeholder="Adresse (vej+nummer)"/><br>
   <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
+    <input type="hidden" name="length" th:value="${session.length}" />
+    <input type="hidden" name="width" th:value="${session.width}" />
 
-</form>
+<!--
 <form class="videre-knap" method="post" action="/createOrder" th:if="${session.currentUser !=null}">
 <div>
     <input type="hidden" name="length" th:value="${session.length}" />
     <input type="hidden" name="width" th:value="${session.width}" />
+    -->
     <button type="submit">Videre</button>
 </div>
 </form>
