@@ -14,12 +14,12 @@
 <div class="header">
     <header>
 
-        <a href="index.html">
+        <a href="index.html" th:href="@{index}">
             <img class="fog-logo" src="../public/images/Fog_Logo.jpeg" alt="Fog Logo">
         </a>
         <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
 
-        <a class="header-design-carport-link" href="design.html">DESIGN CARPORT</a>
+        <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
 
         <a href="login.html" class="header-login-button" th:href="@{login}">
             <div class="header-login-button-content">
@@ -28,7 +28,7 @@
             </div>
         </a>
 
-        <a href="orders.html" class="orders-button">
+        <a href="orders.html" class="orders-button" th:href="@{orders}">
             <div class="order-button-content">
                 <img class="orders-img" src="../public/images/clipboard_line.png" alt="orders image">
                 <div class="header-bottom-orders-text">MINE ORDRE</div>
