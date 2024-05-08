@@ -19,6 +19,7 @@ public class UserController
         app.get("createUser", ctx -> ctx.render("createUser.html"));
         app.post("createUser", ctx -> createUser(ctx, connectionPool));
         app.post("insertUserDetails", ctx -> insertUserDetails(ctx, connectionPool));
+        app.post("createOrderAndInsertUserDetails", ctx -> createOrderAndInsertUserDetails(ctx, connectionPool));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool)
@@ -122,6 +123,9 @@ public class UserController
 
     public static void insertUserDetails(Context ctx, ConnectionPool connectionPool)
     {
+
+        User currentUser = ctx.sessionAttribute("currentUser");
+        int userId = currentUser.getUserId();
      String fornavn = ctx.formParam("fornavn");
         String efternavn = ctx.formParam("efternavn");
         String adresse = ctx.formParam("adresse");
@@ -129,12 +133,34 @@ public class UserController
 
 
         try {
-            UserMapper.insertUserDetails(fornavn, efternavn, adresse, telefon, connectionPool);
+            UserMapper.insertUserDetails(userId,fornavn, efternavn, adresse, telefon, connectionPool);
 
           //  ctx.render("index.html");
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
 
+        }
+    }
+
+    public static void createOrderAndInsertUserDetails(Context ctx, ConnectionPool connectionPool) {
+        User currentUser = ctx.sessionAttribute("currentUser");
+        int userId = currentUser.getUserId();
+
+        String fornavn = ctx.formParam("fornavn");
+        String efternavn = ctx.formParam("efternavn");
+        String adresse = ctx.formParam("adresse");
+        String telefon = ctx.formParam("telefon");
+        int length = Integer.valueOf(ctx.formParam("length"));
+        int width = Integer.valueOf(ctx.formParam("width"));
+
+        try {
+            UserMapper.insertUserDetails(userId, fornavn, efternavn, adresse, telefon, connectionPool);
+            OrdreController.placeOrdre(ctx, connectionPool);
+//SKAL REDIRECT DIG TIL ANDEN SIDE BARE EN PLACEHOLDER
+            ctx.render("/success");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("error.html");
         }
     }
 }
