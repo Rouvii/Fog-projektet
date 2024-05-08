@@ -13,7 +13,7 @@ import java.util.List;
 public class UserMapper {
 
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from users where email=? and password=?";
+        String sql = "select * from users where email=? and password=? ";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -30,10 +30,11 @@ public class UserMapper {
             } else {
                 throw new DatabaseException("Fejl i login. Prøv igen");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new DatabaseException("DB fejl", e.getMessage());
         }
     }
+
 
 
 

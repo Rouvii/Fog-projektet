@@ -13,6 +13,8 @@ public class UserController
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)
     {
         app.post("login", ctx -> login(ctx, connectionPool));
+        app.get("index", ctx -> ctx.render("index.html"));
+        app.get("login", ctx -> loginpage(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
@@ -51,11 +53,23 @@ public class UserController
 
     private static void logout(Context ctx)
     {
+
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
 
+    public static void loginpage(Context ctx, ConnectionPool connectionPool)
+    {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            ctx.render("login.html");
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
     public static void login(Context ctx, ConnectionPool connectionPool)
     {
         // Hent form parametre
@@ -69,8 +83,12 @@ public class UserController
             ctx.sessionAttribute("currentUser", user);
             // Hvis ja, send videre til forsiden med login besked
             ctx.attribute("message", "Du er nu logget ind");
-            ctx.redirect("/menupage");
 
+            if ("admin".equals(user.getrole())){
+                ctx.redirect("/admin");
+            }else {
+                ctx.redirect("/index");
+            }
         }
         catch (DatabaseException e)
         {
@@ -78,6 +96,5 @@ public class UserController
             ctx.attribute("message", e.getMessage() );
             ctx.render("index.html");
         }
-
     }
 }

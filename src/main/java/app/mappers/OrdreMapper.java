@@ -3,10 +3,8 @@ package app.mappers;
 import app.entities.ConnectionPool;
 import app.entities.Ordre;
 import app.exceptions.DatabaseException;
-import net.bytebuddy.asm.Advice;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,28 +59,39 @@ public class OrdreMapper {
 
     }
 
-    public static void createOrder(ConnectionPool connectionPool, Ordre order) throws DatabaseException {
-        String sql = "INSERT INTO ordre (dato, user_id, længde, bredde, status_id) VALUES (?, ?, ?, ?, ?)";
+    public static List<Ordre> getAllOrdersPerUser(int userId, ConnectionPool connectionPool) throws DatabaseException
+    {
+
+        List<Ordre> ordreList = new ArrayList<>();
+        String sql = "select * from ordre where user_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
-        ) {
-            ps.setDate(1, Date.valueOf(LocalDate.now()));
-            ps.setInt(2, order.getUserId());
-            ps.setDouble(3, order.getLængde());
-            ps.setDouble(4, order.getBredde());
-            ps.setInt(5, 5);
-
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved oprettelse af ordre: " + e.getMessage());
+        )
+        {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+                int id = rs.getInt("order_id");
+                Date dato = rs.getDate("dato");
+                double længde = rs.getDouble("længde");
+                double bredde = rs.getDouble("bredde");
+                boolean betalt = rs.getBoolean("betalt");
+                boolean afsendt = rs.getBoolean("afsendt");
+                boolean afvist = rs.getBoolean("afvist");
+                boolean modtaget = rs.getBoolean("modtaget");
+                double slutPris = rs.getDouble("slut_pris");
+                ordreList.add(new Ordre (id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
+            }
         }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("Fejl " +  e.getMessage());
+        }
+        return ordreList;
     }
-
-
-
-
 
 
 }
