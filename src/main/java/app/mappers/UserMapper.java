@@ -97,5 +97,29 @@ public class UserMapper {
     }
 */
 
+    public static void insertUserDetails(String fornavn, String efternavn,String adresse,String telefon, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "insert into users (fornavn, efternavn,adresse,telefon) values (?,?,?,?)";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setString(1, fornavn);
+            ps.setString(2, efternavn);
+            ps.setString(3, adresse);
+            ps.setString(4, telefon);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
+            }
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
+                msg = "Brugernavnet findes allerede. Vælg et andet";
+            }
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
 
 }
