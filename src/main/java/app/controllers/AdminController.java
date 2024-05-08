@@ -208,4 +208,25 @@ public class AdminController {
 
     //TODO: tilføj update status med update status id til et af de status ideer
 
+    public static void updatestatus(Context ctx,ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+            int ordreId = Integer.parseInt(ctx.formParam("ordreId"));
+            int statusId = Integer.parseInt(ctx.formParam("statusId"));
+
+            OrdreMapper.updateStatus(ordreId, statusId, connectionPool);
+
+            List<Ordre> ordreList = OrdreMapper.getAllOrders(connectionPool);
+
+            ctx.attribute("ordreList", ordreList);
+            ctx.render("adminordre.html");
+
+        } catch (NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+        }
+
+    }
+
 }

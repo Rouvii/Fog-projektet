@@ -41,6 +41,19 @@ public class Ordre {
         this.modtaget = modtaget;
         this.slutPris = slutPris;
     }
+    public Ordre(int orderId, int userId, java.sql.Date dato, int længde, int bredde,int statusId, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+        this.ordreId = orderId;
+        this.userId = userId;
+        this.dato = dato;
+        this.længde = længde;
+        this.bredde = bredde;
+        this.statusId = statusId;
+        this.betalt = betalt;
+        this.afsendt = afsendt;
+        this.afvist = afvist;
+        this.modtaget = modtaget;
+        this.slutPris = slutPris;
+    }
 
     public Ordre(int længde,int bredde){
         this.længde=længde;

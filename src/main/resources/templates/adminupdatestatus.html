@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>FOG Carports</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/admin.css" th:href="@{/css/admin.css}" rel="stylesheet"/>
+</head>
+
+<body CLASS="admin-body">
+
+<header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;" class="admin-header">
+    <a href="admin.html" class="banner" th:href="@{admin}">
+        <h1>FOG admin</h1>
+    </a>
+</header>
+
+<div class="main-content-order">
+
+    <div class="info-text">
+        <h3 class="status-text">
+        Mulige statusser: <br> 1: Betalt <br> 2: Betalt,afsendt<br> 3: Betalt, afsendt, modtaget <br> 4: Afvist <br>5: ingen status
+        </h3>
+
+
+    </div>
+
+
+    <form class="edit task" method="post" action="/updatestatus">
+        <input type="number" name="statusId" id="statusId" placeholder="Status id" th:value="${order.status}"/>
+        <input type="hidden" name="materialeId" th:value="${order.orderId}"/>
+        <button type="submit" name="opdaterstatus"  th:value="${order.status}" >Opdater status</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>

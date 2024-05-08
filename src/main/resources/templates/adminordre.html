@@ -17,16 +17,19 @@
 </header>
 
 <div class="main-content">
-    <form method="post" class="admin-orders" action="/deleteorder">
-    <div class="tables">
-        <h1>Active Orders</h1>
-        <table class="order-table">
+    <form method="post" class="admin-orders">
+        <div class="tables">
+            <h1>Active Orders</h1>
+            <table class="order-table">
 
                 <thead>
                 <tr>
                     <th>User</th>
                     <th>Order id</th>
                     <th>Dato</th>
+                    <th>Længde</th>
+                    <th>Bredde</th>
+                    <th>Status id</th>
                     <th>Betalt</th>
                     <th>Afsendt</th>
                     <th>Afvist</th>
@@ -39,26 +42,35 @@
                     <td th:text="${order.userId}">User</td>
                     <td th:text="${order.orderId}">Order id</td>
                     <td th:text="${order.dato}">Dato</td>
+                    <td th:text="${order.længde}">Længde</td>
+                    <td th:text="${order.bredde}">Bredde</td>
+                    <td th:text="${order.status}">Status id</td>
                     <td th:text="${order.betalt}">Betalt</td>
                     <td th:text="${order.afsendt}">Afsendt</td>
                     <td th:text="${order.afvist}">Afvist</td>
                     <td th:text="${order.modtaget}">Modtaget</td>
                     <td th:text="${order.slutPris}">Pris</td>
                     <td>
-                        <div class="button">
-                            <button type="submit" name="delete-order" th:value="${order.orderId}"> Delete
+
+                        <div class="">
+                            <button type="submit" class="admin-button" formaction="/deleteorder" name="delete-order"
+                                    th:value="${order.orderId}"> Slet
                             </button>
+                        </div>
 
-
+                        <div class="ad">
+                            <button type="submit" class="admin-button" name="delete-order" formaction="/adminstatuspage"
+                                    th:value="${order.orderId}"> Opdater status
+                            </button>
                         </div>
                     </td>
                 </tr>
 
                 </tbody>
 
-        </table>
+            </table>
 
-    </div>
+        </div>
     </form>
 </div>
 

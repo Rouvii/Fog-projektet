@@ -132,3 +132,25 @@ margin-top: 5px;
 
 }
 
+.info-text{
+    display: flex;
+    justify-content: center;
+    color: #0077C0;
+    margin-top: 10px;
+}
+
+.status-text{
+    display: flex;
+    justify-content: center;
+    color: #0077C0;
+    margin-top: 10px;
+}
+
+.main-content-order {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+}
+
