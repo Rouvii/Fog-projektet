@@ -16,13 +16,18 @@ public class UserController
         app.get("index", ctx -> ctx.render("index.html"));
         app.get("login", ctx -> loginpage(ctx, connectionPool));
         app.get("logout", ctx -> logout(ctx));
-        app.get("createuser", ctx -> ctx.render("createuser.html"));
-        app.post("createuser", ctx -> createUser(ctx, connectionPool));
+        app.get("createUser", ctx -> ctx.render("createUser.html"));
+        app.post("createUser", ctx -> createUser(ctx, connectionPool));
     }
 
     private static void createUser(Context ctx, ConnectionPool connectionPool)
     {
+
         // Hent form parametre
+        int length = Integer.valueOf(ctx.formParam("length"));
+        int width = Integer.valueOf(ctx.formParam("width"));
+
+
         String username = ctx.formParam("username");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
@@ -75,6 +80,8 @@ public class UserController
         // Hent form parametre
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
+        int length = Integer.valueOf(ctx.formParam("length"));
+        int width = Integer.valueOf(ctx.formParam("width"));
 
         // Check om bruger findes i DB med de angivne username + password
         try
@@ -86,15 +93,17 @@ public class UserController
 
             if ("admin".equals(user.getrole())){
                 ctx.redirect("/admin");
-            }else {
+            }else if (length == 0 && width == 0){
                 ctx.redirect("/index");
+            } else if (length != 0 && width != 0){
+                ctx.redirect("/finalDesign");
             }
         }
         catch (DatabaseException e)
         {
             // Hvis nej, send tilbage til login side med fejl besked
             ctx.attribute("message", e.getMessage() );
-            ctx.render("index.html");
+            ctx.render("login.html");
         }
     }
 }
