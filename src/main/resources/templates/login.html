@@ -7,6 +7,7 @@
     <link href="../public/css/login.css" th:href="@{/css/login.css}" rel="stylesheet"/>
 </head>
 
+
 <body>
 <div class="page">
     <a href="index.html" class="banner" th:href="@{/}"><h2>FOG</h2></a>
@@ -19,9 +20,12 @@
 
 
     <form class="login information" method="post">
+        <input type="hidden" name="length" th:value="${session.length}" />
+        <input type="hidden" name="width" th:value="${session.width}" />
+
         <input type="email" id="email" name="email" placeholder="Email"/>
         <input type="password" id="password" name="password" placeholder="Password"/>
-        <button class="btn-ok" type="submit" formaction="/login">Login</button>
+        <button class="btn-ok" type="submit" formaction="login">Login</button>
         <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
     </form>
     <div>

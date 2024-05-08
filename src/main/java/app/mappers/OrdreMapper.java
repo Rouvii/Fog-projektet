@@ -64,7 +64,10 @@ public class OrdreMapper {
     {
 
         List<Ordre> ordreList = new ArrayList<>();
-        String sql = "select * from ordre where user_id = ?";
+        String sql = "select order_id,user_id,dato,bredde,længde,s.betalt,s.afsendt,s.afvist,s.modtaget,slut_pris " +
+                "from ordre o " +
+                "join status s on s.status_id = o.status_id " +
+                "where user_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -85,8 +88,10 @@ public class OrdreMapper {
                 boolean modtaget = rs.getBoolean("modtaget");
                 double slutPris = rs.getDouble("slut_pris");
                 ordreList.add(new Ordre (id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
-            }
 
+
+            }
+            System.out.println(ordreList);
         }
         catch (SQLException e)
         {
