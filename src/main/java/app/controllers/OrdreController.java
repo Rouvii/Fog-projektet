@@ -1,14 +1,12 @@
 package app.controllers;
 
 import app.entities.ConnectionPool;
-import app.entities.Ordre;
+import app.entities.Order;
 import app.entities.User;
-import app.exceptions.DatabaseException;
 import app.mappers.OrdreMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -75,7 +73,7 @@ public class OrdreController {
             int width = Integer.valueOf(ctx.formParam("width"));
             ctx.sessionAttribute("length", length);
             ctx.sessionAttribute("width", width);
-            Ordre order = new Ordre(length, width);
+            Order order = new Order(length, width);
             OrdreMapper.createOrder(userId, connectionPool, order);
 
         } catch (Exception e) {
@@ -87,7 +85,7 @@ public class OrdreController {
         User user = ctx.sessionAttribute("currentUser");
         try {
 
-            List<Ordre> ordreList = OrdreMapper.getAllOrdersPerUser(user.getUserId(), connectionPool);
+            List<Order> ordreList = OrdreMapper.getAllOrdersPerUser(user.getUserId(), connectionPool);
 
             ctx.attribute("ordreList", ordreList);
 

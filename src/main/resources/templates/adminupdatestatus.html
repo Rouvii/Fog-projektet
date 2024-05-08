@@ -28,9 +28,9 @@
 
 
     <form class="edit task" method="post" action="/updatestatus">
-        <input type="number" name="statusId" id="statusId" placeholder="Status id" th:value="${order.status}"/>
-        <input type="hidden" name="materialeId" th:value="${order.orderId}"/>
-        <button type="submit" name="opdaterstatus"  th:value="${order.status}" >Opdater status</button>
+        <input type="number" name="statusId" id="statusId" placeholder="Status id" th:value="${order.statusId}"/>
+        <input type="hidden" name="materialeId" th:value="${order.ordreId}"/>
+        <button type="submit" name="opdaterstatus"  th:value="${order.statusId}" >Opdater status</button>
     </form>
 
 

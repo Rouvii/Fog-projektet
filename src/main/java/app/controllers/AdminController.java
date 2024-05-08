@@ -2,7 +2,7 @@ package app.controllers;
 
 import app.entities.ConnectionPool;
 import app.entities.Materialer;
-import app.entities.Ordre;
+import app.entities.Order;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.mappers.MaterialeMapper;
@@ -11,7 +11,6 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Purpose:
@@ -32,6 +31,7 @@ public class AdminController {
         app.post("addmateriale", ctx -> addmateriale(ctx,connectionPool));
         app.post("adminaddmateriale", ctx -> adminaddmaterialepage(ctx,connectionPool));
         app.post("deletemateriale", ctx -> deletemateriale(ctx,connectionPool));
+        app.post("adminstatuspage", ctx -> adminstatuspage(ctx,connectionPool));
     }
 
 
@@ -139,7 +139,7 @@ public class AdminController {
         User user = ctx.sessionAttribute("currentUser");
         try {
 
-            List<Ordre> ordreList = OrdreMapper.getAllOrders(connectionPool);
+            List<Order> ordreList = OrdreMapper.getAllOrders(connectionPool);
 
             ctx.attribute("ordrelist", ordreList);
 
@@ -217,7 +217,7 @@ public class AdminController {
 
             OrdreMapper.updateStatus(ordreId, statusId, connectionPool);
 
-            List<Ordre> ordreList = OrdreMapper.getAllOrders(connectionPool);
+            List<Order> ordreList = OrdreMapper.getAllOrders(connectionPool);
 
             ctx.attribute("ordreList", ordreList);
             ctx.render("adminordre.html");
@@ -226,6 +226,20 @@ public class AdminController {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
+
+    }
+
+    private static void adminstatuspage(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+
+            ctx.render("adminupdatestatus.html");
+
+        } catch (Exception e) {
+
+            System.out.println("fejl");
+        }
+
 
     }
 

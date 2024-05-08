@@ -1,7 +1,7 @@
 package app.mappers;
 
 import app.entities.ConnectionPool;
-import app.entities.Ordre;
+import app.entities.Order;
 import app.exceptions.DatabaseException;
 
 import java.sql.*;
@@ -18,9 +18,9 @@ public class OrdreMapper {
 
 
 
-    public static List<Ordre> getAllOrders (ConnectionPool connectionPool) {
+    public static List<Order> getAllOrders (ConnectionPool connectionPool) {
 
-        List<Ordre> orderList = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
         String sql = "select order_id,user_id,dato,bredde,længde,s.status_id,s.betalt,s.afsendt,s.afvist,s.modtaget,slut_pris " +
                 "from ordre o " +
                 "join status s on s.status_id = o.status_id " +
@@ -47,7 +47,7 @@ public class OrdreMapper {
                 boolean modtaget = rs.getBoolean("modtaget");
                 double slutPris = rs.getDouble("slut_pris");
 
-                orderList.add(new Ordre(orderId,userId,dato,status,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
+                orderList.add(new Order(orderId,userId,dato,status,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
             }
 
 
@@ -61,10 +61,10 @@ public class OrdreMapper {
 
     }
 
-    public static List<Ordre> getAllOrdersPerUser(int userId, ConnectionPool connectionPool) throws DatabaseException
+    public static List<Order> getAllOrdersPerUser(int userId, ConnectionPool connectionPool) throws DatabaseException
     {
 
-        List<Ordre> ordreList = new ArrayList<>();
+        List<Order> ordreList = new ArrayList<>();
         String sql = "select order_id,user_id,dato,bredde,længde,s.betalt,s.afsendt,s.afvist,s.modtaget,slut_pris " +
                 "from ordre o " +
                 "join status s on s.status_id = o.status_id " +
@@ -88,7 +88,7 @@ public class OrdreMapper {
                 boolean afvist = rs.getBoolean("afvist");
                 boolean modtaget = rs.getBoolean("modtaget");
                 double slutPris = rs.getDouble("slut_pris");
-                ordreList.add(new Ordre (id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
+                ordreList.add(new Order(id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
 
 
             }
@@ -103,7 +103,7 @@ public class OrdreMapper {
 
 
 
-    public static void createOrder(int userId, ConnectionPool connectionPool, Ordre order) throws DatabaseException {
+    public static void createOrder(int userId, ConnectionPool connectionPool, Order order) throws DatabaseException {
         String sql = "INSERT INTO ordre (user_id, dato, længde, bredde, status_id) VALUES (?, ?, ?, ?, ?)";
 
         try (
