@@ -19,6 +19,7 @@ import java.util.List;
 public class OrdreController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool){
         app.get("design", ctx -> designPage(ctx, connectionPool));
+        app.get("finalDesign", ctx -> finalDesignPage(ctx, connectionPool));
         app.post("finalDesign", ctx -> finalDesignPage(ctx,connectionPool));
         app.post("/createOrder", ctx -> placeOrdre(ctx,connectionPool));
         app.get("orders", ctx -> userOrderPage(ctx, connectionPool));
@@ -71,7 +72,6 @@ public class OrdreController {
     }
 
 
-
     public static void placeOrdre(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
         int userId = user.getUserId();
@@ -79,7 +79,8 @@ public class OrdreController {
         try {
             int length = Integer.valueOf(ctx.formParam("length"));
             int width = Integer.valueOf(ctx.formParam("width"));
-
+            ctx.sessionAttribute("length", length);
+            ctx.sessionAttribute("width", width);
             Ordre order = new Ordre(length, width);
             OrdreMapper.createOrder(userId, connectionPool, order);
 

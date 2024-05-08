@@ -44,15 +44,24 @@
   <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
 
 </form>
-<form class="videre-knap" method="post" action="/createOrder">
+<form class="videre-knap" method="post" action="/createOrder" th:if="${session.currentUser !=null}">
 <div>
     <input type="hidden" name="length" th:value="${session.length}" />
     <input type="hidden" name="width" th:value="${session.width}" />
-    <!--
-    <a class="checkout-link" href="checkout.html" th:href="@{/videre}">Videre</a>
-    -->
     <button type="submit">Videre</button>
 </div>
 </form>
+<form class="create-user-knap" method="get" th:action="@{createUser}" th:unless="${session.currentUser != null}">
+    <div>
+        <button type="submit">Opret bruger</button>
+    </div>
+</form>
+
+<form class="login-knap" method="get" th:action="@{login}" th:unless="${session.currentUser != null}">
+<div>
+    <button type="submit">Login</button>
+</div>
+</form>
+
 </body>
 </html>
