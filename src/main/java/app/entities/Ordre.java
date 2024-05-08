@@ -15,8 +15,8 @@ public class Ordre {
     private boolean afsendt;
     private boolean afvist;
     private boolean modtaget;
-    private double længde;
-    private double bredde;
+    private int længde;
+    private int bredde;
     private int userId;
     private double slutPris;
     private Date dato;
@@ -29,7 +29,7 @@ public class Ordre {
         this.dato = dato;
     }
 
-    public Ordre(int orderId, int userId, java.sql.Date dato, double længde, double bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+    public Ordre(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
         this.ordreId = orderId;
         this.userId = userId;
         this.dato = dato;
@@ -42,7 +42,7 @@ public class Ordre {
         this.slutPris = slutPris;
     }
 
-    public Ordre(double længde,double bredde){
+    public Ordre(int længde,int bredde){
         this.længde=længde;
         this.bredde=bredde;
     }
@@ -81,11 +81,11 @@ public class Ordre {
         return modtaget;
     }
 
-    public double getLængde() {
+    public int getLængde() {
         return længde;
     }
 
-    public double getBredde() {
+    public int getBredde() {
         return bredde;
     }
 
@@ -113,11 +113,11 @@ public class Ordre {
         this.modtaget = modtaget;
     }
 
-    public void setLængde(double længde) {
+    public void setLængde(int længde) {
         this.længde = længde;
     }
 
-    public void setBredde(double bredde) {
+    public void setBredde(int bredde) {
         this.bredde = bredde;
     }
 
@@ -131,6 +131,10 @@ public class Ordre {
 
     public void setStatusId(int statusId) {
         this.statusId = statusId;
+    }
+
+    public int getStatusId() {
+        return statusId;
     }
 
     @Override
@@ -149,7 +153,5 @@ public class Ordre {
                 '}';
     }
 
-    public int getStatusId() {
-        return statusId;
-    }
+
 }

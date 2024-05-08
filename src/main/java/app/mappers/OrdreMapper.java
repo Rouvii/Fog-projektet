@@ -5,6 +5,7 @@ import app.entities.Ordre;
 import app.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +38,8 @@ public class OrdreMapper {
                 int orderId = rs.getInt("order_id");
                 int userId = rs.getInt("user_id");
                 Date dato = rs.getDate("dato");
-                double længde = rs.getDouble("længde");
-                double bredde = rs.getDouble("bredde");
+                int længde = rs.getInt("længde");
+                int bredde = rs.getInt("bredde");
                 boolean betalt = rs.getBoolean("betalt");
                 boolean afsendt = rs.getBoolean("afsendt");
                 boolean afvist = rs.getBoolean("afvist");
@@ -76,8 +77,8 @@ public class OrdreMapper {
             {
                 int id = rs.getInt("order_id");
                 Date dato = rs.getDate("dato");
-                double længde = rs.getDouble("længde");
-                double bredde = rs.getDouble("bredde");
+                int længde = rs.getInt("længde");
+                int bredde = rs.getInt("bredde");
                 boolean betalt = rs.getBoolean("betalt");
                 boolean afsendt = rs.getBoolean("afsendt");
                 boolean afvist = rs.getBoolean("afvist");
@@ -93,5 +94,25 @@ public class OrdreMapper {
         return ordreList;
     }
 
+
+
+    public static void createOrder(int userId, ConnectionPool connectionPool, Ordre order) throws DatabaseException {
+        String sql = "INSERT INTO ordre (user_id, dato, længde, bredde, status_id) VALUES (?, ?, ?, ?, ?)";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, userId); // Set user_id in the SQL statement
+            ps.setDate(2, Date.valueOf(LocalDate.now()));
+            ps.setInt(3, order.getLængde());
+            ps.setInt(4, order.getBredde());
+            ps.setInt(5, 5);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved oprettelse af ordre: " + e.getMessage());
+        }
+    }
 
 }

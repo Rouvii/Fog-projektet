@@ -9,33 +9,41 @@
 <body>
 
 <div class="design-dropdown">
-    <form class="design-dropdown-content" method="get">
+    <form class="design-dropdown-content" method="post">
         Længde(cm):
-        <select name="length" id="length">
-            <option value="" selected="selected">Vælg længde</option>
-            <option value="480">480</option>
-            <option value="540">540</option>
-            <option value="600">600</option>
-            <option value="720">720</option>
-            <option value="780">780</option>
-            <option value="810">810</option>
-            <option value="870">870</option>
-            <option value="910">910</option>
-            <option value="990">990</option>
-        </select>
-        <br><br>
-        Bredde(cm):
-        <select name="width" id="width">
-            <option value="" selected="selected">Vælg bredde</option>
-            <option value="300">300</option>
-            <option value="360">360</option>
-            <option value="390">390</option>
-            <option value="600">600</option>
-        </select>
-        <br><br>
-        <button type="submit" value="Videre til valg af materialer" formaction="finalDesign"> Videre til valg af materialer</button>
-        <button type="submit" value="Plantegning" formaction="plantegning">Plantegning</button>
-    </form>
+
+
+
+
+     <select name="length" id="length">
+         <option value="" selected="selected">Vælg længde</option>
+
+         <option value="480">480</option>
+         <option value="540">540</option>
+         <option value="600">600</option>
+         <option value="720">720</option>
+         <option value="780">780</option>
+         <option value="810">810</option>
+         <option value="870">870</option>
+         <option value="910">910</option>
+         <option value="990">990</option>
+     </select>
+     <br><br>
+     Bredde(cm):
+     <select name="width" id="width">
+         <option value="" selected="selected">Vælg bredde</option>
+         <option value="300">300</option>
+         <option value="360">360</option>
+         <option value="390">390</option>
+         <option value="600">600</option>
+     </select>
+
+     <br><br>
+        <a href="finalDesign.html" th:href="finalDesign">
+     <button type="submit" value="Videre til valg af materialer" formaction="finalDesign"> Videre til valg af materialer</button>
+        </a>
+     <button type="submit" value="Plantegning" formaction="plantegning">Plantegning</button>
+ </form>
 </div>
 
 </body>
