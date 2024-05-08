@@ -3,33 +3,64 @@ package app.controllers;
 import app.entities.ConnectionPool;
 import app.entities.Ordre;
 import app.entities.User;
+import app.exceptions.DatabaseException;
 import app.mappers.OrdreMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-import java.util.List;
+import java.sql.Date;
 
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou, Daniel Rouvillain
+ * @author: Kevin Løvstad Schou
  */
 public class OrdreController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool){
         app.get("design", ctx -> designPage(ctx, connectionPool));
-        app.get("orders",ctx -> myorders(ctx,connectionPool));
+        app.post("finalDesign", ctx -> finalDesignPage(ctx,connectionPool));
+        app.post("/createOrder", ctx -> placeOrdre(ctx,connectionPool));
+
+    }
+
+    private static void finalDesignPage(Context ctx, ConnectionPool connectionPool) {
+
+        User user = ctx.sessionAttribute("currentUser");
+
+        try{
+
+            int length = Integer.valueOf(ctx.formParam("length"));
+            int width = Integer.valueOf(ctx.formParam("width"));
+
+            ctx.sessionAttribute("length", length);
+            ctx.sessionAttribute("width", width);
+
+
+            ctx.render("finalDesign.html");
+
+
+
+        }catch (NumberFormatException e){
+            e.getMessage();
+        }
+
+
+
 
     }
 
     public static void designPage(Context ctx,ConnectionPool connectionPool){
 
-        //User user =ctx.sessionAttribute("currentUser");
+        User user =ctx.sessionAttribute("currentUser");
+
+
 
 
         try{
 
 
-            ctx.render("/design.html");
+
+            ctx.render("design.html");
 
 
         }catch (Exception e){
@@ -39,21 +70,20 @@ public class OrdreController {
 
 
 
+    public static void placeOrdre(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        int userId = user.getUserId();
 
-public static void myorders(Context ctx, ConnectionPool connectionPool){
+        try {
+            int length = Integer.valueOf(ctx.formParam("length"));
+            int width = Integer.valueOf(ctx.formParam("width"));
 
-    User user = ctx.sessionAttribute("currentUser");
+            Ordre order = new Ordre(length, width);
+            OrdreMapper.createOrder(userId, connectionPool, order);
 
-    try {
-        List<Ordre> ordreList = OrdreMapper.getAllOrdersPerUser(user.getUserId(),connectionPool);
-        ctx.attribute("ordreList",ordreList);
-        ctx.render("orders.html");
-    } catch (Exception e) {
-        ctx.attribute("message",e.getMessage());
-        ctx.render("index.html");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
-
-}
-
 
 }

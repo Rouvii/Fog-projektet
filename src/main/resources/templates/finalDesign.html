@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
 <h1>Final design</h1>
 
 <h2>MATERIALER</h2>
@@ -39,17 +38,21 @@
   
 <form class="kontakt-oplysninger" method="post">
 
-  <input type="text" name="navn" placeholder="Navn og efternavn"/><br>
+  <input type="text" name="fornavn" placeholder="Fornavn"/><br>
+    <input type="text" name="efternavn" placeholder="Efternavn"/><br>
   <input type="text" name="adresse" placeholder="Adresse (vej+nummer)"/><br>
-  <input type="number" name="postnummer" placeholder="Postnummer"/><br>
   <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
-    <input type="hidden" name="length" th:value="${param.length}" />
-    <input type="hidden" name="width" th:value="${param.width}" />
+
 </form>
-
+<form class="videre-knap" method="post" action="/createOrder">
 <div>
+    <input type="hidden" name="length" th:value="${session.length}" />
+    <input type="hidden" name="width" th:value="${session.width}" />
+    <!--
     <a class="checkout-link" href="checkout.html" th:href="@{/videre}">Videre</a>
+    -->
+    <button type="submit">Videre</button>
 </div>
-
+</form>
 </body>
 </html>
