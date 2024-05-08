@@ -11,6 +11,7 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Purpose:
@@ -28,6 +29,9 @@ public class AdminController {
         app.post("updatename", ctx -> updatename(ctx, connectionPool));
         app.post("updateprice", ctx -> updateprice(ctx,connectionPool));
         app.get("adminordre", ctx -> adminordrepage(ctx,connectionPool));
+        app.post("addmateriale", ctx -> addmateriale(ctx,connectionPool));
+        app.post("adminaddmateriale", ctx -> adminaddmaterialepage(ctx,connectionPool));
+        app.post("deletemateriale", ctx -> deletemateriale(ctx,connectionPool));
     }
 
 
@@ -146,6 +150,59 @@ public class AdminController {
             System.out.println("fejl");
         }
 
+
+    }
+
+    private static void addmateriale(Context ctx,ConnectionPool connectionPool) {
+
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            String type = ctx.formParam("name");
+            int pris = Integer.parseInt(ctx.formParam("pris"));
+            MaterialeMapper.addMateriale(type, pris, connectionPool);
+
+            List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
+
+            ctx.attribute("materialeList", materialerList);
+            ctx.render("adminrediger.html");
+        } catch (DatabaseException e) {
+            ctx.render("/index.html");
+        }
+    }
+
+    private static void adminaddmaterialepage(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+
+
+            ctx.render("adminaddmateriale.html");
+
+        } catch (Exception e) {
+
+            System.out.println("fejl");
+        }
+
+
+    }
+
+
+    public static void deletemateriale(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+            int materialeId = Integer.parseInt(ctx.formParam("materialeId"));
+
+            MaterialeMapper.deleteMateriale(materialeId, connectionPool);
+
+            List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
+
+            ctx.attribute("materialeList", materialerList);
+            ctx.render("adminrediger.html");
+
+        } catch (DatabaseException | NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+        }
 
     }
 

@@ -11,22 +11,24 @@
 <body CLASS="admin-body">
 
 <header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;" class="admin-header">
-    <h1>FOG Carports</h1>
+    <a href="admin.html" class="banner" th:href="@{admin}">
+        <h1>FOG admin</h1>
+    </a>
 </header>
 
 <div class="main-content">
-    <form class="edit task" method="post" action="/updatename">
-
-        <input type="text" name="name" id="name" placeholder="type" th:value="${materialer.type}"/>
-        <input type="hidden" name="materialeId" th:value="${materialer.materialeId}" />
-        <button type="submit" name="updatename" th:value="${materialer.type}" >Opdater navn</button>
-    </form>
-    <form method="post" action="/updateprice">
-        <input type="number" name="pris" id="pris" placeholder="Pris pr meter" th:value="${materialer.price}"/>
-        <input type="hidden" name="materialeId" th:value="${materialer.materialeId}" />
-        <button type="submit" name="materialepris" th:value="${materialer.price}" >Opdater pris</button>
-    </form>
-
+    <div class="update-field">
+        <form class="edit task" method="post" action="/updatename">
+            <input type="text" name="name" id="name" placeholder="type" th:value="${materialer.type}"/>
+            <input type="hidden" name="materialeId" th:value="${materialer.materialeId}"/>
+            <button class="button" type="submit" name="updatename" th:value="${materialer.type}">Opdater navn</button>
+        </form>
+        <form method="post" action="/updateprice">
+            <input type="number" name="pris" id="pris" placeholder="Pris pr meter" th:value="${materialer.price}"/>
+            <input type="hidden" name="materialeId" th:value="${materialer.materialeId}"/>
+            <button type="submit" class="button" name="materialepris" th:value="${materialer.price}">Opdater pris</button>
+        </form>
+    </div>
 
 </div>
 

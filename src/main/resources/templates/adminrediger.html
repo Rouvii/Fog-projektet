@@ -11,7 +11,9 @@
 <body CLASS="admin-body">
 
 <header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;" class="admin-header">
-    <h1>FOG Carports</h1>
+    <a href="admin.html" class="banner" th:href="@{admin}">
+        <h1>FOG admin</h1>
+    </a>
 </header>
 
 <div class="main-content">
@@ -34,8 +36,11 @@
                 <td th:text="${materialer.type}">type</td>
                 <td th:text="${materialer.price}">pris</td>
                 <td>
-                    <div class="button">
-                        <button type="submit" name="materialeId" th:value="${materialer.materialeId}" formaction="/redigermateriale">Rediger</button>
+                    <div class="admin-button">
+                        <button class="button" type="submit" name="materialeId" th:value="${materialer.materialeId}" formaction="/redigermateriale">Rediger</button>
+                    </div>
+                    <div class="admin-button">
+                        <button class="button" type="submit" name="materialeId" th:value="${materialer.materialeId}" formaction="/deletemateriale">Slet</button>
                     </div>
                 </td>
             </tr>
@@ -43,6 +48,9 @@
             </tbody>
 
         </table>
+            <div class="button-add">
+                <button type="submit" class="button" name="addmaterialebutton"  formaction="/adminaddmateriale">Tilføj</button>
+            </div>
         </div>
     </form>
 
