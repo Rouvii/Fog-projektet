@@ -9,7 +9,10 @@
 
 <body>
 <h1>Final design</h1>
-
+<div>
+<input type="text" name="length" th:value="${session.length}" />
+<input type="text" name="width" th:value="${session.width}"/>
+</div>
 <h2>MATERIALER</h2>
 
 <form class="materialer" method="post">
@@ -36,7 +39,7 @@
 
   <h2>KONTAKTOPLYSNINGER</h2>
   
-<form class="kontakt-oplysninger" method="post">
+<form class="kontakt-oplysninger" method="post" action="/insertUserDetails">
 
   <input type="text" name="fornavn" placeholder="Fornavn"/><br>
     <input type="text" name="efternavn" placeholder="Efternavn"/><br>
@@ -59,6 +62,8 @@
 
 <form class="login-knap" method="get" th:action="@{login}" th:unless="${session.currentUser != null}">
 <div>
+    <input type="hidden" name="length" th:value="${session.length}" />
+    <input type="hidden" name="width" th:value="${session.width}" />
     <button type="submit">Login</button>
 </div>
 </form>
