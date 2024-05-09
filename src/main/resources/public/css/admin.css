@@ -100,3 +100,57 @@ h1 {
     font-weight: bold; /* Make header text bold */
 }
 
+.banner{
+    text-decoration: none;
+    color: white;
+}
+
+.button{
+background-color: #0077C0;
+    color: #fff;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: #005999;
+}
+
+.admin-button{
+    display: flex;
+    justify-content: center;
+margin-top: 5px;
+    padding-left: 10px;
+}
+
+.update-field{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.info-text{
+    display: flex;
+    justify-content: center;
+    color: #0077C0;
+    margin-top: 10px;
+}
+
+.status-text{
+    display: flex;
+    justify-content: center;
+    color: #0077C0;
+    margin-top: 10px;
+}
+
+.main-content-order {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+}
+

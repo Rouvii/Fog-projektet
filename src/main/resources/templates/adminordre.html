@@ -11,20 +11,25 @@
 <body CLASS="admin-body">
 
 <header style="background-color: #0077C0; color: #fff; text-align: center; padding: 20px;" class="admin-header">
-    <h1>FOG Carports</h1>
+    <a href="admin.html" class="banner" th:href="@{admin}">
+        <h1>FOG admin</h1>
+    </a>
 </header>
 
 <div class="main-content">
-    <form method="post" class="admin-orders" action="/deleteorder">
+
     <div class="tables">
         <h1>Active Orders</h1>
         <table class="order-table">
-
+            <form method="post" class="admin-orders">
                 <thead>
                 <tr>
                     <th>User</th>
                     <th>Order id</th>
                     <th>Dato</th>
+                    <th>Længde</th>
+                    <th>Bredde</th>
+                    <th>Status id</th>
                     <th>Betalt</th>
                     <th>Afsendt</th>
                     <th>Afvist</th>
@@ -33,32 +38,57 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="order: ${orderList}">
+                <tr th:each="order: ${ordrelist}">
                     <td th:text="${order.userId}">User</td>
-                    <td th:text="${order.orderId}">Order id</td>
-                    <td th:text="${order.price}">Price</td>
+                    <td th:text="${order.ordreId}">Order id</td>
+                    <td th:text="${order.dato}">Dato</td>
+                    <td th:text="${order.længde}">Længde</td>
+                    <td th:text="${order.bredde}">Bredde</td>
+                    <td th:text="${order.statusId}">Status id</td>
                     <td th:text="${order.betalt}">Betalt</td>
                     <td th:text="${order.afsendt}">Afsendt</td>
                     <td th:text="${order.afvist}">Afvist</td>
                     <td th:text="${order.modtaget}">Modtaget</td>
-                    <td th:text="${order.slutpris}">Pris</td>
+                    <td th:text="${order.slutPris}">Pris</td>
                     <td>
-                        <div class="button">
-                            <button type="submit" name="delete-order" th:value="${order.orderId}"> Delete
+
+                        <div class="">
+                            <button type="submit" class="button" formaction="/deleteorder" name="delete-order"
+                                    th:value="${order.ordreId}"> Slet
                             </button>
+                        </div>
 
-
+                        <div class="ad">
+                            <button type="submit" class="button" name="delete-order" formaction="/adminstatuspage"
+                                    th:value="${order.ordreId}"> Opdater status
+                            </button>
                         </div>
                     </td>
                 </tr>
 
+
                 </tbody>
-
+            </form>
         </table>
+        <div class="update-field-text">
+            <h4>Opdater status på order id</h4>
+        </div>
+        <div class="update-field">
+            <form class="update-status-field" method="post" action="/updatestatus">
+                <input type="text" name="orderid" id="orderid" placeholder="Order id"/>
 
+                <select name="statusid" id="statusid">
+                    <option value="" disabled selected="selected">Vælg Status</option>
+                    <option value="1">Betalt</option>
+                    <option value="2">Betalt,afsendt</option>
+                    <option value="3">Betalt, afsendt, modtaget</option>
+                    <option value="4">Afvist</option>
+                    <option value="5">Default</option>
+                </select>
+                <button type="submit" class="button" name="status">Opdater status</button>
+            </form>
+        </div>
     </div>
-    </form>
 </div>
-
 </body>
 </html>

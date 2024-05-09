@@ -1,14 +1,13 @@
 package app.entities;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 /**
  * Purpose:
  *
  * @author: Kevin Løvstad Schou
  */
-public class Ordre {
+public class Order {
 
     private int ordreId;
     private boolean betalt;
@@ -24,12 +23,12 @@ public class Ordre {
     private int statusId;
 
 
-    public Ordre(int ordreId, Date dato) {
+    public Order(int ordreId, Date dato) {
         this.ordreId = ordreId;
         this.dato = dato;
     }
 
-    public Ordre(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+    public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
         this.ordreId = orderId;
         this.userId = userId;
         this.dato = dato;
@@ -41,8 +40,21 @@ public class Ordre {
         this.modtaget = modtaget;
         this.slutPris = slutPris;
     }
+    public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, int statusId, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+        this.ordreId = orderId;
+        this.userId = userId;
+        this.dato = dato;
+        this.længde = længde;
+        this.bredde = bredde;
+        this.statusId = statusId;
+        this.betalt = betalt;
+        this.afsendt = afsendt;
+        this.afvist = afvist;
+        this.modtaget = modtaget;
+        this.slutPris = slutPris;
+    }
 
-    public Ordre(int længde,int bredde){
+    public Order(int længde, int bredde){
         this.længde=længde;
         this.bredde=bredde;
     }

@@ -2,7 +2,7 @@ package app.controllers;
 
 import app.entities.ConnectionPool;
 import app.entities.Materialer;
-import app.entities.Ordre;
+import app.entities.Order;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.mappers.MaterialeMapper;
@@ -28,6 +28,10 @@ public class AdminController {
         app.post("updatename", ctx -> updatename(ctx, connectionPool));
         app.post("updateprice", ctx -> updateprice(ctx,connectionPool));
         app.get("adminordre", ctx -> adminordrepage(ctx,connectionPool));
+        app.post("addmateriale", ctx -> addmateriale(ctx,connectionPool));
+        app.post("adminaddmateriale", ctx -> adminaddmaterialepage(ctx,connectionPool));
+        app.post("deletemateriale", ctx -> deletemateriale(ctx,connectionPool));
+        app.post("updatestatus", ctx -> updatestatus(ctx,connectionPool));
     }
 
 
@@ -135,7 +139,7 @@ public class AdminController {
         User user = ctx.sessionAttribute("currentUser");
         try {
 
-            List<Ordre> ordreList = OrdreMapper.getAllOrders(connectionPool);
+            List<Order> ordreList = OrdreMapper.getAllOrders(connectionPool);
 
             ctx.attribute("ordrelist", ordreList);
 
@@ -148,5 +152,83 @@ public class AdminController {
 
 
     }
+
+    private static void addmateriale(Context ctx,ConnectionPool connectionPool) {
+
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            String type = ctx.formParam("name");
+            int pris = Integer.parseInt(ctx.formParam("pris"));
+            MaterialeMapper.addMateriale(type, pris, connectionPool);
+
+            List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
+
+            ctx.attribute("materialeList", materialerList);
+            ctx.render("adminrediger.html");
+        } catch (DatabaseException e) {
+            ctx.render("/index.html");
+        }
+    }
+
+    private static void adminaddmaterialepage(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+
+
+            ctx.render("adminaddmateriale.html");
+
+        } catch (Exception e) {
+
+            System.out.println("fejl");
+        }
+
+
+    }
+
+
+    public static void deletemateriale(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+            int materialeId = Integer.parseInt(ctx.formParam("materialeId"));
+
+            MaterialeMapper.deleteMateriale(materialeId, connectionPool);
+
+            List<Materialer> materialerList = MaterialeMapper.getAllMaterialer(connectionPool);
+
+            ctx.attribute("materialeList", materialerList);
+            ctx.render("adminrediger.html");
+
+        } catch (DatabaseException | NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+        }
+
+    }
+
+
+
+    public static void updatestatus(Context ctx,ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+            int ordreId = Integer.parseInt(ctx.formParam("orderid"));
+            int statusId = Integer.parseInt(ctx.formParam("statusid"));
+
+            OrdreMapper.updateStatus(ordreId, statusId, connectionPool);
+
+            List<Order> ordreList = OrdreMapper.getAllOrders(connectionPool);
+
+            ctx.attribute("ordrelist", ordreList);
+            ctx.render("adminordre.html");
+
+        } catch (Exception e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+        }
+
+    }
+
+
 
 }
