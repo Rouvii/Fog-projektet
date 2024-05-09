@@ -31,7 +31,7 @@ public class AdminController {
         app.post("addmateriale", ctx -> addmateriale(ctx,connectionPool));
         app.post("adminaddmateriale", ctx -> adminaddmaterialepage(ctx,connectionPool));
         app.post("deletemateriale", ctx -> deletemateriale(ctx,connectionPool));
-        app.post("adminstatuspage", ctx -> adminstatuspage(ctx,connectionPool));
+        app.post("updatestatus", ctx -> updatestatus(ctx,connectionPool));
     }
 
 
@@ -206,41 +206,29 @@ public class AdminController {
 
     }
 
-    //TODO: tilføj update status med update status id til et af de status ideer
+
 
     public static void updatestatus(Context ctx,ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
 
         try {
-            int ordreId = Integer.parseInt(ctx.formParam("ordreId"));
-            int statusId = Integer.parseInt(ctx.formParam("statusId"));
+            int ordreId = Integer.parseInt(ctx.formParam("orderid"));
+            int statusId = Integer.parseInt(ctx.formParam("statusid"));
 
             OrdreMapper.updateStatus(ordreId, statusId, connectionPool);
 
             List<Order> ordreList = OrdreMapper.getAllOrders(connectionPool);
 
-            ctx.attribute("ordreList", ordreList);
+            ctx.attribute("ordrelist", ordreList);
             ctx.render("adminordre.html");
 
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
 
     }
 
-    private static void adminstatuspage(Context ctx, ConnectionPool connectionPool) {
-        User user = ctx.sessionAttribute("currentUser");
-        try {
 
-            ctx.render("adminupdatestatus.html");
-
-        } catch (Exception e) {
-
-            System.out.println("fejl");
-        }
-
-
-    }
 
 }
