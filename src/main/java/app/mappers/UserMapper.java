@@ -97,8 +97,8 @@ public class UserMapper {
     }
 */
 
-    public static void insertUserDetails(String fornavn, String efternavn,String adresse,String telefon, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into users (fornavn, efternavn,adresse,telefon) values (?,?,?,?)";
+    public static void insertUserDetails(int userId, String fornavn, String efternavn, String adresse, String telefon, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE users SET fornavn = ?, efternavn = ?, adresse = ?, telefon = ? WHERE user_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -108,17 +108,14 @@ public class UserMapper {
             ps.setString(2, efternavn);
             ps.setString(3, adresse);
             ps.setString(4, telefon);
+            ps.setInt(5, userId);
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
-                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
+                throw new DatabaseException("Fejl ved opdatering af bruger");
             }
         } catch (SQLException e) {
-            String msg = "Der er sket en fejl. Prøv igen";
-            if (e.getMessage().startsWith("ERROR: duplicate key value ")) {
-                msg = "Brugernavnet findes allerede. Vælg et andet";
-            }
-            throw new DatabaseException(msg, e.getMessage());
+            throw new DatabaseException("Database fejl", e.getMessage());
         }
     }
 
