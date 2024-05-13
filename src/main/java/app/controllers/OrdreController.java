@@ -4,6 +4,7 @@ import app.entities.ConnectionPool;
 import app.entities.Order;
 import app.entities.User;
 import app.mappers.OrdreMapper;
+import app.services.Svg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -21,6 +22,7 @@ public class OrdreController {
         app.post("finalDesign", ctx -> finalDesignPage(ctx,connectionPool));
         app.post("/createOrder", ctx -> placeOrdre(ctx,connectionPool));
         app.get("orders", ctx -> userOrderPage(ctx, connectionPool));
+        app.get("showOrder", ctx -> OrdreController.showOrder(ctx, connectionPool));
 
     }
 
@@ -97,6 +99,13 @@ public class OrdreController {
         }
 
 
+    }
+    public static void showOrder(Context ctx, ConnectionPool connectionPool){
+
+        Svg carportSvg = new Svg(0, 0, "0 0 855 690", "100%", "auto");
+
+        ctx.attribute("svg", carportSvg.toString());
+        ctx.render("showOrder.html");
     }
 
 }
