@@ -3,12 +3,15 @@ package app.controllers;
 import app.entities.ConnectionPool;
 import app.entities.Order;
 import app.entities.User;
+import app.exceptions.DatabaseException;
 import app.mappers.OrdreMapper;
 import app.services.Svg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Purpose:
@@ -101,8 +104,10 @@ public class OrdreController {
 
     }
     public static void showOrder(Context ctx, ConnectionPool connectionPool){
+        //Locale.setDefault(new Locale("US"));
 
-        Svg carportSvg = new Svg(0, 0, "0 0 855 690", "100%", "auto");
+        Svg carportSvg = new Svg(0, 0, "0 0 855 690", "50%", "auto");
+        carportSvg.addRectangle(0,0,855,690,"stroke-width:1;stroke:black;fill:white");
 
         ctx.attribute("svg", carportSvg.toString());
         ctx.render("showOrder.html");

@@ -1,0 +1,17 @@
+.plantegning-container {
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+.plantegning-container p {
+    text-align: center;
+    line-height: 200px;
+}
+
+
+.carport-svg-topview
+{
+max-width: 600px;
+    max-height: 600px;
+}
