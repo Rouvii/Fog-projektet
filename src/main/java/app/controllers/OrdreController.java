@@ -5,6 +5,7 @@ import app.entities.Order;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.mappers.OrdreMapper;
+import app.services.CarportSvg;
 import app.services.Svg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -104,12 +105,12 @@ public class OrdreController {
 
     }
     public static void showOrder(Context ctx, ConnectionPool connectionPool){
-        //Locale.setDefault(new Locale("US"));
+        Locale.setDefault(new Locale("US"));
+        CarportSvg svg= new CarportSvg(600,780);
 
-        Svg carportSvg = new Svg(0, 0, "0 0 855 690", "50%", "auto");
-        carportSvg.addRectangle(0,0,855,690,"stroke-width:1;stroke:black;fill:white");
 
-        ctx.attribute("svg", carportSvg.toString());
+
+        ctx.attribute("svg",svg.toString());
         ctx.render("showOrder.html");
     }
 

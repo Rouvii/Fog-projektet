@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Frontpage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/plantegning.css" th:href="@{/css/plantegning.css}" rel="stylesheet"/>
 </head>
+
 <body>
+
+<h1>Show Order #12143</h1>
+
+<p>This is where we show the order details and the drawing when the customer has accepted the offer</p>
+
+<p>We want to inject a SVG drawing below:</p>
 
 <div class="carport-svg-topview">
     <div th:utext="${svg}"></div>
-
 </div>
 
 </body>
