@@ -14,9 +14,14 @@
 <p>This is where we show the order details and the drawing when the customer has accepted the offer</p>
 
 <p>We want to inject a SVG drawing below:</p>
-
+<div>
+    <input type="text" name="length" th:value="${session.length}" />
+    <input type="text" name="width" th:value="${session.width}"/>
+</div>
 <div class="carport-svg-topview">
-    <div th:utext="${svg}"></div>
+    <div th:utext="${svg}">
+
+    </div>
 </div>
 
 </body>

@@ -106,11 +106,25 @@ public class OrdreController {
     }
     public static void showOrder(Context ctx, ConnectionPool connectionPool){
         Locale.setDefault(new Locale("US"));
-        CarportSvg svg= new CarportSvg(600,780);
+        int length = ctx.sessionAttribute("length");
+        int width = ctx.sessionAttribute("width");
+
+        CarportSvg carportSvg= new CarportSvg(width,length);
+        Svg outerSvg = new Svg(0,0, "0 0 1000,1000", "100%", "auto");
+
+        outerSvg.addArrow(900,900,900,0,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        outerSvg.addArrow(width,length+25,0,length+25,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        outerSvg.addText(width+25,length+25,width+ " cm");
 
 
 
-        ctx.attribute("svg",svg.toString());
+
+        String combined = outerSvg.addSvg(carportSvg.getCarportSvg()).toString();
+
+
+        ctx.attribute("length",length);
+        ctx.attribute("width",width);
+        ctx.attribute("svg", combined);
         ctx.render("showOrder.html");
     }
 
