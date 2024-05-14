@@ -17,7 +17,7 @@ public class CarportSvg {
     public CarportSvg(int width, int length) {
         this.width = width;
         this.length = length;
-        carportSvg= new Svg(0, 0, "0 0 600 780", "75%", "auto");
+        carportSvg= new Svg(0, 0, "0 0 600 780", "50%", "auto");
         carportSvg.addRectangle(0,0,length,width,"stroke-width:1px;stroke:#000000;fill:#ffffff");
         addBeams(width,length);
         addRafters(width, length);
@@ -26,7 +26,7 @@ public class CarportSvg {
     private void addBeams(int width, int length){
 
         carportSvg.addRectangle(0,35,4.5,width,"stroke-width:1px;stroke:#000000;fill:#ffffff");
-        carportSvg.addRectangle(0,length,4.5,width,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        carportSvg.addRectangle(0,length-35,4.5,width,"stroke-width:1px;stroke:#000000;fill:#ffffff");
 
     }
 

@@ -110,13 +110,15 @@ public class OrdreController {
         int width = ctx.sessionAttribute("width");
 
         CarportSvg carportSvg= new CarportSvg(width,length);
-        Svg outerSvg = new Svg(0,0, "0 0 1000,1000", "100%", "auto");
+        Svg outerSvg = new Svg(0,0, "0 0 1000 1000", "100%", "auto");
 
-        outerSvg.addArrow(900,900,900,0,"stroke-width:1px;stroke:#000000;fill:#ffffff");
-        outerSvg.addArrow(width,length+25,0,length+25,"stroke-width:1px;stroke:#000000;fill:#ffffff");
-        outerSvg.addText(width+25,length+25,width+ " cm");
+        int arrowOffset=15;
+        int rotation=90;
 
-
+        outerSvg.addArrow(width+arrowOffset,length,width+arrowOffset,arrowOffset,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        outerSvg.addArrow(width,length+arrowOffset,arrowOffset,length+arrowOffset,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        outerSvg.addText(width/2+arrowOffset,length+arrowOffset+10,0,width+ " cm");
+        outerSvg.addText(width+arrowOffset,length/2+arrowOffset+10,rotation,length+ " cm");
 
 
         String combined = outerSvg.addSvg(carportSvg.getCarportSvg()).toString();

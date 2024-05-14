@@ -24,7 +24,7 @@ public class Svg {
 
     private static final String RECTANGLE_TEMPLATE="<rect x=\"%.2f\" y=\"%.2f\" height=\"%f\" width=\"%f\" style=\"%s\"/>";
 
-    private static final String SVG_TEXT_TEMPLATE="<text x=\"%d\" y=\"%d\" transform=\"rotate(%d)\">%s</text>";
+    private static final String SVG_TEXT_TEMPLATE="<text x=\"%d\" y=\"%d\" transform=\"rotate(%d %d %d)\">%s</text>";
     private StringBuilder svg = new StringBuilder();
 
     public Svg(int x, int y, String viewBox, String width, String length){
@@ -56,8 +56,8 @@ public class Svg {
         return svg.append(innerSvg.toString()).toString();
     }
 
-    public void addText(int x, int y, String text){
-        svg.append(String.format(SVG_TEXT_TEMPLATE, x, y, 0, text));
+    public void addText(int x, int y, int rotation,String text){
+        svg.append(String.format(SVG_TEXT_TEMPLATE, x, y, rotation,x,y, text));
 
     }
 
