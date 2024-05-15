@@ -17,7 +17,7 @@ public class Order {
     private int længde;
     private int bredde;
     private int userId;
-    private double slutPris;
+    private int totalPris;
     private Date dato;
 
     private int statusId;
@@ -28,7 +28,7 @@ public class Order {
         this.dato = dato;
     }
 
-    public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+    public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, int totalPris) {
         this.ordreId = orderId;
         this.userId = userId;
         this.dato = dato;
@@ -38,9 +38,9 @@ public class Order {
         this.afsendt = afsendt;
         this.afvist = afvist;
         this.modtaget = modtaget;
-        this.slutPris = slutPris;
+        this.totalPris = totalPris;
     }
-    public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, int statusId, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, double slutPris) {
+    public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, int statusId, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, int totalPris) {
         this.ordreId = orderId;
         this.userId = userId;
         this.dato = dato;
@@ -51,7 +51,7 @@ public class Order {
         this.afsendt = afsendt;
         this.afvist = afvist;
         this.modtaget = modtaget;
-        this.slutPris = slutPris;
+        this.totalPris = totalPris;
     }
 
     public Order(int længde, int bredde){
@@ -105,8 +105,8 @@ public class Order {
         return userId;
     }
 
-    public double getSlutPris() {
-        return slutPris;
+    public int getTotalPris() {
+        return totalPris;
     }
 
     public void setBetalt(boolean betalt) {
@@ -137,8 +137,8 @@ public class Order {
         this.userId = userId;
     }
 
-    public void setSlutPris(double slutPris) {
-        this.slutPris = slutPris;
+    public void setTotalPris(int totalPris) {
+        this.totalPris = totalPris;
     }
 
     public void setStatusId(int statusId) {
@@ -160,7 +160,7 @@ public class Order {
                 ", længde=" + længde +
                 ", bredde=" + bredde +
                 ", userId=" + userId +
-                ", slutPris=" + slutPris +
+                ", slutPris=" + totalPris +
                 ", dato=" + dato +
                 '}';
     }
