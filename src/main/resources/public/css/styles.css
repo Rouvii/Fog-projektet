@@ -28,7 +28,7 @@ body {
 .box {
     width: calc(50% - 10px); /* Two boxes with a gap in between */
     height: 600px; /* Set box height */
-    background-color: #000000; /* Set box background color */
+    background-color: #000000;
     position: relative;
 }
 
