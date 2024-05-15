@@ -7,7 +7,7 @@ public class Svg {
             " viewbox=\"%s\" width=\"%s\"\n" +
             " height=\"%s\" preserveAspectRatio=\"xMinYMin\">";
 
-
+    private static final String LINE_WITHOUT_ARROW_TEMPLATE="<line x1=\"%d\"  y1=\"%d\" x2=\"%d\"   y2=\"%d\" style=\"%s\" />";
     private static final String ARROW_TEMPLATE = "<defs>\n" +
             "        <marker id=\"beginArrow\" markerWidth=\"12\" markerHeight=\"12\" refX=\"0\" refY=\"6\" orient=\"auto\">\n" +
             "            <path d=\"M0,6 L12,0 L12,12 L0,6\" style=\"fill: #000000;\" />\n" +
@@ -49,6 +49,10 @@ public class Svg {
     public void addArrow(int x1, int y1, int x2, int y2, String style)
     {
         svg.append(String.format(LINE_TEMPLATE, x1, y1, x2, y2, style));
+    }
+    public void addLineWithoutArrow(int x1, int y1, int x2, int y2, String style){
+
+        svg.append(String.format(LINE_WITHOUT_ARROW_TEMPLATE, x1, y1, x2, y2, style));
     }
 
     public String addSvg(Svg innerSvg)
