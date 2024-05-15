@@ -16,14 +16,14 @@ public class User {
 
     private String password;
 
-    private int telefonNr;
+    private String telefonNr;
 
     private String adresse;
 
 
     private boolean isAdmin;
 
-    public User(int userId, String fornavn, String efternavn, String email, String password, int telefonNr, String adresse, boolean isAdmin) {
+    public User(int userId, String fornavn, String efternavn, String email, String password, String telefonNr, String adresse, boolean isAdmin) {
         this.userId = userId;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
@@ -40,6 +40,14 @@ public class User {
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
+    }
+
+    public User(int userId, String fornavn, String efternavn, String adresse, String telefon) {
+        this.userId = userId;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.telefonNr =telefon;
     }
 
     public int getUserId() {
@@ -82,11 +90,11 @@ public class User {
         this.password = password;
     }
 
-    public int getTelefonNr() {
+    public String getTelefonNr() {
         return telefonNr;
     }
 
-    public void setTelefonNr(int telefonNr) {
+    public void setTelefonNr(String telefonNr) {
         this.telefonNr = telefonNr;
     }
 

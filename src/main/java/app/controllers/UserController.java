@@ -144,6 +144,7 @@ public class UserController
 
     public static void createOrderAndInsertUserDetails(Context ctx, ConnectionPool connectionPool) {
         User currentUser = ctx.sessionAttribute("currentUser");
+
         int userId = currentUser.getUserId();
 
         String fornavn = ctx.formParam("fornavn");
@@ -152,15 +153,16 @@ public class UserController
         String telefon = ctx.formParam("telefon");
         int length = Integer.valueOf(ctx.formParam("length"));
         int width = Integer.valueOf(ctx.formParam("width"));
-
+        ctx.sessionAttribute("length", length);
+        ctx.sessionAttribute("width", width);
         try {
             UserMapper.insertUserDetails(userId, fornavn, efternavn, adresse, telefon, connectionPool);
             OrdreController.placeOrdre(ctx, connectionPool);
 //SKAL REDIRECT DIG TIL ANDEN SIDE BARE EN PLACEHOLDER
-            ctx.render("/success");
+            ctx.render("/showOrder");
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("error.html");
+            ctx.render("finalDesign.html");
         }
     }
 }

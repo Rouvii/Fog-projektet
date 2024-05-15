@@ -7,8 +7,6 @@ package app.services;
  */
 public class CarportSvg {
 
-
-
     private int width;
     private int length;
 
@@ -18,6 +16,7 @@ public class CarportSvg {
     public CarportSvg(int width, int length) {
         this.width = width;
         this.length = length;
+        //Sætter viewbox til Plantegningen til 600x780
         carportSvg= new Svg(0, 0, "0 0 600 780", "50%", "auto");
         carportSvg.addRectangle(0,0,length,width,"stroke-width:1px;stroke:#000000;fill:#ffffff");
         addBeams(width,length);
@@ -41,11 +40,13 @@ public class CarportSvg {
         }
     }
 
+
     public void addPoles() {
         double beamY1 = 35.0;
         double beamY2 = length - 35.0;
 
         String poleStyle = "stroke-width:1px;stroke:#000000;fill:#ffffff";
+        //Sætter pælens bredde og længde
         double poleWidth = 10.0;
         double poleLength = 10.0;
 

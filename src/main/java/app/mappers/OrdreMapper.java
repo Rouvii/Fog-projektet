@@ -45,9 +45,9 @@ public class OrdreMapper {
                 boolean afsendt = rs.getBoolean("afsendt");
                 boolean afvist = rs.getBoolean("afvist");
                 boolean modtaget = rs.getBoolean("modtaget");
-                double slutPris = rs.getDouble("slut_pris");
+                int totalPris = rs.getInt("total_pris");
 
-                orderList.add(new Order(orderId,userId,dato,status,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
+                orderList.add(new Order(orderId,userId,dato,status,længde,bredde,betalt,afsendt,afvist,modtaget,totalPris));
             }
 
 
@@ -87,8 +87,8 @@ public class OrdreMapper {
                 boolean afsendt = rs.getBoolean("afsendt");
                 boolean afvist = rs.getBoolean("afvist");
                 boolean modtaget = rs.getBoolean("modtaget");
-                double slutPris = rs.getDouble("slut_pris");
-                ordreList.add(new Order(id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,slutPris));
+                int totalPris = rs.getInt("total_pris");
+                ordreList.add(new Order(id,userId,dato,længde,bredde,betalt,afsendt,afvist,modtaget,totalPris));
 
 
             }
@@ -110,11 +110,12 @@ public class OrdreMapper {
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setInt(1, userId); // Set user_id in the SQL statement
+            ps.setInt(1, userId);
             ps.setDate(2, Date.valueOf(LocalDate.now()));
             ps.setInt(3, order.getLængde());
             ps.setInt(4, order.getBredde());
             ps.setInt(5, 5);
+            ps.setInt(6, order.getTotalPris());
 
             ps.executeUpdate();
         } catch (SQLException e) {
