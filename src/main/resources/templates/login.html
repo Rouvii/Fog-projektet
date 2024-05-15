@@ -9,26 +9,50 @@
 
 
 <body>
+
+<div class="header">
+    <header>
+
+        <a href="index.html" th:href="@{index}">
+            <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
+        </a>
+        <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
+
+        <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
+
+        <a href="login.html" class="header-login-button" th:href="@{login}">
+            <div class="header-login-button-content">
+                <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
+                <div class="header-login-button-text">LOGIN</div>
+            </div>
+        </a>
+
+        <a href="orders.html" class="orders-button" th:href="@{orders}">
+            <div class="order-button-content">
+                <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
+                <div class="header-bottom-orders-text">MINE ORDRE</div>
+            </div>
+        </a>
+
+    </header>
+</div>
 <div class="page">
-    <a href="index.html" class="banner" th:href="@{/}"><h2>FOG</h2></a>
-
-    <div class="login-header">
-        <header>
-            <h1>Login</h1>
-        </header>
-    </div>
 
 
-    <form class="login information" method="post">
-        <input type="hidden" name="length" th:value="${session.length}" />
-        <input type="hidden" name="width" th:value="${session.width}" />
-        <input type="email" id="email" name="email" placeholder="Email"/>
-        <input type="password" id="password" name="password" placeholder="Password"/>
-        <button class="btn-ok" type="submit" formaction="login">Login</button>
-        <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
-    </form>
-    <div>
-        <a class="create-link" href="createUser.html" th:href="@{/createuser}">Opret bruger</a>
+    <div class="login-box">
+        <h2>LOG PÅ</h2>
+        <form class="login information" method="post">
+            <input type="hidden" name="length" th:value="${session.length}"/>
+            <input type="hidden" name="width" th:value="${session.width}"/>
+            <label for="email">LOG PÅ MED DIN MAILADRESSE</label>
+            <input type="email" id="email" name="email" placeholder="MAILADRESSE" required/>
+            <input type="password" id="password" name="password" placeholder="PASSWORD" required/>
+            <button class="btn-ok" type="submit" formaction="login">LOG PÅ</button>
+            <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+        </form>
+        <div>
+            <a class="create-link" href="createUser.html" th:href="@{/createuser}">OPRET BRUGER</a>
+        </div>
     </div>
 </div>
 </body>

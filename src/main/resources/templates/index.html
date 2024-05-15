@@ -15,7 +15,7 @@
     <header>
 
         <a href="index.html" th:href="@{index}">
-            <img class="fog-logo" src="../public/images/Fog_Logo.jpeg" alt="Fog Logo">
+            <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
         </a>
         <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
 
@@ -23,14 +23,14 @@
 
         <a href="login.html" class="header-login-button" th:href="@{login}">
             <div class="header-login-button-content">
-                <img class="header-login-image" src="../public/images/key_2_line.png" alt="header login image">
+                <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
                 <div class="header-login-button-text">LOGIN</div>
             </div>
         </a>
 
         <a href="orders.html" class="orders-button" th:href="@{orders}">
             <div class="order-button-content">
-                <img class="orders-img" src="../public/images/clipboard_line.png" alt="orders image">
+                <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
                 <div class="header-bottom-orders-text">MINE ORDRE</div>
             </div>
         </a>
@@ -40,7 +40,7 @@
 
 <div class="content">
     <div class="box box-left">
-        <img class="car-left-img" src="../public/images/car1.jpg" alt="Car Image">
+        <img class="car-left-img" th:src="@{/images/car1.jpg}" alt="Car Image">
         <div class="blue-half">
             <div class="box-left-text">SE ALLE VORES CARPORTE</div>
             <div class="button-left">
@@ -52,7 +52,7 @@
     </div>
     <div class="gap"></div>
     <div class="box box-right">
-        <img class="car-right-img" src="../public/images/car2.jpg" alt="Car Image">
+        <img class="car-right-img" th:src="@{/images/car2.jpg}" alt="Car Image">
         <div class="blue-half">
             <div class="box-right-text">DESIGN DIN EGEN CARPORT</div>
             <div class="button-right">
