@@ -3,12 +3,16 @@ package app.controllers;
 import app.entities.ConnectionPool;
 import app.entities.Order;
 import app.entities.User;
+import app.exceptions.DatabaseException;
 import app.mappers.OrdreMapper;
+import app.services.CarportSvg;
 import app.services.Svg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Purpose:
@@ -101,10 +105,28 @@ public class OrdreController {
 
     }
     public static void showOrder(Context ctx, ConnectionPool connectionPool){
+        Locale.setDefault(new Locale("US"));
+        int length = ctx.sessionAttribute("length");
+        int width = ctx.sessionAttribute("width");
 
-        Svg carportSvg = new Svg(0, 0, "0 0 855 690", "100%", "auto");
+        CarportSvg carportSvg= new CarportSvg(width,length);
+        Svg outerSvg = new Svg(0,0, "0 0 1000 1000", "100%", "auto");
 
-        ctx.attribute("svg", carportSvg.toString());
+        int arrowOffset=15;
+        int rotation=90;
+
+        outerSvg.addArrow(width+arrowOffset,length,width+arrowOffset,arrowOffset,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        outerSvg.addArrow(width,length+arrowOffset,arrowOffset,length+arrowOffset,"stroke-width:1px;stroke:#000000;fill:#ffffff");
+        outerSvg.addText(width/2+arrowOffset,length+arrowOffset+10,0,width+ " cm");
+        outerSvg.addText(width+arrowOffset,length/2+arrowOffset+10,rotation,length+ " cm");
+
+
+        String combined = outerSvg.addSvg(carportSvg.getCarportSvg()).toString();
+
+
+        ctx.attribute("length",length);
+        ctx.attribute("width",width);
+        ctx.attribute("svg", combined);
         ctx.render("showOrder.html");
     }
 
