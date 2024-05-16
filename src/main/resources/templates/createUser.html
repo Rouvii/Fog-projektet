@@ -4,32 +4,58 @@
   <title>opret bruger</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../public/css/adminpage.css" th:href="@{/css/adminpage.css}" rel="stylesheet"/>
+  <link href="../public/css/login.css" th:href="@{/css/login.css}" rel="stylesheet"/>
 </head>
 <body>
-<div class="page">
 
-  <a href="index.html" class="banner" th:href="@{/}"><h2>FOG</h2></a>
+
+<div class="header">
+  <header>
+
+    <a href="index.html" th:href="@{index}">
+      <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
+    </a>
+    <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
+
+    <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
+
+    <a href="login.html" class="header-login-button" th:href="@{login}">
+      <div class="header-login-button-content">
+        <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
+        <div class="header-login-button-text">LOGIN</div>
+      </div>
+    </a>
+
+    <a href="orders.html" class="orders-button" th:href="@{orders}">
+      <div class="order-button-content">
+        <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
+        <div class="header-bottom-orders-text">MINE ORDRE</div>
+      </div>
+    </a>
+
+  </header>
 </div>
 
+<div class="page">
+  <div class="create-box">
+    <h2>OPRET BRUGER</h2>
 
-<div class="login-container">
-  <div class="create">
-
-    <h1>Opret bruger</h1>
     <form class="create-form" method="post">
-      <input type="email" name="email" placeholder="Email"/>
-      <input type="password" name="password1" placeholder="Password"/>
-      <input type="password" name="password2" placeholder="Gentag password"/>
+      <label for="email">OPRET BRUGER MED MAILADRESSE</label>
+      <input type="email" name="email" id="email" placeholder="MAILADRESSE" required/>
+      <input type="password" name="password1" placeholder="PASSWORD" required/>
+      <input type="password" name="password2" placeholder="GENTAG PASSWORD" required/>
 
-      <button class="btn-ok" type="submit" formaction="/createuser">Opret bruger</button>
+      <button class="btn-ok" type="submit" formaction="/createUser">OPRET BRUGER</button>
       <div><p th:text="${message}"></p></div>
     </form>
+
+    <div>
+      <a class="login-link" href="login.html" th:href="@{/login}">LOGIN</a>
+    </div>
   </div>
 
-  <div>
-    <a class="login-link" href="Login.html" th:href="@{/login}">Login</a>
-  </div>
+
 
 </div>
 </body>

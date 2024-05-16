@@ -14,11 +14,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Purpose:
- *
- * @author: Kevin Løvstad Schou
- */
+
 public class OrdreController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool){
         app.get("design", ctx -> designPage(ctx, connectionPool));
@@ -89,6 +85,12 @@ public class OrdreController {
 
     private static void userOrderPage(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
+
+        if (user == null) {
+            ctx.redirect("/login");
+            return;
+        }
+
         try {
 
             List<Order> ordreList = OrdreMapper.getAllOrdersPerUser(user.getUserId(), connectionPool);
