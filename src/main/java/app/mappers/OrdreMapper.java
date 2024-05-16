@@ -65,7 +65,7 @@ public class OrdreMapper {
     {
 
         List<Order> ordreList = new ArrayList<>();
-        String sql = "select order_id,user_id,dato,bredde,længde,s.betalt,s.afsendt,s.afvist,s.modtaget,slut_pris " +
+        String sql = "select order_id,user_id,dato,bredde,længde,s.betalt,s.afsendt,s.afvist,s.modtaget,total_pris " +
                 "from ordre o " +
                 "join status s on s.status_id = o.status_id " +
                 "where user_id = ?";

@@ -51,7 +51,7 @@
             <tbody>
             <tr th:each="order : ${ordreList}">
                 <td th:text="${order.ordreId}">Order ID</td>
-                <td th:text="${order.slutPris}">Pris</td>
+                <td th:text="${order.totalPris}">Pris</td>
                 <td th:text="${order.betalt ? 'BETALT' : 'IKKE BETALT'}">Betalt</td>
                 <td th:text="${order.afsendt ? 'AFSENDT' : 'IKKE AFSENDT'}">Afsendt</td>
                 <td th:text="${order.modtaget ? 'MODTAGET' : 'IKKE MODTAGET'}">Modtaget</td>
