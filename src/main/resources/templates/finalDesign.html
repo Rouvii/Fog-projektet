@@ -47,13 +47,6 @@
   <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
     <input type="hidden" name="length" th:value="${session.length}" />
     <input type="hidden" name="width" th:value="${session.width}" />
-
-<!--
-<form class="videre-knap" method="post" action="/createOrder" th:if="${session.currentUser !=null}">
-<div>
-    <input type="hidden" name="length" th:value="${session.length}" />
-    <input type="hidden" name="width" th:value="${session.width}" />
-    -->
     <button type="submit">Videre</button>
 </div>
 </form>

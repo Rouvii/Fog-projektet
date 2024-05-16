@@ -13,6 +13,7 @@ public class Materialer {
 
     private double price;
 
+
     public Materialer(int materialeId) {
         this.materialeId = materialeId;
 
