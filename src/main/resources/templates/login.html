@@ -38,7 +38,6 @@
 </div>
 <div class="page">
 
-
     <div class="login-box">
         <h2>LOG PÅ</h2>
         <form class="login information" method="post">
@@ -51,7 +50,7 @@
             <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
         </form>
         <div>
-            <a class="create-link" href="createUser.html" th:href="@{/createuser}">OPRET BRUGER</a>
+            <a class="create-link" href="createUser.html" th:href="@{/createUser}">OPRET BRUGER</a>
         </div>
     </div>
 </div>

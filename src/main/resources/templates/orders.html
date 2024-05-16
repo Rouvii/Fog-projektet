@@ -9,38 +9,36 @@
 </head>
 
 <body>
-
 <div class="header">
     <header>
 
         <a href="index.html" th:href="@{index}">
-            <img class="fog-logo" src="../public/images/Fog_Logo.jpeg" alt="Fog Logo">
+            <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
         </a>
         <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
 
-        <a class="header-design-carport-link" href="design.html">DESIGN CARPORT</a>
+        <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
 
         <a href="login.html" class="header-login-button" th:href="@{login}">
             <div class="header-login-button-content">
-                <img class="header-login-image" src="../public/images/key_2_line.png" alt="header login image">
+                <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
                 <div class="header-login-button-text">LOGIN</div>
             </div>
         </a>
 
         <a href="orders.html" class="orders-button" th:href="@{orders}">
             <div class="order-button-content">
-                <img class="orders-img" src="../public/images/clipboard_line.png" alt="orders image">
+                <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
                 <div class="header-bottom-orders-text">MINE ORDRE</div>
             </div>
         </a>
 
     </header>
 </div>
-
-<div class="orders-content">
-    <div class="user-tables">
+<div class="page">
+    <div class="orders-box">
         <h2>MINE ORDRE</h2>
-        <form>
+        <table class="orders-table">
             <thead>
             <tr>
                 <th>Order ID</th>
@@ -51,16 +49,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="order: ${ordreList}">
+            <tr th:each="order : ${ordreList}">
                 <td th:text="${order.ordreId}">Order ID</td>
                 <td th:text="${order.slutPris}">Pris</td>
-                <td th:text="${order.betalt}">Betalt</td>
-                <td th:text="${order.afsendt}">Afsendt</td>
-                <td th:text="${order.modtaget}">Modtaget</td>
-
+                <td th:text="${order.betalt ? 'BETALT' : 'IKKE BETALT'}">Betalt</td>
+                <td th:text="${order.afsendt ? 'AFSENDT' : 'IKKE AFSENDT'}">Afsendt</td>
+                <td th:text="${order.modtaget ? 'MODTAGET' : 'IKKE MODTAGET'}">Modtaget</td>
             </tr>
             </tbody>
-        </form>
+        </table>
     </div>
 </div>
 
