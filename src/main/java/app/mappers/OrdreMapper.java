@@ -21,7 +21,7 @@ public class OrdreMapper {
     public static List<Order> getAllOrders (ConnectionPool connectionPool) {
 
         List<Order> orderList = new ArrayList<>();
-        String sql = "select order_id,user_id,dato,bredde,længde,s.status_id,s.betalt,s.afsendt,s.afvist,s.modtaget,slut_pris " +
+        String sql = "select order_id,user_id,dato,bredde,længde,s.status_id,s.betalt,s.afsendt,s.afvist,s.modtaget,total_pris " +
                 "from ordre o " +
                 "join status s on s.status_id = o.status_id " +
                 "order by user_id ";
@@ -92,7 +92,6 @@ public class OrdreMapper {
 
 
             }
-            System.out.println(ordreList);
         }
         catch (SQLException e)
         {
