@@ -2,7 +2,7 @@ package app.services;
 
 import app.entities.ConnectionPool;
 import app.entities.Order;
-import app.entities.OrderItem;
+import app.entities.OrderLine;
 import app.entities.Variant;
 import app.mappers.VariantMapper;
 
@@ -17,7 +17,7 @@ public class Calculator {
 
     private final static int REM = 1;
 
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderLine> orderLines = new ArrayList<>();
     private int width;
     private int length;
     private ConnectionPool connectionPool = null;
@@ -40,13 +40,13 @@ public class Calculator {
         Variant stolpeVariant = variants.get(0);
 
         int stolpeLængde = stolpeVariant.getLength();
-        double stolpePrisPrMeter = stolpeVariant.getMateriale().getPrice();
+        int stolpePrisPrMeter = stolpeVariant.getMateriale().getPrice();
 
         int stolpeAmount = 2 * ((stolpeLængde - 130) / 310);
         int stolpePris = stolpeAmount * (int) stolpePrisPrMeter * stolpeLængde;
 
-        OrderItem stolpe = new OrderItem(stolpeAmount, stolpeLængde, stolpePris, stolpeAmount, "Stolper");
-        orderItems.add(stolpe);
+        OrderLine stolpe = new OrderLine(STOLPE, stolpeLængde, stolpePris, stolpeAmount, "Stolper");
+        orderLines.add(stolpe);
     }
 
     private void calcRemmer() {
@@ -58,37 +58,36 @@ public class Calculator {
                 bestFit = variant;
             }
         }
-
+        int remmeAmount = 2;
         int remmeLængde = bestFit.getLength();
-        double remmePrisPrMeter = bestFit.getMateriale().getPrice();
-        int remmePris = (int) (remmePrisPrMeter * remmeLængde);
+        int remmePrisPrMeter = bestFit.getMateriale().getPrice();
+        int remmePris = (remmePrisPrMeter * remmeLængde) * remmeAmount;
 
-        //  OrderItem remme = new OrderItem(remmeAmount , remmeLængde, remmePris, "Remmer");
-        // orderItems.add(remme);
+        OrderLine remme = new OrderLine(SPÆR, remmeLængde, remmePris, remmeAmount, "Remmer");
+        orderLines.add(remme);
     }
 
     private void calcSpær() {
         List<Variant> variants = VariantMapper.getAllVariantsByMaterialId(SPÆR, connectionPool);
 
 
-    /*
-     if (spærVariant.getLength() > 300){
+
+     /*if (spærVariant.getLength() > 300){
          spærVariant=
-     }
+     }*/
 
-            int spærLængde = 300;
-            int spærPris = 100;
-            OrderItem spær1 = new OrderItem(spær, spærLængde, spærPris, "Spær");
-            orderItems.add(spær1);
-
-    }
-
-    public List<OrderItem> getOrderItems(){
-        System.out.println(orderItems);
-        return orderItems;
+        int spærLængde = 300;
+        int spærPris = 100;
+        //OrderLine spær1 = new OrderLine(SPÆR, spærLængde, spærPris, spærAmount, "Spær");
+        //orderLines.add(spær1);
 
     }
 
-     */
+    public List<OrderLine> getOrderLines() {
+        System.out.println(orderLines);
+        return orderLines;
+
     }
+
+
 }
