@@ -6,6 +6,9 @@ public class OrderLine {
     private int længde;
     private int pris;
     private String description;
+    private int totalPris;
+    private String type;
+
 
     private Order order;
 
@@ -19,6 +22,14 @@ public class OrderLine {
         this.pris = pris;
         this.description = description;
         this.quantity=quantity;
+    }
+
+    public OrderLine(String type,int længde,int quantity, String description, int totalPris) {
+        this.længde = længde;
+        this.description = description;
+        this.totalPris = totalPris;
+        this.type = type;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -48,4 +59,7 @@ public class OrderLine {
     public int getQuantity() {
         return quantity;
     }
+
+
+
 }
