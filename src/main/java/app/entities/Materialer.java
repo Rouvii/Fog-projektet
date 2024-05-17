@@ -11,7 +11,7 @@ public class Materialer {
 
     private String type;
 
-    private double price;
+    private int price;
 
 
     public Materialer(int materialeId) {
@@ -19,7 +19,7 @@ public class Materialer {
 
     }
 
-    public Materialer(int materialeId, String type, double price) {
+    public Materialer(int materialeId, String type, int price) {
         this.materialeId = materialeId;
         this.type = type;
         this.price = price;
@@ -38,7 +38,7 @@ public class Materialer {
         return type;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
