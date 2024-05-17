@@ -34,7 +34,7 @@ public class MaterialeMapper {
             while (rs.next()) {
                 int materialeId = rs.getInt("materiale_id");
                 String type = rs.getString("type");
-                double price = rs.getDouble("pris_pr_meter");
+                int price = rs.getInt("pris_pr_meter");
 
                 materialerList.add(new Materialer(materialeId, type, price));
             }
@@ -100,7 +100,7 @@ public class MaterialeMapper {
             if (rs.next()) {
                 int id = rs.getInt("materiale_id");
                 String type = rs.getString("type");
-                double pris = rs.getDouble("pris_pr_meter");
+                int pris = rs.getInt("pris_pr_meter");
                 materialer = new Materialer(id, type, pris);
             }
         } catch (SQLException e) {
