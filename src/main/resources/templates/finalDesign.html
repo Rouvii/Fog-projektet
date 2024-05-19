@@ -4,67 +4,105 @@
 <title>finalDesign</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+<link href="../public/css/finalDesign.css" th:href="@{/css/finalDesign.css}" rel="stylesheet"/>
 </head>
 
 <body>
-<h1>Final design</h1>
-<div>
-<input type="text" name="length" th:value="${session.length}" />
-<input type="text" name="width" th:value="${session.width}"/>
+
+<div class="header">
+    <header>
+
+        <a href="index.html" th:href="@{index}">
+            <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
+        </a>
+        <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
+
+        <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
+
+        <a href="login.html" class="header-login-button" th:href="@{login}">
+            <div class="header-login-button-content">
+                <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
+                <div class="header-login-button-text">LOGIN</div>
+            </div>
+        </a>
+
+        <a href="orders.html" class="orders-button" th:href="@{orders}">
+            <div class="order-button-content">
+                <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
+                <div class="header-bottom-orders-text">MINE ORDRE</div>
+            </div>
+        </a>
+
+    </header>
 </div>
-<h2>MATERIALER</h2>
 
-<form class="materialer" method="post">
-  <label for="materiale">Vælg materiale</label><br>
-  <select name="materiale" id="materiale">
-      <option value="træ">Træ</option>
-      <option value="metal">Metal</option>
-  </select>
-  <br>
-</form>
+<div class="content">
+    <div class="matriale-box">
+        <h2>SPECIFICATIONS</h2>
+        <div class="previous-inputs">
+            <input type="text" name="length" th:value="${session.length}"/>
+            <input type="text" name="width" th:value="${session.width}"/>
+        </div>
+        <h2>MATRIALER</h2>
 
-    <label for="tag">vælg tag</label><br>
-    <select name="tag" id="tag">
-      <option value="sten">Sten</option>
-      <option value="KÆMPE STEN">KÆMPE STEN</option>
-    </select>
-    <br>
+        <form class="materialer" method="post">
+            <label for="materiale">VÆLG MATRIALER</label><br>
+            <select name="materiale" id="materiale">
+                <option value="træ">TRÆ</option>
+                <option value="metal">METAL</option>
+            </select>
+            <br>
+        </form>
 
-  <label for="redskabsrum">vælg redskabsrum</label><br>
-  <select name="redskabsrum" id="redskabsrum">
-    <option value="xD">xD</option>
-  </select>
-  <br>
+        <label for="tag">VÆLG TAG</label><br>
+        <select name="tag" id="tag">
+            <option value="sten">Plastik</option>
+            <option value="kæmpe-sten">Tagpap</option>
+        </select>
+        <br>
 
-  <h2>KONTAKTOPLYSNINGER</h2>
-  
-<form class="kontakt-oplysninger" method="post" action="/createOrderAndInsertUserDetails" th:if="${session.currentUser !=null}">
-
-  <input type="text" name="fornavn" placeholder="Fornavn"/><br>
-    <input type="text" name="efternavn" placeholder="Efternavn"/><br>
-  <input type="text" name="adresse" placeholder="Adresse (vej+nummer)"/><br>
-  <input type="number" name="telefon" placeholder="Telefon nummer"/><br>
-    <input type="hidden" name="length" th:value="${session.length}" />
-    <input type="hidden" name="width" th:value="${session.width}" />
-    <button type="submit">Videre</button>
-</div>
-</form>
-<form class="create-user-knap" method="get" th:action="@{createUser}" th:unless="${session.currentUser != null}">
-    <div>
-        <button type="submit">Opret bruger</button>
+        <label for="redskabsrum">VÆLG REDSKABSRUM</label><br>
+        <select name="redskabsrum" id="redskabsrum">
+            <option value="xD">Fravalg</option>
+        </select>
+        <br>
     </div>
-</form>
 
-<form class="login-knap" method="get" th:action="@{login}" th:unless="${session.currentUser != null}">
-<div>
-    <input type="hidden" name="length" th:value="${session.length}" />
-    <input type="hidden" name="width" th:value="${session.width}" />
-    <button type="submit">Login</button>
+
+    <div class="kontakt-box">
+        <h2>KONTAKTOPLYSNINGER</h2>
+        <form class="kontakt-oplysninger" method="post" action="/createOrderAndInsertUserDetails"
+              th:if="${session.currentUser !=null}">
+
+            <input type="text" name="fornavn" placeholder="FORNAVN"/><br>
+            <input type="text" name="efternavn" placeholder="EFTERNAVN"/><br>
+            <input type="text" name="adresse" placeholder="ADRESSE (VEJ+NUMMER)"/><br>
+            <input type="number" name="telefon" placeholder="TELEFON NUMMER"/><br>
+            <input type="hidden" name="length" th:value="${session.length}"/>
+            <input type="hidden" name="width" th:value="${session.width}"/>
+            <button class="btn-ok" type="submit">VIDERE</button>
+
+        </form>
+        <div class="login-box">
+            <form class="create-user-knap" method="get" th:action="@{createUser}"
+                  th:unless="${session.currentUser != null}">
+                <div>
+                    <button class="btn-login" type="submit">OPRET BRUGER</button>
+                </div>
+            </form>
+
+            <form class="login-knap" method="get" th:action="@{login}" th:unless="${session.currentUser != null}">
+                <div>
+                    <input type="hidden" name="length" th:value="${session.length}"/>
+                    <input type="hidden" name="width" th:value="${session.width}"/>
+                    <button class="btn-login" type="submit">LOGIN</button>
+                </div>
+            </form>
+        </div>
+        <a class="order-link" th:href="@{/showOrder}" href="showOrder.html">SHOW ORDER</a>
+    </div>
 </div>
-</form>
 
-<a th:href="@{/showOrder}" href="showOrder.html">Show order</a>
 
 </body>
 </html>

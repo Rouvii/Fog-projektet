@@ -80,90 +80,31 @@ body {
 
 }
 
-.login-box {
+.content {
+    display: flex;
+
+}
+
+/* KONTAKT BOX */
+
+.kontakt-box {
     background-color: #D9D9D9;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    width: 400px;
+    width: 80%;
+    max-width: 500px;
     text-align: center;
     margin-top: 60px;
+    margin-left: 120px;
 }
 
-.login-box h2 {
+.kontakt-box h2 {
     color: #154985;
     margin-bottom: 20px;
-    font-weight: bold;
 }
 
-.login-box label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #154985;
-    font-weight: bold;
-    margin-right: 170px;
-    margin-top: 70px;
-}
-
-.login-box input[type="email"],
-.login-box input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 40px;
-    border: 2px solid #154985;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-weight: bold;
-}
-
-.login-box .btn-ok {
-    background-color: #154985;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.login-box .btn-ok:hover {
-    background-color: #123C73;
-}
-
-
-.login-box .create-link {
-    display: block;
-    margin-top: 10px;
-    color: #154985;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    margin-right: 285px;
-}
-
-/* CREATE USER PAGE */
-
-.create-box {
-    background-color: #D9D9D9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 400px;
-    text-align: center;
-    margin-top: 60px;
-}
-
-.create-box h2 {
-    color: #154985;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.create-box label {
+.kontakt-box label {
     display: block;
     font-size: 14px;
     margin-bottom: 10px;
@@ -173,8 +114,8 @@ body {
     margin-top: 70px;
 }
 
-.create-box input[type="email"],
-.create-box input[type="password"] {
+.kontakt-box input[type="text"],
+.kontakt-box input[type="number"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 40px;
@@ -184,7 +125,7 @@ body {
     font-weight: bold;
 }
 
-.create-box .btn-ok {
+.kontakt-box .btn-ok {
     background-color: #154985;
     color: #FFFFFF;
     border: none;
@@ -197,16 +138,85 @@ body {
     font-weight: bold;
 }
 
-.create-box .btn-ok:hover {
-    background-color: #123C73;
+.login-box {
+    display: flex;
+    justify-content: space-between;
 }
 
-.create-box .login-link {
+.login-box .btn-login {
+    background-color: #154985;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 230px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.kontakt-box .order-link {
     display: block;
     margin-top: 10px;
     color: #154985;
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
-    margin-right: 350px;
+    margin-right: 400px;
 }
+
+.kontakt-box .btn-ok:hover {
+    background-color: #123C73;
+}
+
+.kontakt-box .btn-login:hover {
+    background-color: #123C73;
+}
+
+
+
+
+
+/* MATRIALE BOX */
+
+.matriale-box {
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 60px;
+    margin-left: 120px;
+}
+
+.matriale-box h2 {
+    color: #154985;
+    margin-bottom: 20px;
+}
+
+.matriale-box input[type="text"],
+.matriale-box select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #154985;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #154985;
+}
+
+.matriale-box option {
+    color: #154985;
+}
+
+.matriale-box label {
+    color: #154985;
+    font-weight: bold;
+}
+
+
+
