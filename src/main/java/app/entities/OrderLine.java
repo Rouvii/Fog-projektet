@@ -15,6 +15,7 @@ public class OrderLine {
     private Variant variant;
 
     private int quantity;
+    private int pricePerMeter;
 
     public OrderLine(int id, int længde, int pris,int quantity, String description) {
         this.id = id;
@@ -67,6 +68,10 @@ public class OrderLine {
     public String getType() {
         return type;
     }
+
+
+
+
 
 
     @Override

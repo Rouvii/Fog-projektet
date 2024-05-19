@@ -24,7 +24,7 @@
         <th>Længde</th>
         <th>Antal</th>
         <th>Beskrivelse</th>
-        <th>Total Pris</th>
+
     </tr>
     <tr th:each="orderLine : ${orderLines}">
         <td th:hidden="true" th:text="${orderLine.getId()}"></td>
@@ -32,7 +32,6 @@
         <td th:text="${orderLine.getLængde()}"></td>
         <td th:text="${orderLine.getQuantity()}"></td>
         <td th:text="${orderLine.getDescription()}"></td>
-
     </tr>
     <a th:text="${calculator.getTotalPrice()}"></a>
 </table>

@@ -117,10 +117,6 @@ public class OrdreMapper {
                 Date dato = rs.getDate("dato");
                 int længde = rs.getInt("længde");
                 int bredde = rs.getInt("bredde");
-             //boolean betalt = rs.getBoolean("betalt");
-                //boolean afsendt = rs.getBoolean("afsendt");
-               // boolean afvist = rs.getBoolean("afvist");
-               // boolean modtaget = rs.getBoolean("modtaget");
                 int totalPris = rs.getInt("total_pris");
                 int statusId = rs.getInt("status_id");
 

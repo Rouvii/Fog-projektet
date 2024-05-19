@@ -152,7 +152,7 @@ public class OrdreController {
             System.out.println("Total price: " + calculator.getTotalPrice());
             Order order = new Order(length, width);
             int orderId = OrdreMapper.createOrder(userId, connectionPool, order);
-
+            ctx.sessionAttribute("orderId", orderId);
             // For hver OrderLine i styklisten, indsæt den i databasen
             for (OrderLine orderLine : calculator.getOrderLines()) {
                 // Antag at du har en metode til at finde den passende Variant for hver OrderLine
@@ -175,17 +175,16 @@ public class OrdreController {
         int userId = currentUser.getUserId();
 
         try {
-            List<OrderLine> orderLines = OrderlineMapper.getOrderlinesPrUser(userId, connectionPool);
-            Order ordre = OrdreMapper.getOrderForUser(userId, connectionPool);
+            // Hent orderId fra sessionen
+            int orderId = ctx.sessionAttribute("orderId");
+            List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
             Calculator calculator = ctx.sessionAttribute("calculator");
             ctx.attribute("orderLines", orderLines);
-          ctx.attribute("calculator",calculator);
-            ctx.attribute("ordre",ordre);
+            ctx.attribute("calculator",calculator);
             ctx.render("checkout.html");
         } catch (DatabaseException e) {
             ctx.attribute("message", "Der opstod en fejl: " + e.getMessage());
             ctx.render("error.html");
         }
     }
-
 }

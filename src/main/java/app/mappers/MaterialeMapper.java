@@ -149,5 +149,26 @@ public class MaterialeMapper {
 
 
 
+
+    public static int getPricePerMeterFromMaterialeId(int materialeId, ConnectionPool connectionPool) {
+        String sql = "SELECT pris_pr_meter FROM materialer WHERE materiale_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, materialeId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("pris_pr_meter");
+            } else {
+                throw new RuntimeException("Ingen materiale fundet med id = " + materialeId);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Database fejl", e);
+        }
+    }
+
+
     }
 
