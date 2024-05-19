@@ -22,14 +22,15 @@
     <tr>
         <th>Type</th>
         <th>Længde</th>
+        <th>Pris pr meter</th>
         <th>Antal</th>
         <th>Beskrivelse</th>
-        <th>Total Pris</th>
     </tr>
     <tr th:each="orderLine : ${orderLines}">
         <td th:hidden="true" th:text="${orderLine.getId()}"></td>
         <td th:text="${orderLine.getType()}"></td>
         <td th:text="${orderLine.getLængde()}"></td>
+        <td th:text="${orderLine.getPricePerMeter()}"></td>
         <td th:text="${orderLine.getQuantity()}"></td>
         <td th:text="${orderLine.getDescription()}"></td>
 

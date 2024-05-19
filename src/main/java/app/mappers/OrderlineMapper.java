@@ -21,23 +21,22 @@ public class OrderlineMapper {
 
 
 
-    public static List<OrderLine> getOrderlinesPrUser(int userId, ConnectionPool connectionPool) throws DatabaseException
+    public static List<OrderLine> getOrderlinesForOrder(int orderId, ConnectionPool connectionPool) throws DatabaseException
     {
-
         List<OrderLine> orderlineList = new ArrayList<>();
         String sql = " SELECT n.type, v.længde, ol.quantity, ol.description, o.total_pris " +
                 "FROM orderline ol " +
                 "join ordre o on o.order_id = ol.order_id " +
                 "join variant v on v.variant_id = ol.variant_id " +
                 "join materialer n on n.materiale_id = v.materiale_id " +
-                "WHERE o.user_id = ?";
+                "WHERE o.order_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         )
         {
-            ps.setInt(1, userId);
+            ps.setInt(1, orderId);
             ResultSet rs = ps.executeQuery();
             while (rs.next())
             {
@@ -47,7 +46,6 @@ public class OrderlineMapper {
                 String description = rs.getString("description");
                 int totalPris = rs.getInt("total_pris");
                 orderlineList.add(new OrderLine(type,længde,quantity,description,totalPris));
-
             }
         }
         catch (SQLException e)

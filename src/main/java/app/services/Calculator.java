@@ -97,6 +97,7 @@ public class Calculator {
 
 
 
+
     public List<OrderLine> getOrderLines() {
         System.out.println(orderLines);
         return orderLines;
