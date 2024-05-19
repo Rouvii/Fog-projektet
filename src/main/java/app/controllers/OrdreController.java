@@ -153,14 +153,14 @@ public class OrdreController {
             Order order = new Order(length, width);
             int orderId = OrdreMapper.createOrder(userId, connectionPool, order);
             ctx.sessionAttribute("orderId", orderId);
-            // For hver OrderLine i styklisten, indsæt den i databasen
+
             for (OrderLine orderLine : calculator.getOrderLines()) {
-                // Antag at du har en metode til at finde den passende Variant for hver OrderLine
+
                 Variant variant = VariantMapper.findVariantForOrderLine(orderLine,connectionPool);
                 try {
                     OrderlineMapper.createOrderLine(orderId, connectionPool, orderLine, variant);
                 } catch (DatabaseException e) {
-                    // Håndter fejl
+
                     System.err.println("Fejl ved indsættelse af OrderLine i databasen: " + e.getMessage());
                 }
             }

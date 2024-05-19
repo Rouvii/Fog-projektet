@@ -51,20 +51,20 @@ public class VariantMapper {
 
     }
     public static Variant findVariantForOrderLine(OrderLine orderLine,ConnectionPool connectionPool) {
-        // Antag at orderLine.getType() returnerer materiale ID
+
         int materialId = orderLine.getId();
 
-        // Hent alle varianter for det givne materiale
+
         List<Variant> variants = VariantMapper.getAllVariantsByMaterialId(materialId, connectionPool);
 
-        // Find den variant, der har den samme længde som orderLine
+
         for (Variant variant : variants) {
             if (variant.getLength() == orderLine.getLængde()) {
                 return variant;
             }
         }
 
-        // Hvis ingen passende variant blev fundet, returner null
+
         return null;
     }
 
