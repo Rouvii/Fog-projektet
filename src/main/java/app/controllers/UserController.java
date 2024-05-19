@@ -5,6 +5,7 @@ import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.entities.ConnectionPool;
 import app.mappers.UserMapper;
+import app.services.CarportSvg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -25,12 +26,12 @@ public class UserController
     private static void createUser(Context ctx, ConnectionPool connectionPool)
     {
 
-        // Hent form parametre
-        int length = Integer.valueOf(ctx.formParam("length"));
-        int width = Integer.valueOf(ctx.formParam("width"));
+
+       // int length = Integer.valueOf(ctx.formParam("length"));
+        //int width = Integer.valueOf(ctx.formParam("width"));
 
 
-        String username = ctx.formParam("username");
+        String username = ctx.formParam("email");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
 
@@ -158,8 +159,8 @@ public class UserController
         try {
             UserMapper.insertUserDetails(userId, fornavn, efternavn, adresse, telefon, connectionPool);
             OrdreController.placeOrdre(ctx, connectionPool);
-//SKAL REDIRECT DIG TIL ANDEN SIDE BARE EN PLACEHOLDER
-            ctx.render("/showOrder");
+            OrdreController.createOrderAndInsertOrderLines(ctx, connectionPool);
+            OrdreController.showOrder(ctx, connectionPool);
         } catch (DatabaseException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("finalDesign.html");

@@ -101,13 +101,44 @@ public class OrdreMapper {
     }
 
 
-
-    public static void createOrder(int userId, ConnectionPool connectionPool, Order order) throws DatabaseException {
-        String sql = "INSERT INTO ordre (user_id, dato, længde, bredde, status_id) VALUES (?, ?, ?, ?, ?)";
+    public static Order getOrderForUser(int userId, ConnectionPool connectionPool) throws DatabaseException {
+        Order order = null;
+        //Vi bruger DESC LIMIT 1 for at få den nyeste ordre(DESC = descending)
+        String sql = "SELECT * FROM ordre WHERE user_id = ? ORDER BY dato DESC LIMIT 1";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int orderId = rs.getInt("order_id");
+                Date dato = rs.getDate("dato");
+                int længde = rs.getInt("længde");
+                int bredde = rs.getInt("bredde");
+             //boolean betalt = rs.getBoolean("betalt");
+                //boolean afsendt = rs.getBoolean("afsendt");
+               // boolean afvist = rs.getBoolean("afvist");
+               // boolean modtaget = rs.getBoolean("modtaget");
+                int totalPris = rs.getInt("total_pris");
+                int statusId = rs.getInt("status_id");
+
+                order = new Order(orderId, userId, dato, længde, bredde, statusId, totalPris);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved hentning af ordre for bruger med id = " + userId, e.getMessage());
+        }
+        return order;
+    }
+
+
+    public static int createOrder(int userId, ConnectionPool connectionPool, Order order) throws DatabaseException {
+        String sql = "INSERT INTO ordre (user_id, dato, længde, bredde, status_id,total_pris) VALUES (?, ?, ?, ?, ?,?)";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
         ) {
             ps.setInt(1, userId);
             ps.setDate(2, Date.valueOf(LocalDate.now()));
@@ -117,6 +148,14 @@ public class OrdreMapper {
             ps.setInt(6, order.getTotalPris());
 
             ps.executeUpdate();
+
+
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new DatabaseException("Fejl ved oprettelse af ordre, ingen ID fundet.");
+            }
         } catch (SQLException e) {
             throw new DatabaseException("Fejl ved oprettelse af ordre: " + e.getMessage());
         }

@@ -60,6 +60,25 @@ public class OrderLine {
         return quantity;
     }
 
+    public int getTotalPris() {
+        return totalPris;
+    }
+
+    public String getType() {
+        return type;
+    }
 
 
+    @Override
+    public String toString() {
+        return "OrderLine{" +
+                "id=" + id +
+                ", længde=" + længde +
+                ", pris=" + pris +
+                ", description='" + description + '\'' +
+                ", totalPris=" + totalPris +
+                ", type='" + type + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

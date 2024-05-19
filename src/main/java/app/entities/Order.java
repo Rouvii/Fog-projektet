@@ -59,6 +59,17 @@ public class Order {
         this.bredde=bredde;
     }
 
+    public Order(int orderId, int userId, Date dato, int længde, int bredde, int statusId, int totalPris)
+    {
+        this.ordreId = orderId;
+        this.userId = userId;
+        this.dato = dato;
+        this.længde = længde;
+        this.bredde = bredde;
+        this.statusId = statusId;
+        this.totalPris = totalPris;
+    }
+
 
     public int getOrdreId() {
         return ordreId;

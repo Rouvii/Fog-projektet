@@ -16,8 +16,25 @@
 
 <h2>Tak for din bestilling</h2>
 
-<h3>Shop videre:</h3>
+<h3>Her er din stykliste!</h3>
 
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Længde</th>
+        <th>Antal</th>
+        <th>Beskrivelse</th>
+        <th>Total Pris</th>
+    </tr>
+    <tr th:each="orderLine : ${orderLines}">
+        <td th:hidden="true" th:text="${orderLine.getId()}"></td>
+        <td th:text="${orderLine.getType()}"></td>
+        <td th:text="${orderLine.getLængde()}"></td>
+        <td th:text="${orderLine.getQuantity()}"></td>
+        <td th:text="${orderLine.getDescription()}"></td>
 
+    </tr>
+    <a th:text="${calculator.getTotalPrice()}"></a>
+</table>
 </body>
 </html>
