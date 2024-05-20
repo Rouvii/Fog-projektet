@@ -1,14 +1,15 @@
 package app.controllers;
 
-import app.entities.ConnectionPool;
-import app.entities.Order;
-import app.entities.User;
+import app.entities.*;
 import app.exceptions.DatabaseException;
+import app.mappers.OrderlineMapper;
 import app.mappers.OrdreMapper;
+import app.services.Calculator;
 import app.services.CarportSvg;
 import app.services.Svg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import app.mappers.VariantMapper;
 
 import java.sql.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ public class OrdreController {
         app.post("/createOrder", ctx -> placeOrdre(ctx, connectionPool));
         app.get("orders", ctx -> userOrderPage(ctx, connectionPool));
         app.get("showOrder", ctx -> OrdreController.showOrder(ctx, connectionPool));
+        app.get("checkout",ctx ->checkout(ctx,connectionPool));
 
         app.get("/error", ctx -> ctx.render("error.html"));
 
@@ -71,6 +73,9 @@ public class OrdreController {
             int width = Integer.valueOf(ctx.formParam("width"));
             ctx.sessionAttribute("length", length);
             ctx.sessionAttribute("width", width);
+            Calculator calculator = new Calculator(width, length, connectionPool);
+            calculator.calcCarport();
+            System.out.println("Total price: " + calculator.getTotalPrice());
             Order order = new Order(length, width);
             OrdreMapper.createOrder(userId, connectionPool, order);
 
@@ -132,4 +137,57 @@ public class OrdreController {
             ctx.redirect("/error");
         }
     }
+
+
+    public static void createOrderAndInsertOrderLines(Context ctx, ConnectionPool connectionPool) {
+        User currentUser = ctx.sessionAttribute("currentUser");
+        int userId = currentUser.getUserId();
+
+        try {
+            int length = Integer.valueOf(ctx.formParam("length"));
+            int width = Integer.valueOf(ctx.formParam("width"));
+            ctx.sessionAttribute("length", length);
+            ctx.sessionAttribute("width", width);
+            Calculator calculator = new Calculator(width, length, connectionPool);
+            calculator.calcCarport();
+            ctx.sessionAttribute("calculator", calculator);
+            System.out.println("Total price: " + calculator.getTotalPrice());
+            Order order = new Order(length, width);
+            int orderId = OrdreMapper.createOrder(userId, connectionPool, order);
+            ctx.sessionAttribute("orderId", orderId);
+
+            for (OrderLine orderLine : calculator.getOrderLines()) {
+
+                Variant variant = VariantMapper.findVariantForOrderLine(orderLine,connectionPool);
+                try {
+                    OrderlineMapper.createOrderLine(orderId, connectionPool, orderLine, variant);
+                } catch (DatabaseException e) {
+
+                    System.err.println("Fejl ved indsættelse af OrderLine i databasen: " + e.getMessage());
+                }
+            }
+
+            ctx.redirect("/showOrder");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public static void checkout(Context ctx, ConnectionPool connectionPool) {
+        User currentUser = ctx.sessionAttribute("currentUser");
+        int userId = currentUser.getUserId();
+
+        try {
+            // Hent orderId fra sessionen
+            int orderId = ctx.sessionAttribute("orderId");
+            List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
+            Calculator calculator = ctx.sessionAttribute("calculator");
+            ctx.attribute("orderLines", orderLines);
+            ctx.attribute("calculator",calculator);
+            ctx.render("checkout.html");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Der opstod en fejl: " + e.getMessage());
+            ctx.render("error.html");
+        }
+    }
+
 }

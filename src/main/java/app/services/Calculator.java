@@ -33,6 +33,9 @@ public class Calculator {
         calcRemmer();
         calcSpær();
 
+
+
+
     }
 
     private void calcStolper() {
@@ -42,8 +45,11 @@ public class Calculator {
         int stolpeLængde = stolpeVariant.getLength();
         int stolpePrisPrMeter = stolpeVariant.getMateriale().getPrice();
 
-        int stolpeAmount = 2 * ((stolpeLængde - 130) / 310);
-        int stolpePris = stolpeAmount * (int) stolpePrisPrMeter * stolpeLængde;
+        int stolpeAmount = (int) 2 * ((stolpeLængde - 130) / 310);
+        if(stolpeAmount<1){
+            stolpeAmount=2;
+        }
+        int stolpePris = stolpeAmount * (int) stolpePrisPrMeter * (stolpeLængde /100);
 
         OrderLine stolpe = new OrderLine(STOLPE, stolpeLængde, stolpePris, stolpeAmount, "Stolper");
         orderLines.add(stolpe);
@@ -54,39 +60,58 @@ public class Calculator {
         Variant bestFit = null;
 
         for (Variant variant : variants) {
-            if (variant.getLength() <= width && (bestFit == null || variant.getLength() > bestFit.getLength())) {
+            if (variant.getLength() >= width && (bestFit == null || variant.getLength() < bestFit.getLength())) {
                 bestFit = variant;
             }
         }
         int remmeAmount = 2;
         int remmeLængde = bestFit.getLength();
         int remmePrisPrMeter = bestFit.getMateriale().getPrice();
-        int remmePris = (remmePrisPrMeter * remmeLængde) * remmeAmount;
+        int remmePris = (remmePrisPrMeter * (remmeLængde/100) * remmeAmount);
 
         OrderLine remme = new OrderLine(SPÆR, remmeLængde, remmePris, remmeAmount, "Remmer");
         orderLines.add(remme);
     }
 
-    private void calcSpær() {
-        List<Variant> variants = VariantMapper.getAllVariantsByMaterialId(SPÆR, connectionPool);
+
+        private void calcSpær() {
+            List<Variant> variants = VariantMapper.getAllVariantsByMaterialId(SPÆR, connectionPool);
+            Variant bestFit=null;
+
+            for (Variant variant : variants) {
+                if (variant.getLength() <= length && (bestFit == null || variant.getLength() > bestFit.getLength())) {
+                    bestFit = variant;
+                }
+            }
+
+            int spærLængde = bestFit.getLength();
+            double spærPrisPrMeter = bestFit.getMateriale().getPrice();
 
 
+            int spærAmount = width / 55;
+            int spærPris = spærAmount * (int) (spærPrisPrMeter * (spærLængde/100));
 
-     /*if (spærVariant.getLength() > 300){
-         spærVariant=
-     }*/
+            OrderLine spær = new OrderLine(SPÆR, spærLængde, spærPris, spærAmount, "Spær");
+            orderLines.add(spær);
+        }
 
-        int spærLængde = 300;
-        int spærPris = 100;
-        //OrderLine spær1 = new OrderLine(SPÆR, spærLængde, spærPris, spærAmount, "Spær");
-        //orderLines.add(spær1);
 
-    }
 
     public List<OrderLine> getOrderLines() {
         System.out.println(orderLines);
         return orderLines;
 
+    }
+
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        int skruer = 100;
+        for (OrderLine orderLine : orderLines) {
+            totalPrice += orderLine.getPris();
+        }
+        double totalPriceWithIntrest = totalPrice * 1.30;
+        return (int)totalPriceWithIntrest + skruer;
     }
 
 

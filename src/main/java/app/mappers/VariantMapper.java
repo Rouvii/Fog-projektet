@@ -1,9 +1,7 @@
 package app.mappers;
 
+import app.entities.*;
 import app.entities.ConnectionPool;
-import app.entities.Materialer;
-import app.entities.Order;
-import app.entities.Variant;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class VariantMapper {
             int variantId = rs.getInt("variant_id");
             int length = rs.getInt("længde");
             String type = rs.getString("type");
-            double price = rs.getDouble("pris_pr_meter");
+            int price = rs.getInt("pris_pr_meter");
             Materialer materialer = new Materialer(materialeId,type,price);
             Variant variant = new Variant(variantId,materialer,length);
             variantList.add(variant);
@@ -52,5 +50,24 @@ public class VariantMapper {
 
 
     }
+    public static Variant findVariantForOrderLine(OrderLine orderLine,ConnectionPool connectionPool) {
+
+        int materialId = orderLine.getId();
+
+
+        List<Variant> variants = VariantMapper.getAllVariantsByMaterialId(materialId, connectionPool);
+
+
+        for (Variant variant : variants) {
+            if (variant.getLength() == orderLine.getLængde()) {
+                return variant;
+            }
+        }
+
+
+        return null;
+    }
+
+
 
 }
