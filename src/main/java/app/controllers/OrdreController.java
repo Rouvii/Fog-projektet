@@ -114,7 +114,7 @@ public class OrdreController {
             int width = ctx.sessionAttribute("width");
 
             CarportSvg carportSvg = new CarportSvg(width, length);
-            Svg outerSvg = new Svg(0, 0, "0 0 1000 1000", "100%", "auto");
+            Svg outerSvg = new Svg(0, 0, "0 0 1000 1000", "50%", "auto");
 
             int arrowOffset = 15;
             int rotation = 90;

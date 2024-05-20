@@ -4,15 +4,32 @@
     <title>Checkout</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link href="../public/css/checkout.css" th:href="@{/css/checkout.css}" rel="stylesheet"/>
 </head>
 <body>
-<div class="page">
-    <a href="index.html" class="banner" th:href="@{/}"><h2>FOG</h2></a>
+<div class="header">
+    <header>
+        <a href="index.html" th:href="@{index}">
+            <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
+        </a>
+        <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
+        <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
+        <a href="login.html" class="header-login-button" th:href="@{login}">
+            <div class="header-login-button-content">
+                <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
+                <div class="header-login-button-text">LOGIN</div>
+            </div>
+        </a>
+        <a href="orders.html" class="orders-button" th:href="@{orders}">
+            <div class="order-button-content">
+                <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
+                <div class="header-bottom-orders-text">MINE ORDRE</div>
+            </div>
+        </a>
+    </header>
 </div>
+<div class="content-checkout">
 
-
-<h1>Checkout</h1>
 
 <h2>Tak for din bestilling</h2>
 
@@ -33,7 +50,14 @@
         <td th:text="${orderLine.getQuantity()}"></td>
         <td th:text="${orderLine.getDescription()}"></td>
     </tr>
-    <a th:text="${calculator.getTotalPrice()}"></a>
+
+
+
 </table>
+    <div class="total-price">
+        <h2>Total Price:</h2>
+        <p th:text="${calculator.getTotalPrice()}"></p>
+    </div>
+</div>
 </body>
 </html>

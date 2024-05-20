@@ -8,16 +8,34 @@
 </head>
 
 <body>
+<div class="header">
+    <header>
 
-<h1>Show Order #12143</h1>
+        <a href="index.html" th:href="@{index}">
+            <img class="fog-logo" th:src="@{/images/Fog_Logo.jpeg}" alt="Fog Logo">
+        </a>
+        <a class="carporte-link" href="https://www.johannesfog.dk/have-fritid/carporte">CARPORTE</a>
 
-<p>This is where we show the order details and the drawing when the customer has accepted the offer</p>
+        <a class="header-design-carport-link" href="design.html" th:href="@{design}">DESIGN CARPORT</a>
 
-<p>We want to inject a SVG drawing below:</p>
-<div>
-    <input type="text" name="length" th:value="${session.length}" />
-    <input type="text" name="width" th:value="${session.width}"/>
+        <a href="login.html" class="header-login-button" th:href="@{login}">
+            <div class="header-login-button-content">
+                <img class="header-login-image" th:src="@{/images/key_2_line.png}" alt="header login image">
+                <div class="header-login-button-text">LOGIN</div>
+            </div>
+        </a>
+
+        <a href="orders.html" class="orders-button" th:href="@{orders}">
+            <div class="order-button-content">
+                <img class="orders-img" th:src="@{/images/clipboard_line.png}" alt="orders image">
+                <div class="header-bottom-orders-text">MINE ORDRE</div>
+            </div>
+        </a>
+
+    </header>
 </div>
+
+
 <div class="carport-svg-topview">
     <div th:utext="${svg}">
 

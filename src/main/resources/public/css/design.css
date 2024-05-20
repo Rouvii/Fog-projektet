@@ -1,16 +1,69 @@
-
-body {
-    background-color: #C9C9C9;
-    margin: 0;
-}
-
-
 .header {
     background-color: #D9D9D9;
     height: 88px;
     width: 100%;
     margin-top: 40px;
 }
+.fog-logo {
+    width: 75px;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 7px;
+    margin-left: 0px;
+}
+.header header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.carporte-link {
+    position: absolute;
+    left: 17%;
+    transform: translateX(-50%);
+    color: #154985;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+.orders-img {
+    width: 50px;
+}
+.header-login-image {
+    width: 50px;
+}
+.header-login-button {
+    margin-left: 1200px;
+}
+.orders-button {
+    margin-right: 20px;
+}
+.header-bottom-orders-text {
+    width: 100px;
+    font-size: 12px;
+    position: absolute;
+    text-decoration: none;
+    color: #154985;
+    font-weight: bold;
+}
+.header-login-button-text {
+    font-size: 12px;
+    text-decoration: none;
+    color: #154985;
+    position: absolute;
+    font-weight: bold;
+}
+.header-design-carport-link {
+    margin-left: 380px;
+    width: 200px;
+    position: absolute;
+    color: #154985;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    left: 6%;
+}
+
 
 
 .design-dropdown {
