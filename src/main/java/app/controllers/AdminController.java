@@ -6,6 +6,7 @@ import app.entities.Order;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.mappers.MaterialeMapper;
+import app.mappers.OrderlineMapper;
 import app.mappers.OrdreMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -22,16 +23,19 @@ public class AdminController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("admin", ctx -> adminpage(ctx, connectionPool));
-        app.get("adminrediger", ctx -> adminpagerediger(ctx,connectionPool));
+        app.get("adminrediger", ctx -> adminpagerediger(ctx, connectionPool));
         app.post("adminrediger", ctx -> adminpagerediger(ctx, connectionPool));
-        app.post("redigermateriale", ctx ->redigermateriale(ctx,connectionPool));
+        app.post("redigermateriale", ctx -> redigermateriale(ctx, connectionPool));
         app.post("updatename", ctx -> updatename(ctx, connectionPool));
-        app.post("updateprice", ctx -> updateprice(ctx,connectionPool));
-        app.get("adminordre", ctx -> adminordrepage(ctx,connectionPool));
-        app.post("addmateriale", ctx -> addmateriale(ctx,connectionPool));
-        app.post("adminaddmateriale", ctx -> adminaddmaterialepage(ctx,connectionPool));
-        app.post("deletemateriale", ctx -> deletemateriale(ctx,connectionPool));
-        app.post("updatestatus", ctx -> updatestatus(ctx,connectionPool));
+        app.post("updateprice", ctx -> updateprice(ctx, connectionPool));
+        app.get("adminordre", ctx -> adminordrepage(ctx, connectionPool));
+        app.post("addmateriale", ctx -> addmateriale(ctx, connectionPool));
+        app.post("adminaddmateriale", ctx -> adminaddmaterialepage(ctx, connectionPool));
+        app.post("deletemateriale", ctx -> deletemateriale(ctx, connectionPool));
+        app.post("updatestatus", ctx -> updatestatus(ctx, connectionPool));
+        app.post("deleteorder", ctx -> deleteOrder(ctx, connectionPool));
+
+
     }
 
 
@@ -46,7 +50,7 @@ public class AdminController {
             ctx.render("admin.html");
 
         } catch (Exception e) {
-
+            ctx.render("admin.html");
             System.out.println("fejl");
         }
 
@@ -65,13 +69,12 @@ public class AdminController {
             ctx.render("adminrediger.html");
 
         } catch (Exception e) {
-
+            ctx.render("admin.html");
             System.out.println("fejl");
         }
 
 
     }
-
 
 
     private static void updatename(Context ctx, ConnectionPool connectionPool) {
@@ -90,7 +93,7 @@ public class AdminController {
 
         } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("admin.html");
         }
     }
 
@@ -111,10 +114,9 @@ public class AdminController {
 
         } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("admin.html");
         }
     }
-
 
 
     private static void redigermateriale(Context ctx, ConnectionPool connectionPool) {
@@ -125,12 +127,12 @@ public class AdminController {
 
             Materialer materialer = MaterialeMapper.getMaterialeById(materialeId, connectionPool);
 
-            ctx.attribute("materialer",materialer);
+            ctx.attribute("materialer", materialer);
             ctx.render("adminredigermateriale.html");
 
         } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("admin.html");
         }
     }
 
@@ -146,14 +148,14 @@ public class AdminController {
             ctx.render("adminordre.html");
 
         } catch (Exception e) {
-
+            ctx.render("admin.html");
             System.out.println("fejl");
         }
 
 
     }
 
-    private static void addmateriale(Context ctx,ConnectionPool connectionPool) {
+    private static void addmateriale(Context ctx, ConnectionPool connectionPool) {
 
         User user = ctx.sessionAttribute("currentUser");
         try {
@@ -166,7 +168,7 @@ public class AdminController {
             ctx.attribute("materialeList", materialerList);
             ctx.render("adminrediger.html");
         } catch (DatabaseException e) {
-            ctx.render("/index.html");
+            ctx.render("admin.html");
         }
     }
 
@@ -178,7 +180,7 @@ public class AdminController {
             ctx.render("adminaddmateriale.html");
 
         } catch (Exception e) {
-
+            ctx.render("admin.html");
             System.out.println("fejl");
         }
 
@@ -201,14 +203,13 @@ public class AdminController {
 
         } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("admin.html");
         }
 
     }
 
 
-
-    public static void updatestatus(Context ctx,ConnectionPool connectionPool) {
+    public static void updatestatus(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
 
         try {
@@ -224,11 +225,35 @@ public class AdminController {
 
         } catch (Exception e) {
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("admin.html");
         }
 
     }
 
+
+    public static void deleteOrder(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+
+        try {
+
+            int orderId = Integer.parseInt(ctx.formParam("ordreId"));
+            if (OrderlineMapper.countOrderlines(orderId, connectionPool) > 0) {
+                OrderlineMapper.deleteOrderline(orderId, connectionPool);
+            }
+            OrdreMapper.deleteOrder(orderId, connectionPool);
+
+            List<Order> orderList = OrdreMapper.getAllOrders(connectionPool);
+
+            ctx.attribute("ordrelist", orderList);
+            ctx.render("adminordre.html");
+
+        } catch (DatabaseException e) {
+
+            ctx.attribute("message", e.getMessage());
+            ctx.render("admin.html");
+        }
+
+    }
 
 
 }

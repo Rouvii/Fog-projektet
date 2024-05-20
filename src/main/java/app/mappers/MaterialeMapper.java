@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou
+ * @author: Kevin Løvstad Schou, Daniel Rouvillain
  */
 public class MaterialeMapper {
 
@@ -129,6 +129,7 @@ public class MaterialeMapper {
 
         }
     }
+
     public static void deleteMateriale(int materialeId, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "delete from materialer where materiale_id = ?";
 
@@ -169,6 +170,5 @@ public class MaterialeMapper {
         }
     }
 
-
-    }
+}
 

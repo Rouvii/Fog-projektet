@@ -20,36 +20,43 @@
 
     <form method="post">
         <div class="box1">
-        <table class="materiale-table">
+            <div class="scrollable">
+                <table class="materiale-table">
 
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>pris</th>
-            </tr>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>pris</th>
+                    </tr>
 
-            </thead>
-            <tbody>
-            <tr th:each="materialer: ${materialeList}">
-                <td th:text="${materialer.materialeId}">id</td>
-                <td th:text="${materialer.type}">type</td>
-                <td th:text="${materialer.price}">pris</td>
-                <td>
-                    <div class="admin-button">
-                        <button class="button" type="submit" name="materialeId" th:value="${materialer.materialeId}" formaction="/redigermateriale">Rediger</button>
-                    </div>
-                    <div class="admin-button">
-                        <button class="button" type="submit" name="materialeId" th:value="${materialer.materialeId}" formaction="/deletemateriale">Slet</button>
-                    </div>
-                </td>
-            </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="materialer: ${materialeList}">
+                        <td th:text="${materialer.materialeId}">id</td>
+                        <td th:text="${materialer.type}">type</td>
+                        <td th:text="${materialer.price}">pris</td>
+                        <td>
+                            <div class="admin-button">
+                                <button class="button" type="submit" name="materialeId"
+                                        th:value="${materialer.materialeId}" formaction="/redigermateriale">Rediger
+                                </button>
+                            </div>
+                            <div class="admin-button">
+                                <button class="button" type="submit" name="materialeId"
+                                        th:value="${materialer.materialeId}" formaction="/deletemateriale">Slet
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
 
-            </tbody>
+                    </tbody>
 
-        </table>
+                </table>
+            </div>
             <div class="button-add">
-                <button type="submit" class="button" name="addmaterialebutton"  formaction="/adminaddmateriale">Tilføj</button>
+                <button type="submit" class="button" name="addmaterialebutton" formaction="/adminaddmateriale">Tilføj
+                </button>
             </div>
         </div>
     </form>

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou
+ * @author: Kevin Løvstad Schou, Daniel Rouvillain
  */
 public class OrdreMapper {
 
@@ -173,4 +173,27 @@ public class OrdreMapper {
             throw new RuntimeException(e);
         }
     }
+
+    public static void deleteOrder(int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "delete from ordre where order_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, orderId);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl ved sletning af ordre");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved sletning ", e.getMessage());
+        }
+    }
+
+
+
 }
