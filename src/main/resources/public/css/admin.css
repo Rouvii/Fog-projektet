@@ -154,3 +154,7 @@ margin-top: 5px;
     height: 80vh;
 }
 
+.tables .scrollable {
+    height: 300px;
+    overflow-y: scroll;
+}

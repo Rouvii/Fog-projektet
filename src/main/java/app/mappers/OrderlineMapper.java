@@ -75,4 +75,46 @@ public class OrderlineMapper {
     }
 
 
+    public static void deleteOrderline(int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "delete from orderline where order_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, orderId);
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected != 3) {
+                throw new DatabaseException("Fejl ved sletning af ordre");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved sletning ", e.getMessage());
+        }
+    }
+
+    public static int countOrderlines(int orderId, ConnectionPool connectionPool) {
+        String sql = "SELECT COUNT(*) FROM orderline WHERE order_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+
+
 }

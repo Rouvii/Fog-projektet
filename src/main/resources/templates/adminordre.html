@@ -20,52 +20,55 @@
 
     <div class="tables">
         <h1>Active Orders</h1>
-        <table class="order-table">
-            <form method="post" class="admin-orders">
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Order id</th>
-                    <th>Dato</th>
-                    <th>Længde</th>
-                    <th>Bredde</th>
-                    <th>Status id</th>
-                    <th>Betalt</th>
-                    <th>Afsendt</th>
-                    <th>Afvist</th>
-                    <th>Modtaget</th>
-                    <th>Pris</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="order: ${ordrelist}">
-                    <td th:text="${order.userId}">User</td>
-                    <td th:text="${order.ordreId}">Order id</td>
-                    <td th:text="${order.dato}">Dato</td>
-                    <td th:text="${order.længde}">Længde</td>
-                    <td th:text="${order.bredde}">Bredde</td>
-                    <td th:text="${order.statusId}">Status id</td>
-                    <td th:text="${order.betalt}">Betalt</td>
-                    <td th:text="${order.afsendt}">Afsendt</td>
-                    <td th:text="${order.afvist}">Afvist</td>
-                    <td th:text="${order.modtaget}">Modtaget</td>
-                    <td th:text="${order.totalPris}">Pris</td>
-                    <td>
+        <div class="scrollable">
+            <table class="order-table">
+                <form method="post" class="admin-orders ">
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Order id</th>
+                        <th>Dato</th>
+                        <th>Længde</th>
+                        <th>Bredde</th>
+                        <th>Status id</th>
+                        <th>Betalt</th>
+                        <th>Afsendt</th>
+                        <th>Afvist</th>
+                        <th>Modtaget</th>
+                        <th>Pris</th>
+                    </tr>
+                    </thead>
 
-                        <div class="">
-                            <button type="submit" class="button" formaction="/deleteorder" name="delete-order"
-                                    th:value="${order.ordreId}"> Slet
-                            </button>
-                        </div>
+                    <tbody>
+                    <tr th:each="order: ${ordrelist}">
+                        <td th:text="${order.userId}">User</td>
+                        <td th:text="${order.ordreId}">Order id</td>
+                        <td th:text="${order.dato}">Dato</td>
+                        <td th:text="${order.længde}">Længde</td>
+                        <td th:text="${order.bredde}">Bredde</td>
+                        <td th:text="${order.statusId}">Status id</td>
+                        <td th:text="${order.betalt}">Betalt</td>
+                        <td th:text="${order.afsendt}">Afsendt</td>
+                        <td th:text="${order.afvist}">Afvist</td>
+                        <td th:text="${order.modtaget}">Modtaget</td>
+                        <td th:text="${order.totalPris}">Pris</td>
+                        <td>
 
-
-                    </td>
-                </tr>
+                            <div class="">
+                                <button type="submit" class="button" name="ordreId" th:value="${order.ordreId}"
+                                        formaction="/deleteorder"> Slet
+                                </button>
+                            </div>
 
 
-                </tbody>
-            </form>
-        </table>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </form>
+            </table>
+        </div>
         <div class="update-field-text">
             <h4>Opdater status på order id</h4>
         </div>
