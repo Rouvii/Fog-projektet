@@ -52,16 +52,16 @@ body {
 }
 
 .gap {
-    width: 50px; /* Set gap width */
+    width: 50px;
 }
 
 .carporte-link {
     position: absolute;
-    left: 17%; /* Position it in the center */
-    transform: translateX(-50%); /* Center it relative to its own width */
-    color: #154985; /* Set link color */
-    text-decoration: none; /* Remove underline */
-    font-size: 20px; /* Set font size */
+    left: 17%;
+    transform: translateX(-50%);
+    color: #154985;
+    text-decoration: none;
+    font-size: 20px;
     font-weight: bold;
 }
 
