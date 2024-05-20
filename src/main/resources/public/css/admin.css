@@ -5,8 +5,34 @@
 .admin-body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #C9C9C9;
+
+}
+header{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    background-color: #025588;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    height: 100px;
+}
+.banner {
+
+    display: flex;
+    align-items: center;
+
 }
 
+.fog-logo {
+    display: flex;
+    width: 75px;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 7px;
+    margin-left: 0px;
+}
 h1 {
     margin: 0;
     font-size: 2rem;
@@ -14,8 +40,9 @@ h1 {
 
 .admin-text{
     display: flex;
-    justify-content: center;
-    color: #0077C0;;
+    color: #C9C9C9;
+    font-size: 1.5rem;
+    margin: 0;
 
 }
 .main-content {
@@ -31,13 +58,14 @@ h1 {
 }
 
 .option-outline {
-    width: 250px;
-    height: 375px;
-    border: 1px solid #ddd;
+    width: 150px;
+    height: 75px;
+    background-color: #cccccc;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 .option-button {
@@ -74,30 +102,30 @@ h1 {
 }
 
 .box1 {
-    width: 80%; /* Adjust width as needed */
-    margin: 20px auto; /* Center the box horizontally */
-    padding: 20px; /* Add padding for spacing */
-    background-color: #ffffff; /* Set background color */
-    border: 1px solid #dddddd; /* Add a border */
-    border-radius: 10px; /* Add rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow for depth */
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the table inside the box */
+
 .materiale-table {
-    width: 100%; /* Make table fill the box */
-    border-collapse: collapse; /* Collapse table borders */
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .materiale-table th, .materiale-table td {
-    padding: 10px; /* Add padding to table cells */
-    text-align: left; /* Align text to the left */
-    border-bottom: 1px solid #dddddd; /* Add bottom border to table rows */
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
 }
 
 .materiale-table th {
-    background-color: #f2f2f2; /* Set background color for table header */
-    font-weight: bold; /* Make header text bold */
+    background-color: #f2f2f2;
+    font-weight: bold;
 }
 
 .banner{
