@@ -204,9 +204,11 @@ public class OrdreController {
         try {
             // Hent orderId fra sessionen
             int orderId = Integer.parseInt(ctx.formParam("ordreId"));
-            System.out.println(orderId);
+
             List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
-            Calculator calculator = ctx.sessionAttribute("calculator");
+           int length = OrdreMapper.getLenghtById(orderId, connectionPool);
+           int width = OrdreMapper.getBreddeById(orderId, connectionPool);
+            Calculator calculator = new Calculator(width,length, connectionPool);
             ctx.attribute("orderLines", orderLines);
             ctx.attribute("calculator",calculator.getTotalPrice());
             ctx.render("checkout.html");
