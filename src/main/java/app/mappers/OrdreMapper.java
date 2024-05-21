@@ -195,5 +195,44 @@ public class OrdreMapper {
     }
 
 
+    public static int getLenghtById(int orderId, ConnectionPool connectionPool) {
+        String sql = "SELECT længde FROM ordre WHERE order_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int længde = rs.getInt("længde");
+                return længde;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public static int getBreddeById(int orderId,ConnectionPool connectionPool){
+        String sql = "SELECT bredde FROM ordre WHERE order_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int bredde = rs.getInt("bredde");
+                return bredde;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+   return 0;
+    }
 
 }
