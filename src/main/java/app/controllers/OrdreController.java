@@ -15,6 +15,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static java.lang.Integer.parseInt;
+
 
 public class OrdreController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
@@ -23,8 +25,8 @@ public class OrdreController {
         app.post("finalDesign", ctx -> finalDesignPage(ctx, connectionPool));
         app.post("/createOrder", ctx -> placeOrdre(ctx, connectionPool));
         app.get("orders", ctx -> userOrderPage(ctx, connectionPool));
-        app.get("showOrder", ctx -> OrdreController.showOrder(ctx, connectionPool));
-        app.get("checkout",ctx ->checkout(ctx,connectionPool));
+        app.get("showOrder", ctx -> showOrder(ctx, connectionPool));
+        app.post("checkout",ctx ->checkout(ctx,connectionPool));
 
         app.get("/error", ctx -> ctx.render("error.html"));
 
@@ -96,7 +98,9 @@ public class OrdreController {
 
             List<Order> ordreList = OrdreMapper.getAllOrdersPerUser(user.getUserId(), connectionPool);
             ctx.attribute("ordreList", ordreList);
+
             ctx.render("orders.html");
+
 
         } catch (Exception e) {
             ctx.sessionAttribute("errorMessage", "Error retrieving orders: " + e.getMessage());
@@ -112,7 +116,7 @@ public class OrdreController {
             Locale.setDefault(new Locale("US"));
             int length = ctx.sessionAttribute("length");
             int width = ctx.sessionAttribute("width");
-
+            Calculator calculator = new Calculator(width, length, connectionPool);
             CarportSvg carportSvg = new CarportSvg(width, length);
             Svg outerSvg = new Svg(0, 0, "0 0 1000 1000", "50%", "auto");
 
@@ -127,7 +131,7 @@ public class OrdreController {
 
             String combined = outerSvg.addSvg(carportSvg.getCarportSvg()).toString();
 
-
+            ctx.sessionAttribute("calculator", calculator);
             ctx.attribute("length", length);
             ctx.attribute("width", width);
             ctx.attribute("svg", combined);
@@ -172,6 +176,8 @@ public class OrdreController {
             System.out.println(e);
         }
     }
+
+/*
     public static void checkout(Context ctx, ConnectionPool connectionPool) {
         User currentUser = ctx.sessionAttribute("currentUser");
         int userId = currentUser.getUserId();
@@ -179,10 +185,30 @@ public class OrdreController {
         try {
             // Hent orderId fra sessionen
             int orderId = ctx.sessionAttribute("orderId");
+            System.out.println(orderId);
             List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
             Calculator calculator = ctx.sessionAttribute("calculator");
             ctx.attribute("orderLines", orderLines);
             ctx.attribute("calculator",calculator);
+            ctx.render("checkout.html");
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Der opstod en fejl: " + e.getMessage());
+            ctx.render("error.html");
+        }
+    }
+*/
+    public static void checkout(Context ctx, ConnectionPool connectionPool) {
+        User currentUser = ctx.sessionAttribute("currentUser");
+
+
+        try {
+            // Hent orderId fra sessionen
+            int orderId = Integer.parseInt(ctx.formParam("ordreId"));
+            System.out.println(orderId);
+            List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
+            Calculator calculator = ctx.sessionAttribute("calculator");
+            ctx.attribute("orderLines", orderLines);
+            ctx.attribute("calculator",calculator.getTotalPrice());
             ctx.render("checkout.html");
         } catch (DatabaseException e) {
             ctx.attribute("message", "Der opstod en fejl: " + e.getMessage());

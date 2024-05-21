@@ -40,6 +40,7 @@ public class Order {
         this.modtaget = modtaget;
         this.totalPris = totalPris;
     }
+
     public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, int statusId, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, int totalPris) {
         this.ordreId = orderId;
         this.userId = userId;
@@ -54,9 +55,9 @@ public class Order {
         this.totalPris = totalPris;
     }
 
-    public Order(int længde, int bredde){
-        this.længde=længde;
-        this.bredde=bredde;
+    public Order(int længde, int bredde) {
+        this.længde = længde;
+        this.bredde = bredde;
     }
 
     public Order(int orderId, int userId, Date dato, int længde, int bredde, int statusId, int totalPris)
