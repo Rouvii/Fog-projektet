@@ -158,7 +158,6 @@ public class UserController
         ctx.sessionAttribute("width", width);
         try {
             UserMapper.insertUserDetails(userId, fornavn, efternavn, adresse, telefon, connectionPool);
-            OrdreController.placeOrdre(ctx, connectionPool);
             OrdreController.createOrderAndInsertOrderLines(ctx, connectionPool);
             OrdreController.showOrder(ctx, connectionPool);
         } catch (DatabaseException e) {

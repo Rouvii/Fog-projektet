@@ -114,7 +114,4 @@ class OrdreMapperTest {
     }
 
 
-    @Test
-    void updateStatus() {
-    }
 }

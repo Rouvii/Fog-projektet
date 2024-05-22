@@ -47,7 +47,7 @@ public class Calculator {
 
         int stolpeAmount = (int) 2 * ((stolpeLængde - 130) / 310);
         if(stolpeAmount<1){
-            stolpeAmount=2;
+            stolpeAmount=4;
         }
         int stolpePris = stolpeAmount * (int) stolpePrisPrMeter * (stolpeLængde /100);
 

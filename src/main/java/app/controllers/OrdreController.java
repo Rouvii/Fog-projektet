@@ -21,7 +21,6 @@ public class OrdreController {
         app.get("design", ctx -> designPage(ctx, connectionPool));
         app.get("finalDesign", ctx -> finalDesignPage(ctx, connectionPool));
         app.post("finalDesign", ctx -> finalDesignPage(ctx, connectionPool));
-        app.post("/createOrder", ctx -> placeOrdre(ctx, connectionPool));
         app.get("orders", ctx -> userOrderPage(ctx, connectionPool));
         app.get("showOrder", ctx -> OrdreController.showOrder(ctx, connectionPool));
         app.get("checkout",ctx ->checkout(ctx,connectionPool));
@@ -63,7 +62,7 @@ public class OrdreController {
         }
     }
 
-
+/*
     public static void placeOrdre(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
         int userId = user.getUserId();
@@ -85,6 +84,8 @@ public class OrdreController {
         }
     }
 
+
+ */
     private static void userOrderPage(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
 
