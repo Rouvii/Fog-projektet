@@ -1,6 +1,7 @@
 package app.entities;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  * Purpose:
@@ -26,6 +27,15 @@ public class Order {
     public Order(int ordreId, Date dato) {
         this.ordreId = ordreId;
         this.dato = dato;
+    }
+
+    public Order(int ordreId,Date dato,int userId,int længde,int bredde,int statusId,int totalPris){
+        this.ordreId = ordreId;
+        this.userId = userId;
+        this.dato = dato;
+        this.længde = længde;
+        this.bredde = bredde;
+        this.totalPris = totalPris;
     }
 
     public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, int totalPris) {
@@ -158,6 +168,31 @@ public class Order {
 
     public int getStatusId() {
         return statusId;
+    }
+
+
+//Brugt til OrdreMapperTest, det så JUNIT kan sammenligne objekterne ud fra indhold og ikke fra hukommelse
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Order order = (Order) obj;
+        return ordreId == order.ordreId &&
+                betalt == order.betalt &&
+                afsendt == order.afsendt &&
+                afvist == order.afvist &&
+                modtaget == order.modtaget &&
+                længde == order.længde &&
+                bredde == order.bredde &&
+                userId == order.userId &&
+                totalPris == order.totalPris &&
+                Objects.equals(dato, order.dato);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ordreId, betalt, afsendt, afvist, modtaget, længde, bredde, userId, totalPris, dato);
     }
 
     @Override
