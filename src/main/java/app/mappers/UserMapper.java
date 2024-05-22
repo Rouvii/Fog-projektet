@@ -10,6 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Purpose:
+ *
+ * @author: Kevin Løvstad Schou, Matthias Sigurdsson
+ */
 public class UserMapper {
 
     public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException {
@@ -62,40 +68,6 @@ public class UserMapper {
             throw new DatabaseException(msg, e.getMessage());
         }
     }
-
-/*
-    public static List<User> getAllUsers (ConnectionPool connectionPool) {
-
-        List<User> userList = new ArrayList<>();
-        String sql = "select user_id,email,isadmin from users ";
-
-        try (
-                Connection connection = connectionPool.getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)
-
-        )
-        {
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("user_id");
-                String email = rs.getString("email");
-                boolean admin = rs.getBoolean("admin");
-
-                userList.add(new User(id,email,admin));
-            }
-
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return userList;
-
-
-    }
-*/
 
     public static void insertUserDetails(int userId, String fornavn, String efternavn, String adresse, String telefon, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "UPDATE users SET fornavn = ?, efternavn = ?, adresse = ?, telefon = ? WHERE user_id = ?";

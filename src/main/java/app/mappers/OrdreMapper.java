@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou, Daniel Rouvillain
+ * @author: Kevin Løvstad Schou, Daniel Rouvillain, Mads Oliver Rosengren
  */
 public class OrdreMapper {
 
@@ -101,32 +101,34 @@ public class OrdreMapper {
     }
 
 
-    public static Order getOrderForUser(int userId, ConnectionPool connectionPool) throws DatabaseException {
-        Order order = null;
-        //Vi bruger DESC LIMIT 1 for at få den nyeste ordre(DESC = descending)
-        String sql = "SELECT * FROM ordre WHERE user_id = ? ORDER BY dato DESC LIMIT 1";
+    public static Order getOrderByOrdreId(int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "select * from ordre where order_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)
         ) {
-            ps.setInt(1, userId);
+            ps.setInt(1, orderId);
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
-                int orderId = rs.getInt("order_id");
+                int userId = rs.getInt("user_id");
                 Date dato = rs.getDate("dato");
                 int længde = rs.getInt("længde");
                 int bredde = rs.getInt("bredde");
+                int status = rs.getInt("status_id");
                 int totalPris = rs.getInt("total_pris");
-                int statusId = rs.getInt("status_id");
 
-                order = new Order(orderId, userId, dato, længde, bredde, statusId, totalPris);
+                return new Order(orderId, userId, dato, længde, bredde,status,totalPris);
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved hentning af ordre for bruger med id = " + userId, e.getMessage());
+            throw new DatabaseException("Fejl ved hentning af ordre: " + e.getMessage());
         }
-        return order;
+
+        throw new DatabaseException("Ordre ikke fundet");
     }
+
+
 
 
     public static int createOrder(int userId, ConnectionPool connectionPool, Order order) throws DatabaseException {
@@ -234,5 +236,6 @@ public class OrdreMapper {
         }
    return 0;
     }
+
 
 }

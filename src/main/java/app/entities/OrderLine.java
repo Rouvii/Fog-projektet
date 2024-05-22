@@ -1,5 +1,13 @@
 package app.entities;
 
+
+
+
+/**
+ * Purpose:
+ *
+ * @author: Kevin Løvstad Schou, Matthias Sigurdsson, Daniel Rouvillain
+ */
 public class OrderLine {
 
     private int id;
@@ -12,10 +20,7 @@ public class OrderLine {
 
     private Order order;
 
-    private Variant variant;
-
     private int quantity;
-    private int pricePerMeter;
 
     public OrderLine(int id, int længde, int pris,int quantity, String description) {
         this.id = id;
@@ -53,17 +58,11 @@ public class OrderLine {
         return order;
     }
 
-    public Variant getVariant() {
-        return variant;
-    }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public int getTotalPris() {
-        return totalPris;
-    }
 
     public String getType() {
         return type;

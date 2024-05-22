@@ -9,6 +9,12 @@ import app.mappers.VariantMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Purpose:
+ *
+ * @author: Kevin Løvstad Schou, Matthias Sigurdsson
+ */
 public class Calculator {
 
 
@@ -47,7 +53,7 @@ public class Calculator {
 
         int stolpeAmount = (int) 2 * ((stolpeLængde - 130) / 310);
         if(stolpeAmount<1){
-            stolpeAmount=2;
+            stolpeAmount=4;
         }
         int stolpePris = stolpeAmount * (int) stolpePrisPrMeter * (stolpeLængde /100);
 

@@ -1,11 +1,12 @@
 package app.entities;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou
+ * @author: Kevin Løvstad Schou,Daniel Rouvillain
  */
 public class Order {
 
@@ -26,6 +27,15 @@ public class Order {
     public Order(int ordreId, Date dato) {
         this.ordreId = ordreId;
         this.dato = dato;
+    }
+
+    public Order(int ordreId,Date dato,int userId,int længde,int bredde,int statusId,int totalPris){
+        this.ordreId = ordreId;
+        this.userId = userId;
+        this.dato = dato;
+        this.længde = længde;
+        this.bredde = bredde;
+        this.totalPris = totalPris;
     }
 
     public Order(int orderId, int userId, java.sql.Date dato, int længde, int bredde, boolean betalt, boolean afsendt, boolean afvist, boolean modtaget, int totalPris) {
@@ -76,34 +86,6 @@ public class Order {
         return ordreId;
     }
 
-    public void setOrdreId(int ordreId) {
-        this.ordreId = ordreId;
-    }
-
-
-    public Date getDato() {
-        return dato;
-    }
-
-    public void setDato(Date dato) {
-        this.dato = dato;
-    }
-
-    public boolean isBetalt() {
-        return betalt;
-    }
-
-    public boolean isAfsendt() {
-        return afsendt;
-    }
-
-    public boolean isAfvist() {
-        return afvist;
-    }
-
-    public boolean isModtaget() {
-        return modtaget;
-    }
 
     public int getLængde() {
         return længde;
@@ -113,52 +95,39 @@ public class Order {
         return bredde;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
     public int getTotalPris() {
         return totalPris;
-    }
-
-    public void setBetalt(boolean betalt) {
-        this.betalt = betalt;
-    }
-
-    public void setAfsendt(boolean afsendt) {
-        this.afsendt = afsendt;
-    }
-
-    public void setAfvist(boolean afvist) {
-        this.afvist = afvist;
-    }
-
-    public void setModtaget(boolean modtaget) {
-        this.modtaget = modtaget;
     }
 
     public void setLængde(int længde) {
         this.længde = længde;
     }
 
-    public void setBredde(int bredde) {
-        this.bredde = bredde;
+
+
+//Brugt til OrdreMapperTest, det så JUNIT kan sammenligne objekterne ud fra indhold og ikke fra hukommelse
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Order order = (Order) obj;
+        return ordreId == order.ordreId &&
+                betalt == order.betalt &&
+                afsendt == order.afsendt &&
+                afvist == order.afvist &&
+                modtaget == order.modtaget &&
+                længde == order.længde &&
+                bredde == order.bredde &&
+                userId == order.userId &&
+                totalPris == order.totalPris &&
+                Objects.equals(dato, order.dato);
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
-    public void setTotalPris(int totalPris) {
-        this.totalPris = totalPris;
-    }
-
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
-
-    public int getStatusId() {
-        return statusId;
+    @Override
+    public int hashCode() {
+        return Objects.hash(ordreId, betalt, afsendt, afvist, modtaget, længde, bredde, userId, totalPris, dato);
     }
 
     @Override

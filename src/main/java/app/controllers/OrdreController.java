@@ -11,19 +11,21 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import app.mappers.VariantMapper;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static java.lang.Integer.parseInt;
+/**
+ * Purpose:
+ *
+ * @author: Daniel Rouvillain, Kevin Løvstad Schou, Mads Oliver Rosengren
 
+ */
 
 public class OrdreController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool) {
         app.get("design", ctx -> designPage(ctx, connectionPool));
         app.get("finalDesign", ctx -> finalDesignPage(ctx, connectionPool));
         app.post("finalDesign", ctx -> finalDesignPage(ctx, connectionPool));
-        app.post("/createOrder", ctx -> placeOrdre(ctx, connectionPool));
         app.get("orders", ctx -> userOrderPage(ctx, connectionPool));
         app.get("showOrder", ctx -> showOrder(ctx, connectionPool));
         app.post("checkout",ctx ->checkout(ctx,connectionPool));
@@ -65,27 +67,6 @@ public class OrdreController {
         }
     }
 
-
-    public static void placeOrdre(Context ctx, ConnectionPool connectionPool) {
-        User user = ctx.sessionAttribute("currentUser");
-        int userId = user.getUserId();
-
-        try {
-            int length = Integer.valueOf(ctx.formParam("length"));
-            int width = Integer.valueOf(ctx.formParam("width"));
-            ctx.sessionAttribute("length", length);
-            ctx.sessionAttribute("width", width);
-            Calculator calculator = new Calculator(width, length, connectionPool);
-            calculator.calcCarport();
-            System.out.println("Total price: " + calculator.getTotalPrice());
-            Order order = new Order(length, width);
-            OrdreMapper.createOrder(userId, connectionPool, order);
-
-        } catch (Exception e) {
-            ctx.sessionAttribute("errorMessage", "Error placing order: " + e.getMessage());
-            ctx.redirect("/error");
-        }
-    }
 
     private static void userOrderPage(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
@@ -177,40 +158,22 @@ public class OrdreController {
         }
     }
 
-/*
+
     public static void checkout(Context ctx, ConnectionPool connectionPool) {
         User currentUser = ctx.sessionAttribute("currentUser");
-        int userId = currentUser.getUserId();
-
-        try {
-            // Hent orderId fra sessionen
-            int orderId = ctx.sessionAttribute("orderId");
-            System.out.println(orderId);
-            List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
-            Calculator calculator = ctx.sessionAttribute("calculator");
-            ctx.attribute("orderLines", orderLines);
-            ctx.attribute("calculator",calculator);
-            ctx.render("checkout.html");
-        } catch (DatabaseException e) {
-            ctx.attribute("message", "Der opstod en fejl: " + e.getMessage());
-            ctx.render("error.html");
-        }
-    }
-*/
-    public static void checkout(Context ctx, ConnectionPool connectionPool) {
-        User currentUser = ctx.sessionAttribute("currentUser");
-
 
         try {
             // Hent orderId fra sessionen
             int orderId = Integer.parseInt(ctx.formParam("ordreId"));
 
             List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
-           int length = OrdreMapper.getLenghtById(orderId, connectionPool);
-           int width = OrdreMapper.getBreddeById(orderId, connectionPool);
-            Calculator calculator = new Calculator(width,length, connectionPool);
+            int length = ctx.sessionAttribute("length");
+            int width = ctx.sessionAttribute("width");
+           Calculator calculator = new Calculator(width, length, connectionPool);
+           calculator.calcCarport();
+            ctx.sessionAttribute("calculator", calculator);
             ctx.attribute("orderLines", orderLines);
-            ctx.attribute("calculator",calculator.getTotalPrice());
+
             ctx.render("checkout.html");
         } catch (DatabaseException e) {
             ctx.attribute("message", "Der opstod en fejl: " + e.getMessage());
