@@ -35,29 +35,45 @@
 
     </header>
 </div>
-<div class="page">
-    <div class="orders-box">
-        <h2>MINE ORDRE</h2>
-        <table class="orders-table">
-            <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Pris</th>
-                <th>Betalt</th>
-                <th>Afsendt</th>
-                <th>Modtaget</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="order : ${ordreList}">
-                <td th:text="${order.ordreId}">Order ID</td>
-                <td th:text="${order.totalPris}">Pris</td>
-                <td th:text="${order.betalt ? 'BETALT' : 'IKKE BETALT'}">Betalt</td>
-                <td th:text="${order.afsendt ? 'AFSENDT' : 'IKKE AFSENDT'}">Afsendt</td>
-                <td th:text="${order.modtaget ? 'MODTAGET' : 'IKKE MODTAGET'}">Modtaget</td>
-            </tr>
-            </tbody>
-        </table>
+
+
+    <div class="page">
+        <div class="orders-box">
+            <h2>MINE ORDRE</h2>
+            <table class="orders-table">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Pris</th>
+                    <th>Betalt</th>
+                    <th>Afsendt</th>
+                    <th>Modtaget</th>
+                    <th>Se stykliste</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${ordreList}">
+                    <td th:text="${order.ordreId}">Order ID</td>
+                    <td th:text="${order.totalPris}">Pris</td>
+                    <td th:text="${order.betalt ? 'BETALT' : 'IKKE BETALT'}">Betalt</td>
+                    <td th:text="${order.afsendt ? 'AFSENDT' : 'IKKE AFSENDT'}">Afsendt</td>
+                    <td th:text="${order.modtaget ? 'MODTAGET' : 'IKKE MODTAGET'}">Modtaget</td>
+                    <td>
+                        <div class="button">
+                            <form method="post">
+                                <input type="hidden" name="ordreId" th:value="${order.ordreId}">
+                            <button class="button" type="submit" id="ordreId" name="ordreId"
+                                    th:value="${order.ordreId}" formaction="/checkout">Se stykliste
+                            </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
-</div>
+
+
 </body>

@@ -47,12 +47,12 @@ public class OrderlineMapper {
                 int totalPris = rs.getInt("total_pris");
                 orderlineList.add(new OrderLine(type,længde,quantity,description,totalPris));
             }
+            return orderlineList;
         }
         catch (SQLException e)
         {
             throw new DatabaseException("Fejl i database " +  e.getMessage());
         }
-        return orderlineList;
     }
 
 

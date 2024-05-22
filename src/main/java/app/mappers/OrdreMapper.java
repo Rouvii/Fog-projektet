@@ -101,6 +101,34 @@ public class OrdreMapper {
     }
 
 
+    public static Order getOrderForUser(int userId, ConnectionPool connectionPool) throws DatabaseException {
+        Order order = null;
+        //Vi bruger DESC LIMIT 1 for at få den nyeste ordre(DESC = descending)
+        String sql = "SELECT * FROM ordre WHERE user_id = ? ORDER BY dato DESC LIMIT 1";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int orderId = rs.getInt("order_id");
+                Date dato = rs.getDate("dato");
+                int længde = rs.getInt("længde");
+                int bredde = rs.getInt("bredde");
+                int totalPris = rs.getInt("total_pris");
+                int statusId = rs.getInt("status_id");
+
+                order = new Order(orderId, userId, dato, længde, bredde, statusId, totalPris);
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl ved hentning af ordre for bruger med id = " + userId, e.getMessage());
+        }
+        return order;
+    }
+
+
     public static int createOrder(int userId, ConnectionPool connectionPool, Order order) throws DatabaseException {
         String sql = "INSERT INTO ordre (user_id, dato, længde, bredde, status_id,total_pris) VALUES (?, ?, ?, ?, ?,?)";
 
@@ -167,8 +195,8 @@ public class OrdreMapper {
     }
 
 
-    public static Order getOrderByOrdreId(int orderId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "select * from ordre where order_id = ?";
+    public static int getLenghtById(int orderId, ConnectionPool connectionPool) {
+        String sql = "SELECT længde FROM ordre WHERE order_id = ?";
 
         try (
                 Connection connection = connectionPool.getConnection();
@@ -178,22 +206,33 @@ public class OrdreMapper {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int userId = rs.getInt("user_id");
-                Date dato = rs.getDate("dato");
                 int længde = rs.getInt("længde");
-                int bredde = rs.getInt("bredde");
-                int status = rs.getInt("status_id");
-                int totalPris = rs.getInt("total_pris");
-
-                return new Order(orderId, userId, dato, længde, bredde,status,totalPris);
+                return længde;
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Fejl ved hentning af ordre: " + e.getMessage());
+            throw new RuntimeException(e);
         }
-
-        throw new DatabaseException("Ordre ikke fundet");
+        return 0;
     }
 
+    public static int getBreddeById(int orderId,ConnectionPool connectionPool){
+        String sql = "SELECT bredde FROM ordre WHERE order_id = ?";
 
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        ) {
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int bredde = rs.getInt("bredde");
+                return bredde;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+   return 0;
+    }
 
 }
