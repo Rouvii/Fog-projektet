@@ -3,7 +3,7 @@ package app.services;
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou
+ * @author: Kevin Løvstad Schou, Daniel Rouvillain
  */
 public class CarportSvg {
 

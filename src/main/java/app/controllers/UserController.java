@@ -8,10 +8,17 @@ import app.mappers.UserMapper;
 import app.services.CarportSvg;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
+
+/**
+ * Purpose:
+ *
+ * @author: Kevin Løvstad Schou, Matthias Sigurdsson
+ */
 public class UserController
 {
-    public static void addRoutes(Javalin app, ConnectionPool connectionPool)
+    public static void addRoutes(@NotNull Javalin app, ConnectionPool connectionPool)
     {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("index", ctx -> ctx.render("index.html"));

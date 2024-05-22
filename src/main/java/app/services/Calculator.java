@@ -9,6 +9,12 @@ import app.mappers.VariantMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Purpose:
+ *
+ * @author: Kevin Løvstad Schou, Matthias Sigurdsson
+ */
 public class Calculator {
 
 

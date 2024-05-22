@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou, Daniel Rouvillain
+ * @author: Daniel Rouvillain
  */
 public class AdminController {
 

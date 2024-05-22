@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Purpose:
  *
- * @author: Kevin Løvstad Schou
+ * @author: Kevin Løvstad Schou,Daniel Rouvillain
  */
 public class Order {
 
@@ -86,34 +86,6 @@ public class Order {
         return ordreId;
     }
 
-    public void setOrdreId(int ordreId) {
-        this.ordreId = ordreId;
-    }
-
-
-    public Date getDato() {
-        return dato;
-    }
-
-    public void setDato(Date dato) {
-        this.dato = dato;
-    }
-
-    public boolean isBetalt() {
-        return betalt;
-    }
-
-    public boolean isAfsendt() {
-        return afsendt;
-    }
-
-    public boolean isAfvist() {
-        return afvist;
-    }
-
-    public boolean isModtaget() {
-        return modtaget;
-    }
 
     public int getLængde() {
         return længde;
@@ -123,53 +95,15 @@ public class Order {
         return bredde;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
     public int getTotalPris() {
         return totalPris;
-    }
-
-    public void setBetalt(boolean betalt) {
-        this.betalt = betalt;
-    }
-
-    public void setAfsendt(boolean afsendt) {
-        this.afsendt = afsendt;
-    }
-
-    public void setAfvist(boolean afvist) {
-        this.afvist = afvist;
-    }
-
-    public void setModtaget(boolean modtaget) {
-        this.modtaget = modtaget;
     }
 
     public void setLængde(int længde) {
         this.længde = længde;
     }
 
-    public void setBredde(int bredde) {
-        this.bredde = bredde;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setTotalPris(int totalPris) {
-        this.totalPris = totalPris;
-    }
-
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
-
-    public int getStatusId() {
-        return statusId;
-    }
 
 
 //Brugt til OrdreMapperTest, det så JUNIT kan sammenligne objekterne ud fra indhold og ikke fra hukommelse
