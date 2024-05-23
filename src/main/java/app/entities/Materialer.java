@@ -43,6 +43,8 @@ public class Materialer {
     }
 
 
+
+
     @Override
     public String toString() {
         return "Materialer{" +

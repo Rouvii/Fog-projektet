@@ -21,6 +21,7 @@ public class Order {
     private int totalPris;
     private Date dato;
 
+
     private int statusId;
 
 
@@ -104,9 +105,35 @@ public class Order {
         this.længde = længde;
     }
 
+    public boolean isBetalt() {
+        return betalt;
+    }
 
+    public boolean isAfsendt() {
+        return afsendt;
+    }
 
-//Brugt til OrdreMapperTest, det så JUNIT kan sammenligne objekterne ud fra indhold og ikke fra hukommelse
+    public boolean isAfvist() {
+        return afvist;
+    }
+
+    public boolean isModtaget() {
+        return modtaget;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public Date getDato() {
+        return dato;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    //Brugt til OrdreMapperTest, det så JUNIT kan sammenligne objekterne ud fra indhold og ikke fra hukommelse
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

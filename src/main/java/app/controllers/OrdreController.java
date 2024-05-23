@@ -163,12 +163,13 @@ public class OrdreController {
         User currentUser = ctx.sessionAttribute("currentUser");
 
         try {
-            // Hent orderId fra sessionen
+            // Hent orderId,length og width fra sessionen
             int orderId = Integer.parseInt(ctx.formParam("ordreId"));
-
+            int length = OrdreMapper.getLenghtById(orderId, connectionPool);
+            int width = OrdreMapper.getBreddeById(orderId, connectionPool);
+            ctx.attribute("length", length);
+            ctx.attribute("width", width);
             List<OrderLine> orderLines = OrderlineMapper.getOrderlinesForOrder(orderId, connectionPool);
-            int length = ctx.sessionAttribute("length");
-            int width = ctx.sessionAttribute("width");
            Calculator calculator = new Calculator(width, length, connectionPool);
            calculator.calcCarport();
             ctx.sessionAttribute("calculator", calculator);
