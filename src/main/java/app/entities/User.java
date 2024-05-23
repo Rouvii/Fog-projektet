@@ -70,6 +70,26 @@ public class User {
         isAdmin = admin;
     }
 
+    public String getFornavn() {
+        return fornavn;
+    }
+
+    public String getEfternavn() {
+        return efternavn;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefonNr() {
+        return telefonNr;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
     public String getrole() {
         return isAdmin ? "admin" : "user";
     }

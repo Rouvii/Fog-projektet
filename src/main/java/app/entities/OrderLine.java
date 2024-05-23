@@ -69,9 +69,9 @@ public class OrderLine {
     }
 
 
-
-
-
+    public int getTotalPris() {
+        return totalPris;
+    }
 
     @Override
     public String toString() {
