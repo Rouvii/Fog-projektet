@@ -1,0 +1,72 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+Title Carport Webside
+state "index.html" as index
+state "design.html" as design
+state "finalDesign.html" as finalDesign
+state "showOrder.html" as showOrder
+state "createUser.html" as createUser
+state "login.html" as login
+state "orders.html" as orders
+state "error.html" as error
+state isAdmin
+note right of index
+    index.html er vores forside
+    kan tilgås fra en hver side ved tryk på logo i navbar
+    end note
+
+    note right of design
+    bruger angiver carport dimensioner
+    end note
+
+    note right of finalDesign
+    bruger indtaster kontaktoplysninger
+    end note
+
+    note right of showOrder
+    bruger ser plantegning for carport
+    end note
+
+    note left of orders
+    bruger kan se sine nuværende ordrer
+    kan tilgås fra en hver side ved tryk på "mine ordrer" i navbar
+    end note
+
+    note right of error
+    bruger bliver ført her hen
+    hvis man får en fejlmeddelse
+    end note
+
+
+
+index --> design
+design --> finalDesign
+finalDesign --> showOrder
+finalDesign --> login :hvis ikke er logget ind
+showOrder --> orders
+index --> login
+login --> createUser: hvis ikke har bruger
+login --> index : logget på [ok]
+login --> login : logget på [fejl]
+login --> finalDesign: retur hvis man logger ind fra finalDesign
+createUser --> index : oprettet bruger [ok]
+createUser --> createUser : oprettet bruger [fejl]
+state isAdmin {
+
+    state "admin.html" as admin
+    state "adminaddmateriale.html" as adminaddmateriale
+    state "adminordre.html" as adminordre
+    state "adminrediger.html" as adminrediger
+    state "adminredigermateriale.html" as adminredigermateriale
+    login --> admin : hvis admin
+    admin --> adminordre
+    admin --> adminrediger
+    adminrediger --> adminaddmateriale
+    adminrediger --> adminredigermateriale
+    admin --> index : hvis man trykker på logo
+}
+
+
+
+@enduml
